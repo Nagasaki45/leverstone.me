@@ -6,8 +6,6 @@ import os
 import sys
 sys.path.append(os.curdir)
 
-from theme_specific_texts import *
-
 AUTHOR = 'Tom Gurion'
 SITENAME = 'Tom Gurion'
 DESCRIPTION = 'Musician, coder, and researcher of head nods. Collecting hobbies in my spare time'
