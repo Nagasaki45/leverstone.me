@@ -79,7 +79,7 @@ HOBBIES = [
         'content': '''
         My main language is python. I use it regularly for web development, data analysis, and other bits and pieces.
         Like elixir for highly concurrent webapps.
-        Can do some js and frontend with vue.js and bulma.
+        Can do some js and frontend with vue.js, gatsby.js, and bulma.
         Familiar with way too many creative coding languages: max/MSP and Pd, arduino and processing, some unity3d, blender and a bit more.
         '''.strip(),
     },
@@ -97,7 +97,7 @@ HOBBIES = [
         Bouldering regularly at <a href="https://www.mileendwall.org.uk/">Mile End Climbing Wall</a>.
         On a good day I might even manage a V5.
         Recently got into cycling, and especially bikepacking.
-        So far done a few overnighters here and there, and looking forwards for more.
+        Always try to escape the city on the weekends for a night in the tent and some scenic rides.
         There's no such thing as too many hobbies, right?
         '''.strip(),
     },
