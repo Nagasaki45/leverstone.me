@@ -6,8 +6,8 @@ import os
 import sys
 sys.path.append(os.curdir)
 
-AUTHOR = 'Tom Gurion'
-SITENAME = 'Tom Gurion'
+AUTHOR = 'Tom Gurion Leverstone'
+SITENAME = 'Tom Gurion Leverstone'
 DESCRIPTION = 'Father, musician, and coder. I collect hobbies in my spare time.'
 
 SITEURL = ''
