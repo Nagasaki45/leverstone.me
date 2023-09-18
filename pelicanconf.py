@@ -60,7 +60,7 @@ PLUGINS = ['pelican_youtube']
 SOCIAL = (
     ('fas fa-blog', 'https://blog.tomgurion.me'),
     ('fab fa-github', 'https://github.com/Nagasaki45'),
-    ('fab fa-twitter', 'https://twitter.com/nagasaki45'),
+    ('fab fa-mastodon', 'https://mastodon.online/@nagasaki45'),
     ('fa fa-envelope', 'mailto:nagasaki45@gmail.com'),
 )
 
