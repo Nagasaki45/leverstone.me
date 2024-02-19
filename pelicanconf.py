@@ -6,8 +6,8 @@ import os
 import sys
 sys.path.append(os.curdir)
 
-AUTHOR = 'Tom Gurion Leverstone'
-SITENAME = 'Tom Gurion Leverstone'
+AUTHOR = 'Tom Leverstone'
+SITENAME = 'Tom Leverstone'
 DESCRIPTION = 'Father, musician, and coder. I collect hobbies in my spare time.'
 
 SITEURL = ''
@@ -58,10 +58,10 @@ EXTRA_PATH_METADATA = {
 PLUGINS = ['pelican_youtube']
 
 SOCIAL = (
-    ('fas fa-blog', 'https://blog.tomgurion.me'),
+    ('fas fa-blog', 'https://blog.leverstone.me'),
     ('fab fa-github', 'https://github.com/Nagasaki45'),
     ('fab fa-mastodon', 'https://mastodon.online/@nagasaki45'),
-    ('fa fa-envelope', 'mailto:nagasaki45@gmail.com'),
+    ('fa fa-envelope', 'mailto:tleverstone@gmail.com'),
 )
 
 HOBBIES = [
