@@ -61,6 +61,7 @@ PLUGINS = ['pelican_youtube']
 SOCIAL = (
     ('fas fa-blog', 'https://blog.leverstone.me'),
     ('fab fa-github', 'https://github.com/Nagasaki45'),
+    ('fab fa-linkedin', 'https://www.linkedin.com/in/tleverstone/'),
     ('fab fa-mastodon', 'https://mastodon.online/@nagasaki45'),
     ('fa fa-envelope', 'mailto:tleverstone@gmail.com'),
 )
