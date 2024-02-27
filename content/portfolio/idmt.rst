@@ -5,7 +5,7 @@ nagasaki45 / IDMT?
 :order: 0
 :img: idmt.jpg
 :summary: Improvised, polymetric, modular, avant-pop, mess
-:links: more;https://nagasaki45.com;fas fa-link
+:links: more;https://nagasaki45.leverstone.me;fas fa-link
 
 nagasaki45 is my electronic music stage name.
 I improvise live sets focusing on percussive, up-beat, and polymetric structures on a modular synth.

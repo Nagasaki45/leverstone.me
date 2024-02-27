@@ -8,7 +8,8 @@ sys.path.append(os.curdir)
 
 AUTHOR = 'Tom Leverstone'
 SITENAME = 'Tom Leverstone'
-DESCRIPTION = 'Father, musician, and coder. I collect hobbies in my spare time.'
+ABOUT_TITLE = "Hi! I'm Tom 👋"
+DESCRIPTION = 'A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it\'s Tom Leverstone.'
 
 SITEURL = ''
 
@@ -66,21 +67,23 @@ SOCIAL = (
 
 HOBBIES = [
     {
+        'title': 'Code',
+        'content': '''
+        Although my job is in software, coding is also one of my main hobbies!
+        My main language is python.
+        I use it regularly for web development, data analysis, and other bits and bobs.
+        I like elixir for highly concurrent webapps.
+        Frontend-wise I will usually go for react / next.js with typescript, or plain old HTML/CSS/JS.
+        I'm familiar with way too many creative coding languages: max/MSP and Pd, arduino and processing, some unity3d, blender and a bit more.
+        '''.strip(),
+    },
+    {
         'title': 'Music',
         'content': '''
         I play an instrument since... forever!
         Started with sax and piano as a kid. Picked up bass guitar at 14 and played in a few rock bands since then.
-        Got into electronic music in 2017 and shortly after started performing improvised modular jams under the alias <a href="https://nagasaki45.com"><i>nagasaki45</i></a>.
+        Got into electronic music in 2017 and shortly after started performing improvised modular jams under the alias <a href="https://nagasaki45.leverstone.me"><i>nagasaki45</i></a>.
         Recently teamed up with <a href="https://lwlsn.github.io/digitalselves-web/"><i>digital selves</i></a> to perform together as <i>IDMT?</i>
-        '''.strip(),
-    },
-    {
-        'title': 'Code',
-        'content': '''
-        My main language is python. I use it regularly for web development, data analysis, and other bits and pieces.
-        Like elixir for highly concurrent webapps.
-        Can do some js and frontend with vue.js, gatsby.js, and bulma.
-        Familiar with way too many creative coding languages: max/MSP and Pd, arduino and processing, some unity3d, blender and a bit more.
         '''.strip(),
     },
     {
@@ -88,7 +91,7 @@ HOBBIES = [
         'content': '''
         Enjoy playing board games for many years, and got deeper into the hobby ~2018.
         Favourite game at the moment is <a href="https://boardgamegeek.com/boardgame/155821/inis">Inis</a>.
-        If you're from Queen Mary University of London, we play regularly. Drop me a line!
+        I play on a weekly basis, so if you're into that drop me a line!
         '''.strip(),
     },
     {
