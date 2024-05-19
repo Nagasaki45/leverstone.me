@@ -12,11 +12,11 @@ feedgenerator==1.9.1
     # via pelican
 jinja2==2.11.3
     # via pelican
+markdown==3.1.1
+    # via pelican
 markupsafe==1.1.1
     # via jinja2
-pelican==4.2.0
-    # via -r requirements.in
-pelican-youtube==0.2.0
+pelican[markdown]==4.2.0
     # via -r requirements.in
 pygments==2.16.1
     # via pelican
@@ -33,3 +33,6 @@ six==1.16.0
     #   python-dateutil
 unidecode==1.1.1
     # via pelican
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

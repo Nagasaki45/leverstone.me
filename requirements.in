@@ -1,2 +1,1 @@
-pelican
-pelican_youtube
+pelican[markdown]

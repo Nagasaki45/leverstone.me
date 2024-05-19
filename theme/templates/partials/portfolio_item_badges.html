@@ -1,8 +1,8 @@
 <div>
-  {% for link in article.links.strip().split('\n') %}
+  {% for link in article.links.strip().split(',') %}
     {% set text, href, icon = link.strip().split(';') %}
     <a class="btn btn-primary" href="{{ href }}" target="_blank">
-        <span class="{{ icon }}"></span>{{ text }}
+        <span class="{{ icon }}"></span>&nbsp;{{ text }}
     </a>
   {% endfor %}
 </div>

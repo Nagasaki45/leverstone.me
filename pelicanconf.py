@@ -56,8 +56,6 @@ EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
 }
 
-PLUGINS = ['pelican_youtube']
-
 SOCIAL = (
     ('fas fa-blog', 'https://blog.leverstone.me'),
     ('fab fa-github', 'https://github.com/Nagasaki45'),
