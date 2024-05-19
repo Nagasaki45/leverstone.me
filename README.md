@@ -3,7 +3,7 @@
 Static, [pelican](https://docs.getpelican.com/en/stable/) generated, site.
 
 ```bash
-pip install pip-tools  # only once (preferabely in a virtualenv)
+pip install pip-tools  # only once (preferably in a virtualenv)
 pip-sync               # only once
-make dev               # Regenerate and serve on localhost:8000
+pelican -rl            # Regenerate and listen on localhost:8000
 ```
