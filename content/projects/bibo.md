@@ -1,6 +1,6 @@
 title: bibo
 date: 2020-04-06 02:00
-order: 005
+order: 0.5
 img: bibo.png
 summary: Command line reference manager with a single source of truth: the .bib file. Inspired by beets.
 links: source code;https://github.com/nagasaki45/bibo;fab fa-github

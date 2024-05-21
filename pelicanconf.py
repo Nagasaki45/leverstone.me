@@ -21,7 +21,12 @@ TIMEZONE = 'Europe/London'
 
 DEFAULT_LANG = 'en'
 
-ARTICLE_ORDER_BY = 'order'
+
+def ARTICLE_ORDER_BY(article):
+    if article.category == "projects":
+        return float(article.order)
+    return -article.date.timestamp()
+
 
 DEFAULT_DATE = 'fs'  # Get date from file creation time if missing
 
@@ -47,21 +52,22 @@ TAG_SAVE_AS = ''
 STATIC_PATHS = [
     'images',
     'pdfs',
-    'extra/favicon.ico',
-    'extra/CNAME',
+    'extra',
 ]
 
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico': {'path': 'favicon.ico'},
-    'extra/CNAME': {'path': 'CNAME'},
+    'extra': {'path': ''},
 }
 
+ARTICLE_URL = ARTICLE_SAVE_AS = '{category}/{slug}.html'
+PAGE_URL = PAGE_SAVE_AS = '{slug}.html'
+
 SOCIAL = (
-    ('fas fa-blog', 'https://blog.leverstone.me'),
-    ('fab fa-github', 'https://github.com/Nagasaki45'),
-    ('fab fa-linkedin', 'https://www.linkedin.com/in/tleverstone/'),
-    ('fab fa-mastodon', 'https://mastodon.online/@nagasaki45'),
-    ('fa fa-envelope', 'mailto:tleverstone@gmail.com'),
+    ('fas fa-blog', 'https://blog.leverstone.me', 'Blog'),
+    ('fa fa-brain', '/today-i-learned', 'TIL'),
+    ('fab fa-github', 'https://github.com/Nagasaki45', 'GitHub'),
+    ('fab fa-linkedin', 'https://www.linkedin.com/in/tleverstone/', 'LinkedIn'),
+    ('fa fa-envelope', 'mailto:tleverstone@gmail.com', 'Email'),
 )
 
 HOBBIES = [

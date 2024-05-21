@@ -1,0 +1,10 @@
+{% extends "content.html" %} {% block content %}
+<h1 class="title">{{ page.title }}</h1>
+<ul>
+  {% for article in articles if article.category == "til" %}
+  <li>
+    <a href="{{ article.url }}">{{ article.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

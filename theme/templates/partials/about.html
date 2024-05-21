@@ -10,13 +10,13 @@
                 <p class="p-note content">{{ DESCRIPTION }}</p>
 
                 <div>
-                    {% for name, link in SOCIAL %}
+                    {% for name, link, text in SOCIAL %}
                     {% if name == 'fa fa-envelope' %}
                     <a class="icon" href="{{ link }}">
                     {% else %}
                     <a class="icon" href="{{ link }}" rel="me">
                     {% endif %}
-                        <i class="{{ name }} fa-2x"></i>
+                        <i class="{{ name }}"></i>&nbsp;{{ text }}
                     </a>
                     {% endfor %}
                 </div>

@@ -3,3 +3,6 @@ output
 pelican-plugins
 env
 .vscode
+
+node_modules
+.env

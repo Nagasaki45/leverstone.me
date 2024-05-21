@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page %}
+    <!-- Header -->
+    <section>
+        <div class="container article-container">
+            {% include "partials/navbar.html" %}
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+{% endblock %}
