@@ -3,15 +3,14 @@
 Static, [pelican](https://docs.getpelican.com/en/stable/) generated, site.
 
 ```bash
-pip install pip-tools  # only once (preferably in a virtualenv)
-pip-sync               # only once
-pelican -rl            # Regenerate and listen on localhost:8000
+poetry install          # only once
+poetry run pelican -rl  # Regenerate and listen on localhost:8000
 ```
 
 To run with TinaCMS locally run
 
 ```bash
-yarn tinacms dev -c "pelican -rl"
+yarn tinacms dev -c "poetry run pelican -rl"
 ```
 
 Now you can visit the CMS on http://localhost:8000/admin

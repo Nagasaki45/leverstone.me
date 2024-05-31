@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "leverstone-me"
+version = "0.1.0"
+description = "Tom Leverstone's personal website"
+authors = ["Tom Leverstone <nagasaki45@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pelican = {extras = ["markdown"], version = "^4.9.1"}
+pelican-yaml-metadata = "^2.1.2"

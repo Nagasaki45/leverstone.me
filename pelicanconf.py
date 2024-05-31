@@ -56,7 +56,8 @@ STATIC_PATHS = [
 ]
 
 EXTRA_PATH_METADATA = {
-    'extra': {'path': ''},
+    'extra/favicon.ico': {'path': 'favicon.ico'},
+    'extra/CNAME': {'path': 'CNAME'},
 }
 
 ARTICLE_URL = ARTICLE_SAVE_AS = '{category}/{slug}.html'
