@@ -1,8 +1,10 @@
+---
 title: MusiGali
 date: 2016-01-10 23:00
 order: 08
 img: musigali.jpg
 summary: EEG controlled music for Brain Tech Israel 2013
+---
 
 A project by Giori Politi, Sharon Duek, Jonathan Abramson and myself
 which was developed / composed especially for the [Brain Tech Israel

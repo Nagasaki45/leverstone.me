@@ -1,9 +1,20 @@
+---
 title: A collaborative web synth
 date: 2016-01-10 23:00
 order: 09
 img: web-audio.png
 summary: Experimenting the Web-Audio API
-links: website;https://web-audio.leverstone.me/;fas fa-link, source code;https://github.com/Nagasaki45/Web-Audio;fab fa-github, more thoughts;http://blog.leverstone.me/web-audio-api-some-thoughts-and-experiments.html;fas fa-blog
+links:
+  - text: website
+    url: https://web-audio.leverstone.me/
+    icon: fas fa-link
+  - text: source code
+    url: https://github.com/Nagasaki45/Web-Audio
+    icon: fab fa-github
+  - text: more thoughts
+    url: http://blog.leverstone.me/web-audio-api-some-thoughts-and-experiments.html
+    icon: fas fa-blog
+---
 
 My experiments with the [Web-Audio
 API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API),

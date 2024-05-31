@@ -1,9 +1,17 @@
+---
 title: OS GR
 date: 2021-05-24 17:00
 order: 01.5
 img: os_gr.png
 summary: Android app to convert to and from OS grid reference.
-links: Google Play;https://play.google.com/store/apps/details?id=com.os_gr;fab fa-google-play, Source code;https://github.com/Nagasaki45/OS_GR;fab fa-github
+links:
+  - text: Google Play
+    url: https://play.google.com/store/apps/details?id=com.os_gr
+    icon: fab fa-google-play
+  - text: Source code
+    url: https://github.com/Nagasaki45/OS_GR
+    icon: fab fa-github
+---
 
 The Ordnance Survey grid reference is a British system to denote
 geographic locations, similar to latitude and longitude. It is commonly

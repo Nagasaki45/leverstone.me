@@ -1,9 +1,17 @@
+---
 title: tapeless cassettes
 date: 2016-11-14 11:00
 order: 06
 img: tapeless-cassettes.jpg
 summary: Turn the wheels manually with your pinky or a BIC® pen to play the cassettes; the higher the speed the faster the music.
-links: source code;https://github.com/Nagasaki45/TapelessCassettes;fab fa-github, conceptual / technical report;https://github.com/Nagasaki45/TapelessCassettes/blob/master/docs/report.md;fas fa-file-alt
+links:
+  - text: source code
+    url: https://github.com/Nagasaki45/TapelessCassettes
+    icon: fab fa-github
+  - text: conceptual / technical report
+    url: https://github.com/Nagasaki45/TapelessCassettes/blob/master/docs/report.md
+    icon: fas fa-file-alt
+---
 
 A CruftFest 2016 project / an assignment to the Interactive Digital
 Multimedia Techniques (ESC742P) module, Media and Arts Technology, Queen

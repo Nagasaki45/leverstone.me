@@ -1,9 +1,14 @@
+---
 title: Schleikess
 date: 2017-07-24 12:00
 order: 05
 img: schleikess.jpg
-summary: "suspenders" in Yiddish
-links: source code;https://github.com/Nagasaki45/Schleikess;fab fa-github
+summary: '"suspenders" in Yiddish'
+links:
+  text: source code
+  url: https://github.com/Nagasaki45/Schleikess
+  icon: fab fa-github
+---
 
 A controller for full-body interactive performances that requires
 applying force and effort to play with, hopefully facilitating

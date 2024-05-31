@@ -1,9 +1,17 @@
+---
 title: Xteams!
 date: 2015-12-31 16:00
 order: 10
 img: xteams.jpg
 summary: Create teams automatically based on discrete scores of the players
-links: website;https://xteams.leverstone.me/;fas fa-link source, code;https://github.com/Nagasaki45/Xteams;fab fa-github
+links:
+  - text: website
+    url: https://xteams.leverstone.me/
+    icon: fas fa-link
+  - text: source code
+    url: https://github.com/Nagasaki45/Xteams
+    icon: fab fa-github
+---
 
 You want to create teams, but:
 
