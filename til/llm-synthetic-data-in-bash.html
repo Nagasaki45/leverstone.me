@@ -59,7 +59,7 @@
         <p>The <a href="https://github.com/simonw/llm"><code>llm</code> command line tool by Simon Willison</a> lets you interact with LLMs from the command line. I've been using it recently, and while it's nice and convenient, I wasn't doing anythin I couldn't do with a "vanila" LLM ChatBot a la ChatGPT. Until today!</p>
 <p>Today, I had to test our retrieval-augmented generation (RAG) system. I wanted to hit a endpoint repeatedly and monitor the response time while running some operations on the server. Sure, I can throw something together with a bash loop and <code>curl</code>. But what if my experiment will be skewed by caching somewhere in the system if the request is always the same 🤔</p>
 <p>Here's what I ended up with</p>
-<div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="nb">true</span>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">true</span>
 <span class="k">do</span>
 <span class="w">  </span>curl<span class="w"> </span>https://my-server.com/<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;query\&quot;: \&quot;`llm &quot;</span>Give<span class="w"> </span>me<span class="w"> </span>a<span class="w"> </span>one<span class="w"> </span>sentence<span class="w"> </span>interesting<span class="w"> </span>question<span class="w"> </span>about<span class="w"> </span>consumers<span class="w"> </span>behaviours<span class="s2">&quot;`\&quot;}&quot;</span><span class="w"> </span><span class="se">\</span>
@@ -67,8 +67,7 @@
 <span class="w">    </span>--silent<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--write-out<span class="w"> </span><span class="s2">&quot;%{http_code} %{time_total}s\n&quot;</span>
 <span class="k">done</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>It hits the system with a new query every time, running in an endless loop.</p>
 <ul>
