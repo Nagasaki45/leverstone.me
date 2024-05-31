@@ -76,15 +76,23 @@ secrets:
     environment: "HOST_SECRET"
 ```
 
-The `docker-compose.yml` defines a global secret that is loaded from the environment variable `HOST_SECRET` on the host. There are other source to load a secret from (e.g. from a file). Again, consult [the docs](https://docs.docker.com/compose/use-secrets/). Then the service that needs the secret can
+The `docker-compose.yml` defines a global secret that is loaded from the environment variable `HOST_SECRET` on the host. There are other options for defining secrets (e.g. from a file). Again, consult [the docs](https://docs.docker.com/compose/use-secrets/). Then, the service that needs the secret can ask for it by name.
 
-As mentioned before, some local development tasks run on an image built by docker without docker compose. Here's how this build works
+# Nice to haves
+
+## Build with docker
+
+While I mostly use docker compose for local development, sometimes it's useful to just build with docker, even for the same project! A good example is unit-tests. It's simple to build and run unit tests in the container without docker compose because there's no need for the surrounding services, environment variables, networking configuration, volumes, etc.
+
+Here's how this is done
 
 ```
 docker build --secret id=my_secret,env=HOST_SECRET --tag my-app:test .
 ```
 
-Lastly, we often find that we need to run `command_that_requires_secrets` from within the container in development not during build. For a concrete example substitute `command_that_requires_secrets` with a `pip install` that uses a private repository. In this case we need `CONTAINER_SECRET` in the container at runtime. A simple solution is to pass an environment variable to the container:
+## Passing secrets to running containers
+
+Lastly, it's often useful to run commands that require secrets from within the container in development, not during the build. For example, when modifying dependencies (something like `pip install --upgrade my-private-package && pip freeze > requirements.txt`). In this case we need `CONTAINER_SECRET` in the container at runtime. A simple solution is to pass an environment variable to the container:
 
 `# docker-compose.yml`
 
@@ -96,4 +104,4 @@ services:
       CONTAINER_SECRET: ${ HOST_SECRET }
 ```
 
-While it's possible to use secrets at runtime there's no need to do so. Think about the two issues secrets tried to solve: security and build time. The environment variable is not stored in the image so there's no security issue here. And the build is long done so there are no effect on that front either.
+While it's possible to use secrets at runtime there's no need to do so. Think about the two issues secrets solve: security and build time. The environment variable is not stored in the image so there's no security issue here. And the build is long done so there are no effect on that front either.
