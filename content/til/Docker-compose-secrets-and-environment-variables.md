@@ -9,9 +9,8 @@ A dockerised app I'm working on needs some secrets at build time. In my case, it
 
 In the past, we solved this by passing a build argument with the secret.
 
-`# docker-compose.yml`
-
 ```yaml
+# docker-compose.yml
 services:
   my-app:
     build:
@@ -21,9 +20,8 @@ services:
 
 This is going to pass the `HOST_SECRET` environment variable from the host machine, to the container as an `ARG`.
 
-`# Dockerfile`
-
 ```Dockerfile
+# Dockerfile
 ARG CONTAINER_SECRET
 ```
 
@@ -43,15 +41,10 @@ So, what are we trying to achieve?
 * Call a command that requires a secret, stored in `HOST_SECRET` on the host, during the docker image build.
 * Use docker compose in local development to build the app.
 
-<!-- * Some local development tasks (e.g. running unit tests) build with docker, not with docker compose, because they don't need any of the services, networking, and environment variables that docker compose manages. -->
-
-<!-- * Another build of the docker image happens in CI/CD, without docker compose this time. -->
-
 Let's start from the `Dockerfile`. It needs to call `pip install my-private-package` with our secret in the environment variable `CONTAINER_SECRET`
 
-`# Dockerfile`
-
 ```dockerfile
+# Dockerfile
 RUN --mount=type=secret,id=my_secret \
     CONTAINER_SECRET=$(cat /run/secrets/my_secret) \
     pip install my-private-package
@@ -61,9 +54,8 @@ The `Dockerfile` mounts the value of the secret called `my_secret` on `/run/secr
 
 Now let's have a look at the `docker-compose.yml`
 
-`# docker-compose.yml`
-
 ```yaml
+# docker-compose.yml
 services:
   my-app:
     build:
@@ -94,9 +86,8 @@ docker build --secret id=my_secret,env=HOST_SECRET --tag my-app:test .
 
 Lastly, it's often useful to run commands that require secrets from within the container in development, not during the build. For example, when modifying dependencies (something like `pip install --upgrade my-private-package && pip freeze > requirements.txt`). In this case we need `CONTAINER_SECRET` in the container at runtime. A simple solution is to pass an environment variable to the container:
 
-`# docker-compose.yml`
-
 ```yaml
+# docker-compose.yml
 services:
   my-app:
     ...
