@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Migrating to python3</h1>
+        <time datetime="2016-06-25">
+            June 25, 2016
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <p>I was recently asked, by my boss, about the possible benefits of migrating our
+code base at work from python 2.6 to python 3. Instead of sending an email back
+to my boss with my answer, I decided that it worth a blog post. Why? because the
+internet is full with comparisons between python 2 and python 3, but it is hard
+to tell what are the real gains from doing the migration. Here, I will try to
+explain, in a very subjective manner, the benefits I see from such move.</p>
+<p>So let's start with the obvious, <strong>python 3 is clearly a better language than
+python 2.6</strong>: <tt class="docutils literal">print</tt> is a function instead of a statement, now with sane
+arguments; dict and set comprehensions reduce unnecessary, error prone,
+verbosity; real division by default, because that's what you want 99% of the
+time anyway; iterators by default (<tt class="docutils literal">range</tt> replaced <tt class="docutils literal">xrange</tt>,
+<tt class="docutils literal">dict.items()</tt> replaced <tt class="docutils literal">dict.iteritems()</tt>, etc.); explicit relative
+imports... Actually, the list goes on and on. However, I <strong>don't</strong> think that
+the features above are good reasons to migrate a large project. Modern python
+code, written with python 3 in mind, will benefit from them, that's for sure. But
+we do not want to rewrite our code base, we want the transition to be as smooth
+as possible.</p>
+<p>So what <strong>is</strong> valuable? Here is my list:</p>
+<div class="section" id="we-must-leave-python-2-6">
+<h2>We must leave python 2.6</h2>
+<p>Our server is based on <a class="reference external" href="https://pypi.python.org/pypi/Twisted">twisted</a>, which already dropped support for python 2.6.
+Our other main dependency is <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a>. I don't think that they are going to
+drop support for python 2.6 anytime soon but this day will surely come. In
+general, staying with python 2.6 will soon mean that for each dependency upgrade
+we will have to upgrade everything at once, which is kind of a nightmare.</p>
+<p>So, if we must leave python 2.6 behind and upgrade, I really don't think that
+migrating to python 3.5, for example, will be way too complicated than to 2.7.
+Moreover, moving to python 2.7 now will require another migration, with similar
+effort, in the next 4 years.</p>
+</div>
+<div class="section" id="what-features-do-worth-the-upgrade">
+<h2>What features do worth the upgrade</h2>
+<div class="section" id="exception-chaining">
+<h3><a class="reference external" href="https://www.python.org/dev/peps/pep-3134/">Exception chaining</a></h3>
+<p>In python 3, when an exception is raised from within an <tt class="docutils literal">except</tt> block, it is
+concatenated to the former exception, and the traceback of both is available to
+whoever catch them. That way, we can always be sure that our top most logging
+system will log the entire traceback, even if the latest exception &quot;mask&quot; the
+original one.</p>
+<p>This feature could solve us several debugging hours. Even more, I'm sure that we
+gave up on lots of bugs we couldn't investigate properly, as the original
+exception was lost due to a bug in the <tt class="docutils literal">except</tt> block.</p>
+</div>
+<div class="section" id="unorderable-types">
+<h3><a class="reference internal" href="#unorderable-types">Unorderable types</a></h3>
+<p>If something is broken, I prefer it to raise exception as soon as possible. In
+python 2, the following won't fail!</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># python2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;hello&#39;</span> <span class="o">&lt;</span> <span class="mi">1</span>
+</pre></div>
+<p>WTF?!? Why should anyone allow comparison between a string and an int!?!
+Moreover, what is the result, <tt class="docutils literal">True</tt> or <tt class="docutils literal">False</tt>? In python 3 this issue was
+solved for good:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># python3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;hello&#39;</span> <span class="o">&lt;</span> <span class="mi">1</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">unorderable</span> <span class="n">types</span><span class="p">:</span> <span class="nb">str</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">()</span>
+</pre></div>
+<p>Again, we saw such bugs before in our system, and they are hard to spot. Having
+the language solve this corner for us will be great.</p>
+</div>
+<div class="section" id="list-comprehensions-that-doesn-t-leak">
+<h3>List comprehensions that doesn't leak</h3>
+<p>Again, another source for nasty bugs.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># python2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="mi">9</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="c1"># python3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="mi">42</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="and-much-more">
+<h2>And much more</h2>
+<p>Apart from new features there are the plethora of packages that we can't use
+with python 2.6. External dependencies gradually drop support, while the
+standard library continuously improves with new and shiny tools, such as
+<tt class="docutils literal">concurrent.futures</tt> and <tt class="docutils literal">asyncio</tt>.</p>
+</div>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>

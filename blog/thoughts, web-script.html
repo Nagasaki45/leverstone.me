@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Python vs. elixir for a web-app wrapper for a script</h1>
+        <time datetime="2017-08-27">
+            August 27, 2017
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <img alt="Python vs. elixir" src="/images/blog/python_vs_elixir.png" style="width: 100%;" />
+<p>I'm a facing a project with the following requirements:</p>
+<ul class="simple">
+<li>An existing script should be wrapped with a web server.</li>
+<li>The script takes 10-30 seconds to run, so just let the user wait for it to complete.</li>
+<li>Multiple users should be able to call the script concurrently.</li>
+<li>Make sure to protect the server from overloading by limiting the number of concurrent active scripts.</li>
+</ul>
+<p>I created a repo with two projects, in python and elixir, to see how easy / hard the task will be with each technology.
+You can find the repo <a class="reference external" href="https://github.com/Nagasaki45/web-script/">here</a>.
+The frontend, and the demo script to run, are the same for both projects.
+Getting and validating user input is not demonstrated, as it should be straightforward in both languages.
+The idea was to compare the concurrency stuff.</p>
+<div class="section" id="python">
+<h2>Python</h2>
+<p>The implementation is based on <a class="reference external" href="https://aiohttp.readthedocs.io/en/latest/index.html">aiohttp</a>, with no much extras.
+There is a global counter to track the number of active scripts.
+A new POST request checks the counter.
+If it reaches the maximal allowed active scripts a 503 error is returned, indicating that the service is unavailable.
+Otherwise, first, the counter is incremented.
+Then, <tt class="docutils literal">asyncio.create_subprocess_exec</tt> is used to call the script.
+Lastly, the result is returned to the user, and the counter is decremented under <tt class="docutils literal">finally</tt>.</p>
+</div>
+<div class="section" id="elixir">
+<h2>Elixir</h2>
+<p>The general idea is very similar.
+The server is based on <a class="reference external" href="https://github.com/ninenines/cowboy">cowboy</a> and <a class="reference external" href="https://github.com/elixir-plug/plug">plug</a>.
+Instead of a global counter I'm using <a class="reference external" href="https://github.com/devinus/poolboy">poolboy</a> to create a pool of workers for calling the script.
+On each POST request, if the pool if full, the 503 error is returned.
+Otherwise, the script is called and the result is returned to the user.</p>
+</div>
+<div class="section" id="conclusions">
+<h2>Conclusions</h2>
+<p>I'm a complete asyncio newbie, and wasn't sure how complex the implementetion will be.
+It always feel a bit restrictive for me.
+For example, without the already implemented <tt class="docutils literal">asyncio.subprocess</tt> module, following the requirements would be much more difficult.
+I'm also more confident with elixir, as I use it almost exclusively for everything web-based.
+With elixir you can use whatever library you want and make use of all of the concurrency feature of the language without any special adapters.
+Surprisingly, the python solution ended up much simpler than I thought, and it is much shorter than the elixir solution (mainly due to the way a project is structured in elixir).
+So, I ended with two easy to use options, hence the decision between them will be even harder.
+Or maybe it's time to properly learn asyncio.</p>
+</div>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">docker-compose in production - part 2</h1>
+        <time datetime="2016-08-05">
+            August 05, 2016
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <p>Few months ago I shared my <a class="reference external" href="{filename}/blog/docker-compose-in-production.rst">experiences with docker-compose in production</a>.
+Recently I faced another deployment and decided to use the same technique. This
+time I used it somewhat differently. In this blog post I would like to share the
+new experiences.</p>
+<p>I started by following the process that went so well last time, which summarized
+to:</p>
+<ul class="simple">
+<li>Create a <tt class="docutils literal">Dockerfile</tt> for the app.</li>
+<li>Create a <tt class="docutils literal"><span class="pre">docker-compose.yml</span></tt> file with my app and its dependencies (official postgres and redis docker images).</li>
+<li><tt class="docutils literal">git clone</tt> the project on the server.</li>
+<li>Build the project <strong>on the server</strong>.</li>
+<li>Copy the &quot;secrets&quot; file to the server.</li>
+<li>Spin everything with <tt class="docutils literal"><span class="pre">docker-compose</span> up</tt>.</li>
+</ul>
+<p>But guess what? My digital ocean's droplet has only 512MB of RAM, which are not
+enough for building the image. The beloved technique couldn't work with my
+server!</p>
+<div class="section" id="docker-hub-to-the-rescue">
+<h2><a class="reference external" href="https://hub.docker.com/">Docker Hub</a> to the rescue</h2>
+<p>OK. I can't build the image on the server, but I still want to use docker and
+docker-compose for all of their advantages. The solution will be to build the
+image somewhere else, upload it to <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>- an open and free repository
+for docker images - and fetch it from there directly to the server.</p>
+<p>There are two ways to upload a docker image to Docker Hub. The first is to link
+it to your github account and instruct it to build an image whenever you push
+code to the repository. The second is to build the image locally and push it to
+the Hub using the docker command line tool. I wished I could choose the first
+option, but due to memory restrictions the build failed on their build servers
+similarly to the way it failed on my digital ocean droplet. Therefore, I choose
+the 2nd option.</p>
+<p>With this revised deployment technique there are only two files on the server,
+the <tt class="docutils literal"><span class="pre">docker-compose.yml</span></tt> file and the &quot;secrets&quot; file. In my first blog post
+about docker-compose the <tt class="docutils literal"><span class="pre">docker-compose.yml</span></tt> used the current directory as
+the <tt class="docutils literal">build</tt> path for the image. Now, the full image name on Docker Hub is
+referenced. Here is my <tt class="docutils literal"><span class="pre">docker-compose.yml</span></tt> file:</p>
+<div class="highlight"><pre><span></span><span class="nt">web</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nagasaki45/krihelinator_web</span>
+<span class="w">  </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80:80</span>
+<span class="w">  </span><span class="nt">links</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">db</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stash</span>
+<span class="w">  </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./secrets</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+
+<span class="nt">db</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+
+<span class="nt">stash</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<span class="w">  </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+</pre></div>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>Ideally, a server should only serve the application to the clients, and run the
+necessary infrastructure to support it. Building or compiling a project on the
+server is possible, but it doesn't have to be that way. With docker and
+docker-compose based deployments the build can be done on one machine (be it
+your local machine, Docker Hub's dedicated build servers, or some other
+continuous integration / delivery server). But it's not only possible, it even
+simplifies the process a bit as there is no source code involved, and less
+operations run on the server. Give docker-compose a try, you won't regret it.</p>
+</div>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>

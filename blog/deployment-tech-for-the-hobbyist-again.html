@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Deployment tech for the hobbyist, again</h1>
+        <time datetime="2023-12-15">
+            December 15, 2023
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <p><strong>TL;DR:</strong> Try <a class="reference external" href="https://dokku.com/">Dokku</a> if you want to run multiple toy web apps on a single server and keep the cost at minimum.</p>
+<img alt="Dokku logo with name" src="/images/blog/dokku-logo-with-name.png" style="width: 100%;" />
+<p>Let's talk, yet again, about deploying toy web apps.
+I wrote about this topic many moons ago (see docker-compose in production <a class="reference external" href="{filename}/blog/docker-compose-in-production.rst">part 1</a> and <a class="reference external" href="{filename}/blog/docker-compose-in-production-part-2.rst">part 2</a>), but things have changed and it's time for an update.</p>
+<p>The main thing that changed, really, is having much less time to maintain projects and money to keep the servers up.
+In the past I had a single virtual server (a <a class="reference external" href="https://www.digitalocean.com/products/droplets">Digital Ocean droplet</a>) that ran everything.
+It had <a class="reference external" href="https://nginx.org/en/">nginx</a> installed manually, and whenever I added a project, I had to reconfigure it to pass traffic to the port the project was running on.
+This, again, was done manually.
+The deployment itself was done by running a custom script somewhere, either from the local machine or from CI/CD.
+That's pretty old-school, isn't it?
+And what about SSL?
+Forget it; that was too complicated.</p>
+<p>Over time projects started to transition to different platforms that automated the process.
+I had projects on <a class="reference external" href="https://www.heroku.com/">Heroku</a> for years, using their now-retired free dev offering.
+The cheapest option at the moment is $5 a month.
+Some projects were deployed to <a class="reference external" href="https://docs.digitalocean.com/products/app-platform/">Digital Ocean's App Platform</a> which also starts at the same cost.
+I found both platform very convenient to use, and although not particularly expensive, the cost ramps up quickly when you have a few projects, and that's without considering having a DB and other services to support the web app.
+Last year, I invested some time learning AWS (Amazon Web Services), and in the process, deployed a toy project to <a class="reference external" href="https://aws.amazon.com/elasticbeanstalk/">Elastic Beanstalk</a>.
+In the first year I was on the AWS free tier, but after that the price got really high.
+If memory serves the forecast was &gt;$50 a month for a load balancer, two of the smallest server instances possible, and a relational DB.
+Two days after the end of the free tier period the project was shut down due to the cost.</p>
+<p>A solution was called for hosting my toy projects.
+If you read this far, you can understand the requirements:</p>
+<ul class="simple">
+<li>It needs to be cheap. Ideally, I don't want to consider cost for adding or removing toy projects. A one-server solution sounds good for this.</li>
+<li>It needs to be simple and easy to maintain. <a class="reference external" href="https://docs.aws.amazon.com/lambda/">AWS Lambdas</a> are cheap and, in that sense, might be a good solution for toy projects, but my projects already exist in the form of servers and changing them to Lambda functions is too much effort.</li>
+</ul>
+<p>I had a look at <a class="reference external" href="https://dokku.com/">Dokku</a> many years ago, and decided to check it again now.
+The tagline is 'An open-source PaaS alternative to Heroku', and based on my good experience with <a class="reference external" href="https://www.heroku.com/">Heroku</a> it sounds pretty much up my alley.</p>
+<p>As already mentioned, I also have good experience with <a class="reference external" href="https://www.digitalocean.com/">Digital Ocean</a>.
+If only I can have <a class="reference external" href="https://dokku.com/">Dokku</a> running in a Digital Ocean droplet 🤔</p>
+<img alt="Dokku on Digit Ocean" src="/images/blog/dokku-on-digitalocean.png" />
+<p>Yes! A quick search reveals a <a class="reference external" href="https://docs.digitalocean.com/products/marketplace/catalog/dokku/">one click deployment of Dokku on Digital ocean through their marketplace</a>.
+I went for a $12 virtual machine with 1 CPU, 2GB RAM, and 50GB of SSD storage, hoping it will be enough for a handful of projects for a while.
+Within 20 minutes I was trying to deploy my first abandoned toy project on my new <a class="reference external" href="https://dokku.com/">Dokku</a> instance.
+Another 20 minutes in, and the project was up and running.
+Three more projects followed in what amounts to 2-3 hours work.
+From these 4 project, 3 were previously deployed to <a class="reference external" href="https://www.heroku.com/">Heroku</a> using <a class="reference external" href="https://buildpacks.io/">buildpacks</a> and <a class="reference external" href="https://docs.digitalocean.com/products/app-platform/">Digital Ocean's App Platform</a> using containers (having a <tt class="docutils literal">Dockerfile</tt> at the root of the repo).
+Moving these to the new system was a breeze:
+adding a git remote locally and pushing, then on the new server configuring environment variables and <a class="reference external" href="https://dokku.com/docs/deployment/application-deployment/#setting-up-ssl">configuring SSL following the deployment tutorial</a>, followed by creating A tags on my DNS provider, and that's it!</p>
+<p>The 4th project was previously on <a class="reference external" href="https://aws.amazon.com/elasticbeanstalk/">Elastic Beanstalk</a> and backed by a relational DB.
+I had the data from the DB exported into JSON before shutting the project down.
+I was worried about transitioning it, but found it extremely easy as well!
+Adding a DB to it was very simple following the so-far-excellent docs.
+It took me a while to wrap my head around loading the backup, but the following did the trick:</p>
+<div class="highlight"><pre><span></span>docker<span class="w"> </span>ps<span class="w">  </span><span class="c1"># to find the container ID of my app</span>
+docker<span class="w"> </span>cp<span class="w"> </span>my-backup.json<span class="w"> </span>my-app-container-id:/app
+dokku<span class="w"> </span>enter<span class="w"> </span>my-app
+<span class="c1"># Now run whatever command within the image to load the data</span>
+</pre></div>
+<p>One last project is an <a class="reference external" href="https://elixir-lang.org/">Elixir</a>/<a class="reference external" href="https://www.phoenixframework.org/">Phoenix</a> project that was previously deployed on <a class="reference external" href="https://www.gigalixir.com/">Gigalixir</a> with their custom buildpacks.
+I had to containerise the project to make it work with the new system, and that took a while.
+Nothing to blame the new system for though.
+Just the usual modernisation of an old project.</p>
+<p>Do I care about having these project highly available? no.
+Do I care about no-downtime deployments? also no.
+What about data loss (e.g. losing the DB)? That's not the end of the world either.
+<a class="reference external" href="https://dokku.com/">Dokku</a> supports cron jobs, so it might be interesting to explore doing regular DB backups.
+Or, alternatively, I can accept the $2.40 per month to enable weekly backups of the entire droplet.
+If you do care about these then maybe your toy project is not that much of a toy any more 😄.</p>
+<p>In summary, all of the deployment stories above are here to say that so far I find <a class="reference external" href="https://dokku.com/">Dokku</a> really easy to work with.
+There's no much traffic to any of these projects, so CPU / network / disk usage are low as expected.
+Memory usage is constantly around %40-%50.
+As long as it doesn't creep up dramatically that's probably fine.
+So overall it seems that the transition succeeded.</p>
+<div class="section" id="shameless-plug">
+<h2>Shameless plug</h2>
+<p>Here are the projects that are running on my <a class="reference external" href="https://dokku.com/">Dokku</a> instance at the time of writing this post. Source code for all of them can be found on <a class="reference external" href="https://github.com/nagasaki45/">my GitHub profile</a>.</p>
+<div class="section" id="cardigan">
+<h3><a class="reference external" href="https://cardigan.leverstone.me/">Cardigan</a></h3>
+<p>A &quot;platform&quot; for playing card games online. Created during COVID to play <a class="reference external" href="https://boardgamegeek.com/boardgame/284083/crew-quest-planet-nine">The Crew</a> with friend before it was available on <a class="reference external" href="https://boardgamearena.com/">BGA</a>. It was previously deployed to <a class="reference external" href="https://www.gigalixir.com/">Gigalixir</a>.</p>
+</div>
+<div class="section" id="proker">
+<h3><a class="reference external" href="https://proker.leverstone.me/">Proker</a></h3>
+<p>A tool we use at work to vote on the complexity of tickets (bugs, feature enhancements, tech debt, etc.) It was previously deployed to <a class="reference external" href="https://docs.digitalocean.com/products/app-platform/">Digital Ocean's App Platform</a>.</p>
+</div>
+<div class="section" id="xteams">
+<h3><a class="reference external" href="https://xteams.leverstone.me/">Xteams!</a></h3>
+<p>An app I made many years ago when I was playing volleyball with a group of 15-20 people who were too polite to make up teams. I know a few people were still using it until 3-4 years ago (including the coach of the Hebrew University of Jerusalem Women Volleyball Team). Have no idea if anyone still does. It was previously deployed to <a class="reference external" href="https://aws.amazon.com/elasticbeanstalk/">Elastic Beanstalk</a>, and before that to <a class="reference external" href="https://www.heroku.com/">Heroku</a> (I think).</p>
+</div>
+<div class="section" id="grabacoffee">
+<h3><a class="reference external" href="https://grab-a-coffee.leverstone.me/">GrabACoffee</a></h3>
+<p>A hackathon project made at work to encourage people to take coffee breaks together. It was previously on <a class="reference external" href="https://docs.digitalocean.com/products/app-platform/">Digital Ocean's App Platform</a>.</p>
+</div>
+<div class="section" id="web-audio">
+<h3><a class="reference external" href="https://web-audio.leverstone.me/">web-audio</a></h3>
+<p>An attempt to play with the WebAudio API that ended up more like an experiment in ajax / websockets. Made when I just started writing code and had no idea what I'm doing. Happy to see it online mainly for nostalgia. Previously deployed on <a class="reference external" href="https://www.heroku.com/">Heroku</a> but went down when they changed the pricing model because there was no point in paying for it.</p>
+</div>
+</div>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>

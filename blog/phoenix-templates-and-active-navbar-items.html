@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Phoenix, templates, and active navbar items</h1>
+        <time datetime="2016-12-22">
+            December 22, 2016
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <p>We build a web-app, and want the items on the navigation bar to be active when the user visits the corresponding page, like this:</p>
+<img alt="An animated example of active navigation bar items." src="/images/blog/navbar_active_items.gif" style="width: 100%;" />
+<p>I'm not saying that this is a complicated task in other frameworks, but it often feels &quot;hacky&quot;.
+Here is a <a class="reference external" href="http://www.phoenixframework.org/">phoenix</a> solution that feels pretty elegant, and therefore worth sharing.</p>
+<p>So, let's start with a simple <a class="reference external" href="https://getbootstrap.com/">twitter-bootstrap</a> navbar example for our web-app, with links to our home, products, and about pages.</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar navbar-default&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav navbar-nav&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>Products<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#&quot;</span><span class="p">&gt;</span>About<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</pre></div>
+<p>Right now, none of the links are highlighted.
+We need to add a <tt class="docutils literal"><span class="pre">class=&quot;active&quot;</span></tt> to the <tt class="docutils literal">&lt;li&gt;</tt> item that corresponds to the current page.
+The question is, how can we do it dynamically, according to the current visited page?</p>
+<p>The <a class="reference external" href="https://hexdocs.pm/plug/readme.html#the-plug-conn"><tt class="docutils literal">Plug.Conn</tt></a> contains all of the information for the current request/response cycle, and is available in our views and template.
+Moreover, the <tt class="docutils literal">&amp;Phoenix.Controller.action_name/1</tt> function expects a <tt class="docutils literal">Plug.Conn</tt> and returns the name of the controller function that was used to process the request.
+With this information in mind, let's create a template to render navbar <tt class="docutils literal">&lt;li&gt;</tt> items.
+First, we will have to make the <tt class="docutils literal">action_name</tt> function available in our views.
+Edit <tt class="docutils literal">web/web.ex</tt> to import it to all of the views.</p>
+<div class="highlight"><pre><span></span><span class="w"> </span> # Import convenience functions from controllers
+<span class="gd">- import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]</span>
+<span class="gi">+ import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1, action_name: 1]</span>
+</pre></div>
+<p>Now we are ready to create the template for the navbar items:</p>
+<div class="highlight"><pre><span></span><span class="cm">&lt;!-- web/templates/layout/navbar_item.html.eex --&gt;</span>
+
+<span class="err">&lt;</span>%= if action_name(@conn) == @action do %&gt;
+<span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;active&quot;</span><span class="p">&gt;</span>
+<span class="err">&lt;</span>%= else %&gt;
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="err">&lt;</span>%= end %&gt;
+  <span class="err">&lt;</span>%= link @text, to: page_path(@conn, @action) %&gt;
+<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</pre></div>
+<p>Notice that this template expects the <tt class="docutils literal">conn</tt>, <tt class="docutils literal">action</tt> (as an atom), and <tt class="docutils literal">text</tt> (for the link) as assigns.
+It also uses the <tt class="docutils literal">link</tt> function to create the <tt class="docutils literal">&lt;a&gt;</tt> tags automatically by finding the path in the routing table for us.
+We can already use it by replacing our previous navbar with:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar navbar-default&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav navbar-nav&quot;</span><span class="p">&gt;</span>
+    <span class="err">&lt;</span>%= render &quot;navbar_item.html&quot;, conn: @conn, action: :index, text: &quot;Home&quot; %&gt;
+    <span class="err">&lt;</span>%= render &quot;navbar_item.html&quot;, conn: @conn, action: :products, text: &quot;Products&quot; %&gt;
+    <span class="err">&lt;</span>%= render &quot;navbar_item.html&quot;, conn: @conn, action: :about, text: &quot;About&quot; %&gt;
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</pre></div>
+<p>However, it is even more elegant and concise to add the following function to the layout view:</p>
+<div class="highlight"><pre><span></span><span class="c1"># web/views/layout_view.ex</span>
+
+<span class="kd">def</span><span class="w"> </span><span class="n">navbar_item</span><span class="p">(</span><span class="n">assigns</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">render</span><span class="w"> </span><span class="s2">&quot;navbar_item.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">assigns</span>
+<span class="k">end</span>
+</pre></div>
+<p>And improve the navbar:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;navbar navbar-default&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;nav navbar-nav&quot;</span><span class="p">&gt;</span>
+    <span class="err">&lt;</span>%= navbar_item conn: @conn, action: :index, text: &quot;Home&quot; %&gt;
+    <span class="err">&lt;</span>%= navbar_item conn: @conn, action: :products, text: &quot;Products&quot; %&gt;
+    <span class="err">&lt;</span>%= navbar_item conn: @conn, action: :about, text: &quot;About&quot; %&gt;
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</pre></div>
+<p>In addition to <tt class="docutils literal">action_name</tt>, you might also be interested in <tt class="docutils literal">Phoenix.Controller.controller_module</tt>, as suggested <a class="reference external" href="http://stackoverflow.com/a/36009443/1224456">here</a>.
+I hope that this short tutorial helped you.
+Good luck with your navbar!</p>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>

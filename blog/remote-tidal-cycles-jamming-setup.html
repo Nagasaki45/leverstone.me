@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Remote TidalCycles jamming setup</h1>
+        <time datetime="2020-09-18">
+            September 18, 2020
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <object data="https://upload.wikimedia.org/wikipedia/commons/8/80/TidalCycles_identity.svg" style="width: 100%;" type="image/svg+xml">TidalCycles logo</object>
+<p><a class="reference external" href="https://tidalcycles.org/i">TidalCycles</a> (tidal in short) is a live coding language for music performance / composition.
+I don't use it myself but been playing with a live coder, Lizzie, AKA <a class="reference external" href="https://lwlsn.github.io/digitalselves-web/">digital selves</a>, for the last year and a half.
+Check her out!
+With a COVID 2nd wave around the corner we decided to search for a solution for remote jamming together.
+This blog post is a summary of what seems to work.
+It's written mainly as a documentation for Lizzie and self.
+Hopefully others will find it useful as well.</p>
+<p>So, what do we want to achieve?
+We want Lizzie to run tidal code on her laptop and having the audio generated on my laptop at the other side of town.
+The clock to sync my hardware synth will be generated with the audio.
+So, audio-wise, both Lizzie's output and my hardware synth will generate locally on my side, fully in sync.
+Then, the mix of Lizzie's live coding and my hardware synth will be streamed back to Lizzie, so she could hear it too.</p>
+<p>How do we plan to do it?
+Tidal uses a client / server architecture with the tidal haskell library as the client and SuperCollider (SC) running the audio as the server.
+Communication is done over UDP on port 57120 by default.
+Our idea is to route the messages from tidal, through a server, to my machine, which runs the SC server.
+With such a solution there won't be any need to change anything around tidal, nor around SC, just set up the network properly.
+I will listen to the mix locally on my side and send it to Lizzie over zoom / skype / whatever.</p>
+<p>With the overall picture in mind, let's dive in.</p>
+<div class="section" id="prerequisits">
+<h2>Prerequisits</h2>
+<ul class="simple">
+<li>You'll need a server with admin previliges.</li>
+<li>Both ends (the computer running tidal and the computer running SC) should have <a class="reference external" href="https://linux.die.net/man/1/socat">socat</a> installed.</li>
+</ul>
+<p>Here's the overall process:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#prepare-the-server">Prepare the server</a></li>
+<li><a class="reference internal" href="#create-an-ssh-reverse-tunnel-from-the-server-to-the-laptop-running-sc">Create an SSH reverse tunnel from the server to the laptop running SC</a></li>
+<li><a class="reference internal" href="#convert-tcp-messages-back-to-udp-on-the-laptop-running-sc">Convert TCP messages back to UDP on the laptop running SC</a></li>
+<li><a class="reference internal" href="#send-the-udp-messages-from-the-laptop-running-tidal-to-the-server">Send the UDP messages from the laptop running tidal to the server</a></li>
+<li><a class="reference internal" href="#start-tidal">Start tidal</a></li>
+<li><a class="reference internal" href="#stream-the-audio-back-to-the-tidal-user">Stream the audio back to the tidal user</a></li>
+</ul>
+</div>
+<div class="section" id="prepare-the-server">
+<h2>Prepare the server</h2>
+<p>For a server we created a droplet on <a class="reference external" href="https://digitalocean.com/">digital ocean</a>.
+There's almost no setup for the droplet, so we can create one for jamming and delete it later to keep the cost low.</p>
+<p>The only configuration needed on the server is to change the SSH settings on the server to allow forwarded ports to bind to the wildcard address (meaning that the address will be publicly accessible) <a class="footnote-reference" href="#footnote-1" id="footnote-reference-1">[1]</a>.</p>
+<p>Edit <tt class="docutils literal">/etc/ssh/sshd_config</tt> and add:</p>
+<pre class="code literal-block">
+GatewayPorts yes
+</pre>
+<p>Now reload the SSH settings on the server with</p>
+<pre class="code literal-block">
+systemctl reload ssh.service
+</pre>
+<p>Note the IP of your server and use it everywhere that <tt class="docutils literal">SERVER_IP</tt> is mentioned below.</p>
+</div>
+<div class="section" id="create-an-ssh-reverse-tunnel-from-the-server-to-the-laptop-running-sc">
+<h2>Create an SSH reverse tunnel from the server to the laptop running SC</h2>
+<p>SSH tunnelling doesn't support UDP, so we'll create a tunnel for TCP and convert the UDP messages sent by tidal to TCP on one machine, and back to UDP on the other machine.</p>
+<p>On the machine that runs SC run</p>
+<pre class="code literal-block">
+ssh -R 12345:localhost:12345 root&#64;SERVER_IP
+</pre>
+<p>The port doesn't really matter, 12345 is used here for convenience.</p>
+</div>
+<div class="section" id="convert-tcp-messages-back-to-udp-on-the-laptop-running-sc">
+<h2>Convert TCP messages back to UDP on the laptop running SC</h2>
+<pre class="code literal-block">
+socat TCP-LISTEN:12345,fork UDP4:localhost:57120
+</pre>
+</div>
+<div class="section" id="send-the-udp-messages-from-the-laptop-running-tidal-to-the-server">
+<h2>Send the UDP messages from the laptop running tidal to the server</h2>
+<pre class="code literal-block">
+socat UDP-LISTEN:57120,fork TCP4:SERVER_IP:12345
+</pre>
+</div>
+<div class="section" id="start-tidal">
+<h2>Start tidal</h2>
+<p>Spin up tidal on one side, SC on the other side, put some patterns in and it should work, almost!
+The user on the SC side will probably notice that the timing is not super stable and there are warnings about that in the SC log.
+This is a result of the network latency.
+To fix that, increase tidal's latency.
+If you're using atom go to preferences &gt; open config folder. This brings up the tidal source code. In <tt class="docutils literal">tidalcycles/lib/boot.tidal</tt>, change the <tt class="docutils literal">oLatency</tt> value to 0.4 or so in this line of code:</p>
+<div class="highlight"><pre><span></span><span class="nf">tidal</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">startTidal</span><span class="w"> </span><span class="p">(</span><span class="n">superdirtTarget</span><span class="w"> </span><span class="p">{</span><span class="n">oLatency</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">oAddress</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="s">&quot;127.0.0.1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">oPort</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">57120</span><span class="p">})</span><span class="w"> </span><span class="p">(</span><span class="n">defaultConfig</span><span class="w"> </span><span class="p">{</span><span class="n">cFrameTimespan</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">20</span><span class="p">})</span>
+</pre></div>
+<p>A value of 0.4 worked for us.
+If it's still too low try to increase the value until there's no more jitter and warnings in the log.</p>
+</div>
+<div class="section" id="stream-the-audio-back-to-the-tidal-user">
+<h2>Stream the audio back to the tidal user</h2>
+<p>So now the live coder's music is coming from the laptop running SC.
+In our case, one audio channel from SC is an analog clock to sync the hardware sync.
+The other channels from SC, and the hardware synth, are connected to a mixer and the entire mix can now be heard on the SC end of the system.
+But the live coder cannot hear anything yet.
+We used a 2nd computer that takes mixer's output and streams it back to the live coder over zoom.</p>
+<p>The entire system looks something like this.
+The area in blue is for the laptop running tidal and the area in pink is the SC + hardware synth end of the system.</p>
+<img alt="TidalCycles logo" src="/images/blog/tidal_remote_diagram.jpg" style="width: 100%;" />
+</div>
+<div class="section" id="advice-on-testing-things-locally">
+<h2>Advice on testing things locally</h2>
+<p>If you want to test things on a single computer make sure to change the port SC is listening to.
+Otherwise you are trying to use the same port twice: once listening to tidal and sending the messages to the server, and again listening to the messages coming from the server.
+To do so, start the SuperDirt synth in SC as follows:</p>
+<pre class="code literal-block">
+SuperDirt.start(port: 57121)
+</pre>
+<p>You'll also have to change the port that the TCP stream is converted to, so replace</p>
+<pre class="code literal-block">
+socat TCP-LISTEN:12345,fork UDP4:localhost:57120
+</pre>
+<p>with</p>
+<pre class="code literal-block">
+socat TCP-LISTEN:12345,fork UDP4:localhost:57121
+</pre>
+<p><strong>Enjoy jamming and keep safe!</strong></p>
+</div>
+<div class="section" id="footnotes">
+<h2>Footnotes</h2>
+<table class="docutils footnote" frame="void" id="footnote-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#footnote-reference-1">[1]</a></td><td>Setting the server this way is not 100% secure. We didn't mind it too much as this is a throwaway server with IP that no one except for us will ever know. If you are worried about security consider creating a forward tunnel from the laptop running tidal to the server instead of exposing the port to the public.</td></tr>
+</tbody>
+</table>
+</div>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>

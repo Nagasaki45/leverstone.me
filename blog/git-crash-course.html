@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone.">
+<title>Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Montserrat:300italic,400italic,700italic,300,400,700|Sen:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it's Tom Leverstone." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn btn-primary btn-home" href="/">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">git crash course</h1>
+        <time datetime="2017-01-31">
+            January 31, 2017
+        </time>
+    <div class="content">
+        <!-- Content -->
+        <p>A really short introduction to git for my PhD fellas.</p>
+<div class="section" id="first-trygit">
+<h2>First, <a class="reference external" href="https://try.github.io/">TryGit</a></h2>
+</div>
+<div class="section" id="clone-something">
+<h2>Clone something</h2>
+<p>There are two ways to start to work in a git repository.</p>
+<ul class="simple">
+<li><tt class="docutils literal">git clone <span class="pre">https://github.com/some_user/some_repo.git</span></tt> to download a project into a new directory <cite>some_repo</cite>.</li>
+<li><tt class="docutils literal">git init</tt> to make the current directory a git repository.</li>
+</ul>
+<p>Go ahead and clone a project of interest.</p>
+</div>
+<div class="section" id="working-locally">
+<h2>Working locally</h2>
+<img alt="git local workflow" src="/images/blog/git_staging_commit.png" style="width: 100%;" />
+<p><strong>Remember!</strong> you can always see the current state and the staging / unstaging commands with <tt class="docutils literal">git status</tt>, so don't try to memorize them.</p>
+<p>When you are satisfied with the changes commit them:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;an informatice message describing your change&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="explore">
+<h2>Explore</h2>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w">  </span><span class="c1"># see the history</span>
+git<span class="w"> </span>diff<span class="w">  </span><span class="c1"># see the unstaged changes</span>
+git<span class="w"> </span>diff<span class="w"> </span>--staged<span class="w">  </span><span class="c1"># see the staged changes</span>
+git<span class="w"> </span>show<span class="w"> </span>&lt;COMMIT_HASH&gt;<span class="w">  </span><span class="c1"># see the changes in a commit</span>
+</pre></div>
+</div>
+<div class="section" id="collaborating-through-github">
+<h2>Collaborating through GitHub</h2>
+<p>GitHub is a place to share and collaborate on git repositories.</p>
+<p>Your local git repository can be &quot;linked&quot; to remote repositories.
+To see them run <tt class="docutils literal">git remote</tt>.
+If you cloned an existing repository you should see one remote, called <tt class="docutils literal">origin</tt>, in the list.
+Otherwise, create a new GitHub repository and add it as a remote with:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/you/your_repo.git
+</pre></div>
+<div class="section" id="pull">
+<h3><tt class="docutils literal">pull</tt></h3>
+<p>To get the latest changes (commits) from your remote run:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>master
+</pre></div>
+</div>
+<div class="section" id="push">
+<h3><tt class="docutils literal">push</tt></h3>
+<p>To update the remote with your changes (commits) run:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>master
+</pre></div>
+<p><strong>Remember!</strong> Always <tt class="docutils literal">pull</tt> before you <tt class="docutils literal">push</tt> to avoid unnecessary conflicts.</p>
+<img alt="git Austin Powers meme" src="/images/blog/git_meme.jpg" style="width: 100%;" />
+</div>
+</div>
+<div class="section" id="a-simple-but-complete-workflow">
+<h2>A simple but complete workflow</h2>
+<p>Assuming that you already have a local repository with a remote (called <tt class="docutils literal">origin</tt>) that you can push code to:</p>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>master<span class="w">         </span><span class="c1"># to get the latest changes</span>
+<span class="c1"># work work work...</span>
+git<span class="w"> </span>status<span class="w">                     </span><span class="c1"># to see all of the changes you did</span>
+git<span class="w"> </span>diff<span class="w">                       </span><span class="c1"># optional but handy</span>
+git<span class="w"> </span>add<span class="w"> </span>FILE_WITH_CHANGES<span class="w">      </span><span class="c1"># repeat as necessary</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;your message&quot;</span><span class="w">   </span><span class="c1"># commit the changes to the repository</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>master<span class="w">         </span><span class="c1"># to upload your changes</span>
+</pre></div>
+</div>
+<div class="section" id="more-info-and-resources">
+<h2>More info and resources</h2>
+<ul class="simple">
+<li><em>Branches</em> are an important concept in git. <a class="reference external" href="http://learngitbranching.js.org/">Learn it</a>!</li>
+<li><a class="reference external" href="https://git-scm.com/book/en/v2">Pro Git book</a>: lots of info, sometime too verbose.</li>
+</ul>
+</div>
+
+        <!-- Links -->
+    </div>
+</div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>    </body>
+</html>
