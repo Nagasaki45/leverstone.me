@@ -1,10 +1,12 @@
-<!-- PORTFOLIO -->
-<section id="portfolio">
+<div class="container article-container">
+  {% include "partials/navbar.html" %}
+</div>
+<div id="portfolio">
   <div class="container-fluid">
     <h2 class="text-center">Projects</h2>
     <hr />
     <div class="row no-gutter">
-      {% for article in articles if article.category == "projects" %}
+      {% for article in articles %}
       <div class="col-lg-4 col-sm-6">
         <a href="{{ article.url }}" class="portfolio-box portfolio-link">
           <img
@@ -23,4 +25,4 @@
       {% endfor %}
     </div>
   </div>
-</section>
+</div>

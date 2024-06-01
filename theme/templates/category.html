@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block page %}
+{% if category.name == "Hobbies" %}
+{% include "partials/hobbies.html" %}
+{% elif category.name == "Projects" %}
+{% include "partials/portfolio.html" %}
+{% else %}
+{% include "partials/generic_category.html" %}
+{% endif %}
+{% endblock %}

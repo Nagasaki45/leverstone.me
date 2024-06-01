@@ -5,7 +5,7 @@ date: 2024-05-30T23:00:00.000Z
 
 A dockerised app I'm working on needs some secrets at build time. In my case, it needs to `pip install` from a private repository. Note that this is a generic problem, luckily with quite an elegant generic solution.
 
-# How NOT to pass secrets to docker
+## How NOT to pass secrets to docker
 
 In the past, we solved this by passing a build argument with the secret.
 
@@ -32,7 +32,7 @@ There are two significant drawbacks to this approach:
 1. If the secret is a token that refreshes from time to time, it will mess up the docker build caching. In other words, when your token changes, every step after `ARG CONTAINER_SECRET` will have to be rerun during the build.
 2. The secret can be extracted from the image, which is a security concern.
 
-# How to pass secrets to docker
+## How to pass secrets to docker
 
 Luckily, [docker supports build secrets](https://docs.docker.com/build/building/secrets/). But until recently it was hard to fully utilize them because they were not supported by docker compose, which I almost always use for local development.
 

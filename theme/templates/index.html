@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
 {% block page %}
-    {% include "partials/about.html" %}
-    {% include "partials/hobbies.html" %}
-    {% include "partials/portfolio.html" %}
+<div id="about">
+    <div class="wrapper text-center">
+        <a href="{{ SITEURL }}" class="u-url">
+            <img class="u-photo avatar" src="/images/me.jpg">
+        </a>
+        <h1 class="p-name title">{{ ABOUT_TITLE }}</h1>
+        <p class="p-note content">{{ DESCRIPTION }}</p>
+
+        <div>
+        {% with skip_home=True %}
+            {% include "partials/navbar.html" %}
+        {% endwith %}
+        </div>
+
+        <div>
+            {% for name, link, text in SOCIAL %}
+            {% if name == 'fa fa-envelope' %}
+            <a class="icon" href="{{ link }}">
+            {% else %}
+            <a class="icon" href="{{ link }}" rel="me">
+            {% endif %}
+                <i class="{{ name }}"></i>&nbsp;{{ text }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

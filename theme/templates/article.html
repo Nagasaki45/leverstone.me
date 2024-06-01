@@ -1,14 +1,16 @@
-{% extends "content.html" %}
+{% extends "base.html" %}
 
-{% block content %}
+{% block page %}
+<div class="container article-container">
+    {% include "partials/navbar.html" %}
     <h1 class="title">{{ article.title }}</h1>
-    {% if article.img %}
-        <img src="/images/portfolio/{{ article.img }}" />
-    {% endif %}
-    {% if article.category == "til" %}
+    {% if article.date %}
         <time datetime="{{ article.date.date().isoformat() }}">
             {{ article.date.strftime('%B %d, %Y') }}
         </time>
+    {% endif %}
+    {% if article.img %}
+        <img src="/images/portfolio/{{ article.img }}" />
     {% endif %}
     <div class="content">
         <!-- Content -->
@@ -18,4 +20,5 @@
         {% include "partials/portfolio_item_badges.html" %}
         {% endif %}
     </div>
+</div>
 {% endblock %}
