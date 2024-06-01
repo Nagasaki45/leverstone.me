@@ -63,9 +63,13 @@ EXTRA_PATH_METADATA = {
 ARTICLE_URL = ARTICLE_SAVE_AS = '{category}/{slug}.html'
 PAGE_URL = PAGE_SAVE_AS = '{slug}.html'
 
+PLUGINS = [
+    'pelican_youtube',
+    'yaml_metadata',
+]
+
 SOCIAL = (
-    ('fas fa-blog', 'https://blog.leverstone.me', 'Blog'),
-    ('fa fa-brain', '/today-i-learned', 'TIL'),
+    ('fas fa-blog', '/blog', 'Blog'),
     ('fab fa-github', 'https://github.com/Nagasaki45', 'GitHub'),
     ('fab fa-linkedin', 'https://www.linkedin.com/in/tleverstone/', 'LinkedIn'),
     ('fa fa-envelope', 'mailto:tleverstone@gmail.com', 'Email'),

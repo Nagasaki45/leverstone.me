@@ -10,3 +10,4 @@ package-mode = false
 python = "^3.12"
 pelican = {extras = ["markdown"], version = "^4.9.1"}
 pelican-yaml-metadata = "^2.1.2"
+pelican-youtube = "^0.2.1"

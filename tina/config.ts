@@ -22,9 +22,9 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "til",
-        label: "TIL",
-        path: "content/til",
+        name: "blog",
+        label: "Blog",
+        path: "content/blog",
         fields: [
           {
             name: "title",
