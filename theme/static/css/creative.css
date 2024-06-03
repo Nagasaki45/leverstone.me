@@ -102,14 +102,6 @@ nav .btn {
     }
 }
 
-nav .btn-home {
-    border-color: black;
-}
-
-nav .btn-home:hover {
-    border-color: black;
-}
-
 nav .btn.selected {
     border-color: black;
 }
