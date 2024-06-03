@@ -96,6 +96,12 @@ nav .btn {
     border: 6px solid;
 }
 
+@media screen and (max-width: 600px) {
+    nav .btn {
+        font-size: 0.5em;
+    }
+}
+
 nav .btn-home {
     border-color: black;
 }
@@ -120,7 +126,6 @@ nav ul.float {
 
 nav li {
     display: inline;
-    margin-left: 5px;
 }
 
 /* ABOUT */
