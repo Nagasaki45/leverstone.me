@@ -119,8 +119,8 @@ A hackathon project made at work to encourage people to take coffee breaks toget
 An attempt to play with the WebAudio API that ended up more like an experiment in ajax / websockets. Made when I just started writing code and had no idea what I'm doing. Happy to see it online mainly for nostalgia. Previously deployed on `Heroku`_ but went down when they changed the pricing model because there was no point in paying for it.
 
 .. _Dokku: https://dokku.com/
-.. _part 1: {filename}/blog/docker-compose-in-production.rst
-.. _part 2: {filename}/blog/docker-compose-in-production-part-2.rst
+.. _part 1: {filename}/Blog/docker-compose-in-production.rst
+.. _part 2: {filename}/Blog/docker-compose-in-production-part-2.rst
 .. _Digital Ocean droplet: https://www.digitalocean.com/products/droplets
 .. _nginx: https://nginx.org/en/
 .. _Heroku: https://www.heroku.com/

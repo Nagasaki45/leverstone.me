@@ -78,6 +78,6 @@ continuous integration / delivery server). But it's not only possible, it even
 simplifies the process a bit as there is no source code involved, and less
 operations run on the server. Give docker-compose a try, you won't regret it.
 
-.. _experiences with docker-compose in production: {filename}/blog/docker-compose-in-production.rst
+.. _experiences with docker-compose in production: {filename}/Blog/docker-compose-in-production.rst
 .. _The Krihelinator: https://github.com/nagasaki45/krihelinator
 .. _Docker Hub: https://hub.docker.com/
