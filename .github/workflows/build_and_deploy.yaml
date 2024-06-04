@@ -19,6 +19,8 @@ jobs:
       - run: poetry install
 
       - run: poetry run pelican
+        env:
+            FEED_DOMAIN: https://leverstone.me
 
       - run: yarn
 

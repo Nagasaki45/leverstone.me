@@ -30,20 +30,19 @@ def ARTICLE_ORDER_BY(article):
 
 DEFAULT_DATE = 'fs'  # Get date from file creation time if missing
 
-# Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
-
 # Things we don't need
+
 ARCHIVES_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 CATEGORIES_SAVE_AS = ''
 TAGS_SAVE_AS = ''
 TAG_SAVE_AS = ''
+
+FEED_ALL_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
 
 # Filepaths and URLs
 
@@ -53,6 +52,11 @@ ARTICLE_URL = '/{category}/{slug}'
 ARTICLE_SAVE_AS = '{category}/{slug}.html'
 
 PAGINATED_TEMPLATES = {'category': 10}
+
+# Feeds
+
+FEED_DOMAIN = os.environ.get('FEED_DOMAIN', '')
+CATEGORY_FEED_ATOM = '{slug}/atom.xml'
 
 # Static files
 

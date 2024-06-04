@@ -2,7 +2,14 @@
   {% include "partials/navbar.html" %}
 
   <div class="category">
-    <h2 class="text-center">{{ category.name }}</h2>
+    <div class="header">
+      <a class="btn btn-secondary btn-sm" href="{{ category.url }}/atom.xml" target="_blank">
+        <span class="fa fa-rss"></span>
+        &nbsp;
+        RSS Feed
+      </a>
+      <h2 class="text-center">{{ category.name }}</h2>
+    </div>
     <hr />
     {% for article in articles_page.object_list %}
     <div class="item">
