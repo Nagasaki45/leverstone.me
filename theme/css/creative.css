@@ -255,6 +255,16 @@ nav li {
 
 /* CATEGORY */
 
+.category .header {
+    position: relative
+}
+
+.category .header a {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 .category .item {
     margin: 1em 0 3em;
 }
