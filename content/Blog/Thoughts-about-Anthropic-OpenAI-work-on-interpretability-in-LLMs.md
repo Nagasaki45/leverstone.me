@@ -13,9 +13,7 @@ To be fair here, Anthropic encoded 1 million, 4 million, and 34 million features
 
 The second reason for the OpenAI research to feel weak is the examples they give for feature activation. Take this snippet for example:
 
-```
-most people, it isn't. We all have wonderful days, glimpses of what we perceive to be perfection, but we can also all have truly shit-tastic ones, and I can assure you that you're not alone. So toddler of mine, and most other toddlers out there, remember; Don't be a
-```
+> most people, it isn't. We all have wonderful days, glimpses of what we perceive to be perfection, but we can also all have truly shit-tastic ones, and I can assure you that you're not alone. So toddler of mine, and most other toddlers out there, remember; Don't be a
 
 If I tell you to highlight the words / phrases associated with 'phrases relating to things (especially humans) being flawed', what would you do? I would probably highlight 'we can also all have truly shit-tastic ones' and 'you're not alone'.
 
