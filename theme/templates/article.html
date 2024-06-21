@@ -9,16 +9,14 @@
             {{ article.date.strftime('%B %d, %Y') }}
         </time>
     {% endif %}
-    {% if article.img %}
-        <img src="/images/portfolio/{{ article.img }}" />
-    {% endif %}
     <div class="content">
-        <!-- Content -->
-        {{ article.content  }}
-        <!-- Links -->
-        {% if article.links %}
-        {% include "partials/portfolio_item_badges.html" %}
+        {% if article.img %}
+            <p><img src="/images/portfolio/{{ article.img }}" /></p>
         {% endif %}
+        {{ article.content  }}
     </div>
+    {% if article.links %}
+    {% include "partials/portfolio_item_badges.html" %}
+    {% endif %}
 </div>
 {% endblock %}

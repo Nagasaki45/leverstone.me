@@ -71,13 +71,18 @@ section {
 }
 
 .content {
-    margin: 1em 0 3em;
+    margin: 1em 0;
+    font-family: "Georgia",serif;
+    line-height: 1.6em;
+}
+
+.content img {
+    margin: 0.5em 0;
 }
 
 .title {
     margin: 0.5em 0;
     font-weight: bold;
-    font-family: "Sen",sans-serif;
 }
 
 time {
@@ -251,6 +256,7 @@ nav li {
 /* ARTICLE */
 .article-container {
     max-width: 800px;
+    margin-bottom: 3em;
 }
 
 /* CATEGORY */
