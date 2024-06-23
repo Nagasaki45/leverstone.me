@@ -148,9 +148,58 @@ I would like to seize the opportunity to thank Kruschke again for his great book
 </div>
 
     </div>
-</div>
+
+<button id="openSubscribeModal" class="subscribe btn btn-secondary btn-sm">
+  Subscribe
+</button>
+
+<div id="subscribeModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>
+          Either use the RSS feed
+          <a target="_blank" href="/blog/atom.xml">here</a>, or
+          subscribe to the email newsletter.
+        </p>
+        <form
+          action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/"
+          method="post"
+        >
+          <div class="form-group">
+            <label for="emailField">Email</label>
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              id="emailField"
+              aria-describedby="emailHelp"
+              placeholder="name@example.com"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <!-- Anti spam protection -->
+          <div style="position: absolute; left: -5000px" aria-hidden="true">
+            <input type="text" name="b28-ft" tabindex="-1" value="" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="closeSubscribeModal"
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div></div>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/theme/js/jquery.js"></script>
-<script src="/theme/js/bootstrap.min.js"></script>    </body>
+<script src="/theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/subscribe.js"></script>    </body>
 </html>

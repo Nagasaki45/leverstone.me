@@ -265,7 +265,7 @@ nav li {
     position: relative
 }
 
-.category .header a {
+.category .header .subscribe {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -282,4 +282,10 @@ nav li {
 
 .pagination .older {
     float: right;
+}
+
+/* SUBSCRIBE */
+
+.modal {
+    background-color: rgba(0,0,0,0.6);
 }
