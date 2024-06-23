@@ -3,11 +3,7 @@
 
   <div class="category">
     <div class="header">
-      <a class="btn btn-secondary btn-sm" href="{{ category.url }}/atom.xml" target="_blank">
-        <span class="fa fa-rss"></span>
-        &nbsp;
-        RSS Feed
-      </a>
+      {% include "partials/subscribe.html" %}
       <h2 class="text-center">{{ category.name }}</h2>
     </div>
     <hr />
