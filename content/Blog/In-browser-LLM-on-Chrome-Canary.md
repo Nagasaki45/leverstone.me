@@ -1,5 +1,5 @@
 ---
-title: In browser LLM on Chrome Canary
+title: In-browser LLM on Chrome Canary
 date: 2024-07-03T23:00:00.000Z
 ---
 
