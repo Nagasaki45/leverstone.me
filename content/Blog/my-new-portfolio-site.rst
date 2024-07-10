@@ -10,7 +10,6 @@ I have a new site!
 .. image:: /images/blog/portfolio_header.jpg
   :width: 100%
   :alt: My portfolio header
-  :target: http://www.leverstone.me
 
 The site was created to present the different projects I'm working on
 as a portfolio. I will keep posting ideas and explorations here. But I
