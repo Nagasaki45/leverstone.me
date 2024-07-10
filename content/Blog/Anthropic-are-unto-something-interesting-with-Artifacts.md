@@ -1,5 +1,5 @@
 ---
-title: Anthropic are unto something interesting with Artifacts
+title: Anthropic is onto something interesting with Artifacts
 date: 2024-07-09T23:00:00.000Z
 ---
 
