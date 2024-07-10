@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom Leverstone - Projects</title><link href="/" rel="alternate"></link><link href="https://leverstone.me/projects/atom.xml" rel="self"></link><id>/</id><updated>2024-07-10T08:12:57+01:00</updated><entry><title>nagasaki45 / IDMT?</title><link href="/projects/nagasaki45-idmt" rel="alternate"></link><published>2020-04-06T00:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2020-04-06:/projects/nagasaki45-idmt</id><summary type="html">&lt;p&gt;Improvised, polymetric, modular, avant-pop, mess&lt;/p&gt;</summary><content type="html">&lt;p&gt;nagasaki45 is my electronic music stage name. I improvise live sets
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom Leverstone - Projects</title><link href="/" rel="alternate"></link><link href="https://leverstone.me/projects/atom.xml" rel="self"></link><id>/</id><updated>2024-07-10T08:20:48+01:00</updated><entry><title>nagasaki45 / IDMT?</title><link href="/projects/nagasaki45-idmt" rel="alternate"></link><published>2020-04-06T00:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2020-04-06:/projects/nagasaki45-idmt</id><summary type="html">&lt;p&gt;Improvised, polymetric, modular, avant-pop, mess&lt;/p&gt;</summary><content type="html">&lt;p&gt;nagasaki45 is my electronic music stage name. I improvise live sets
 focusing on percussive, up-beat, and polymetric structures on a modular
 synth.&lt;/p&gt;
 &lt;h2&gt;IDMT?&lt;/h2&gt;
 &lt;p&gt;Lizzie Wilson, AKA &lt;a href="https://lwlsn.github.io/digitalselves-web/"&gt;digital
 selves&lt;/a&gt;, is a London based
 audiovisual artist who likes to use computer code to make sounds and
-visuals and occasionally both. Together we play under the IDMT? alias.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>bibo</title><link href="/projects/bibo" rel="alternate"></link><published>2020-04-06T02:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2020-04-06:/projects/bibo</id><summary type="html">&lt;p&gt;Command line reference manager with a single source of truth: the .bib file. Inspired by beets.&lt;/p&gt;</summary><content type="html">&lt;p&gt;bibo is a command line reference manager with a single source of truth:
+visuals and occasionally both. Together we play under the IDMT? alias.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>bibo</title><link href="/projects/bibo" rel="alternate"></link><published>2020-04-06T02:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2020-04-06:/projects/bibo</id><summary type="html">&lt;p&gt;Command line reference manager with a single source of truth: the .bib file. Inspired by beets.&lt;/p&gt;</summary><content type="html">&lt;p&gt;bibo is a command line reference manager with a single source of truth:
 the .bib file. It is inspired by &lt;a href="https://beets.readthedocs.io/"&gt;beets&lt;/a&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It gives you control over your files. They are not hidden in some
@@ -17,7 +17,7 @@ the .bib file. It is inspired by &lt;a href="https://beets.readthedocs.io/"&gt;b
 &lt;li&gt;It's a command line tool. What not to ❤️?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Check out all the nitty gritty details on
-&lt;a href="https://github.com/Nagasaki45/bibo"&gt;github&lt;/a&gt;.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>An Audio-Only Augmented Reality System for Social Interaction</title><link href="/projects/an-audio-only-augmented-reality-system-for-social-interaction" rel="alternate"></link><published>2015-12-31T10:30:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2015-12-31:/projects/an-audio-only-augmented-reality-system-for-social-interaction</id><summary type="html">&lt;p&gt;Master thesis in Music Technology, Bar-Ilan Music Department&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Abstract:&lt;/strong&gt; Music plays a crucial role in social interactions. This
+&lt;a href="https://github.com/Nagasaki45/bibo"&gt;github&lt;/a&gt;.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>An Audio-Only Augmented Reality System for Social Interaction</title><link href="/projects/an-audio-only-augmented-reality-system-for-social-interaction" rel="alternate"></link><published>2015-12-31T10:30:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2015-12-31:/projects/an-audio-only-augmented-reality-system-for-social-interaction</id><summary type="html">&lt;p&gt;Master thesis in Music Technology, Bar-Ilan Music Department&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Abstract:&lt;/strong&gt; Music plays a crucial role in social interactions. This
 thesis examines how an interactive environment might facilitate such
 exchanges by developing and evaluating a novel system for joint music
 consumption by a group of users in the same place and time. The system
@@ -60,7 +60,7 @@ takes diverse sound zones with him during this simulation. The music is
 the same as in the original system.&lt;/p&gt;
 &lt;div class="youtube youtube-16x9"&gt;
 &lt;iframe src="https://www.youtube.com/embed/2kJoeD2iWBA" allowfullscreen seamless frameBorder="0"&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>OS GR</title><link href="/projects/os-gr" rel="alternate"></link><published>2021-05-24T17:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2021-05-24:/projects/os-gr</id><summary type="html">&lt;p&gt;Android app to convert to and from OS grid reference.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The Ordnance Survey grid reference is a British system to denote
+&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>OS GR</title><link href="/projects/os-gr" rel="alternate"></link><published>2021-05-24T17:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2021-05-24:/projects/os-gr</id><summary type="html">&lt;p&gt;Android app to convert to and from OS grid reference.&lt;/p&gt;</summary><content type="html">&lt;p&gt;The Ordnance Survey grid reference is a British system to denote
 geographic locations, similar to latitude and longitude. It is commonly
 used in maps and guides for navigation. Many android apps, however,
 don't work natively with OS grid references. This is where the &lt;a href="https://play.google.com/store/apps/details?id=com.os_gr"&gt;OS GR
@@ -90,7 +90,7 @@ github&lt;/a&gt;.&lt;/p&gt;
 open source mini project of mine. It probably won't light your phone on
 fire, or share your bank details with facebook, but it might (and
 probably will) brake in unexpected ways. Please don't blindly rely on
-this for navigation.&lt;/strong&gt;&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>Unsocial VR</title><link href="/projects/unsocial-vr" rel="alternate"></link><published>2017-07-14T10:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2017-07-14:/projects/unsocial-vr</id><summary type="html">&lt;p&gt;Fake social behaviours in shared virtual environment&lt;/p&gt;</summary><content type="html">&lt;p&gt;Advance Project Placement, Media and Arts Technology doctoral programme,
+this for navigation.&lt;/strong&gt;&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>Unsocial VR</title><link href="/projects/unsocial-vr" rel="alternate"></link><published>2017-07-14T10:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2017-07-14:/projects/unsocial-vr</id><summary type="html">&lt;p&gt;Fake social behaviours in shared virtual environment&lt;/p&gt;</summary><content type="html">&lt;p&gt;Advance Project Placement, Media and Arts Technology doctoral programme,
 Queen Mary University of London. Supervised by Prof. Patrick Healey and
 hosted by &lt;a href="https://www.inition.co.uk/"&gt;Inition&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="youtube youtube-16x9"&gt;
@@ -130,7 +130,7 @@ signals (or "backchannel behaviours", as they called in the scientific
 literature), such as head nods, in automated agents.&lt;/p&gt;
 &lt;p&gt;Further information can be found in my
 &lt;a href="https://youtu.be/K39_wlQ60-Y"&gt;mid-project&lt;/a&gt; and
-&lt;a href="https://youtu.be/2k8MO74guTA"&gt;inter/sections&lt;/a&gt; presentations.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>The Krihelinator</title><link href="/projects/the-krihelinator" rel="alternate"></link><published>2016-10-17T22:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-10-17:/projects/the-krihelinator</id><summary type="html">&lt;p&gt;"Trendiness of OSS should be assessed by contribution rate, not by stars" - Meir Kriheli&lt;/p&gt;</summary><content type="html">&lt;p&gt;This project proposes an alternative to &lt;a href="https://github.com/trending"&gt;github's trending
+&lt;a href="https://youtu.be/2k8MO74guTA"&gt;inter/sections&lt;/a&gt; presentations.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>The Krihelinator</title><link href="/projects/the-krihelinator" rel="alternate"></link><published>2016-10-17T22:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-10-17:/projects/the-krihelinator</id><summary type="html">&lt;p&gt;"Trendiness of OSS should be assessed by contribution rate, not by stars" - Meir Kriheli&lt;/p&gt;</summary><content type="html">&lt;p&gt;This project proposes an alternative to &lt;a href="https://github.com/trending"&gt;github's trending
 page&lt;/a&gt;, by exposing projects with high
 contribution rate, instead of daily stars (similarly to github's pulse
 page). The krihelimeter of each repository is calculated using the
@@ -161,7 +161,7 @@ from the past week.&lt;/p&gt;
 &lt;h2&gt;Contribution&lt;/h2&gt;
 &lt;p&gt;This is an &lt;a href="https://github.com/Nagasaki45/krihelinator"&gt;open source
 project&lt;/a&gt; under active
-development. Your ideas and contribution are more than welcome!&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>Malinka</title><link href="/projects/malinka" rel="alternate"></link><published>2015-12-31T16:00:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2015-12-31:/projects/malinka</id><summary type="html">&lt;p&gt;My indie-rock band, lead by Stav German&lt;/p&gt;</summary><content type="html">&lt;p&gt;Malinka is an independent rock band formed in Tel-Aviv. The songs stand
+development. Your ideas and contribution are more than welcome!&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>Malinka</title><link href="/projects/malinka" rel="alternate"></link><published>2015-12-31T16:00:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2015-12-31:/projects/malinka</id><summary type="html">&lt;p&gt;My indie-rock band, lead by Stav German&lt;/p&gt;</summary><content type="html">&lt;p&gt;Malinka is an independent rock band formed in Tel-Aviv. The songs stand
 on the border of fantasy and the local reality.&lt;/p&gt;
 &lt;p&gt;We are&lt;/p&gt;
 &lt;ul&gt;
@@ -176,7 +176,7 @@ on the border of fantasy and the local reality.&lt;/p&gt;
 
 &lt;div class="youtube youtube-16x9"&gt;
 &lt;iframe src="https://www.youtube.com/embed/fzQoYdzAFz0" allowfullscreen seamless frameBorder="0"&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>Schleikess</title><link href="/projects/schleikess" rel="alternate"></link><published>2017-07-24T12:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2017-07-24:/projects/schleikess</id><summary type="html">&lt;p&gt;"suspenders" in Yiddish&lt;/p&gt;</summary><content type="html">&lt;p&gt;A controller for full-body interactive performances that requires
+&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>Schleikess</title><link href="/projects/schleikess" rel="alternate"></link><published>2017-07-24T12:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2017-07-24:/projects/schleikess</id><summary type="html">&lt;p&gt;"suspenders" in Yiddish&lt;/p&gt;</summary><content type="html">&lt;p&gt;A controller for full-body interactive performances that requires
 applying force and effort to play with, hopefully facilitating
 expressiveness. It is composed of two elastic bands that are attached to
 the players' belt loops, and a main unit that measures the tension on
@@ -186,7 +186,7 @@ generative drum machine by mapping the stretch of the bands to tempo and
 the pitch of the samples.&lt;/p&gt;
 &lt;div class="youtube youtube-16x9"&gt;
 &lt;iframe src="https://www.youtube.com/embed/_BUf_VLCIWQ" allowfullscreen seamless frameBorder="0"&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>tapeless cassettes</title><link href="/projects/tapeless-cassettes" rel="alternate"></link><published>2016-11-14T11:00:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-11-14:/projects/tapeless-cassettes</id><summary type="html">&lt;p&gt;Turn the wheels manually with your pinky or a BIC® pen to play the cassettes; the higher the speed the faster the music.&lt;/p&gt;</summary><content type="html">&lt;p&gt;A CruftFest 2016 project / an assignment to the Interactive Digital
+&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>tapeless cassettes</title><link href="/projects/tapeless-cassettes" rel="alternate"></link><published>2016-11-14T11:00:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-11-14:/projects/tapeless-cassettes</id><summary type="html">&lt;p&gt;Turn the wheels manually with your pinky or a BIC® pen to play the cassettes; the higher the speed the faster the music.&lt;/p&gt;</summary><content type="html">&lt;p&gt;A CruftFest 2016 project / an assignment to the Interactive Digital
 Multimedia Techniques (ESC742P) module, Media and Arts Technology, Queen
 Mary University of London.&lt;/p&gt;
 &lt;p&gt;This project uses modified audio cassettes as controllers for an
@@ -202,7 +202,7 @@ different types of interactions with the musical materials and between
 players.&lt;/p&gt;
 &lt;div class="youtube youtube-16x9"&gt;
 &lt;iframe src="https://www.youtube.com/embed/JZ3Z4X_d1iQ" allowfullscreen seamless frameBorder="0"&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>Sign-language</title><link href="/projects/sign-language" rel="alternate"></link><published>2016-03-05T00:00:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-03-05:/projects/sign-language</id><summary type="html">&lt;p&gt;A gesture to speech application&lt;/p&gt;</summary><content type="html">&lt;p&gt;A gesture to speech application that uses the
+&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>Sign-language</title><link href="/projects/sign-language" rel="alternate"></link><published>2016-03-05T00:00:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-03-05:/projects/sign-language</id><summary type="html">&lt;p&gt;A gesture to speech application&lt;/p&gt;</summary><content type="html">&lt;p&gt;A gesture to speech application that uses the
 &lt;a href="http://www.leapmotion.com/"&gt;LeapMotion&lt;/a&gt; to track gestures, the
 &lt;a href="http://www.wekinator.org/"&gt;WekiMini&lt;/a&gt; to analyze the gestures using
 supervised machine learning algorithms, and a python web server for text
@@ -211,7 +211,7 @@ to speech conversion and web interface.&lt;/p&gt;
 together with Ilai Giloh and Mel.&lt;/p&gt;
 &lt;div class="youtube youtube-16x9"&gt;
 &lt;iframe src="https://www.youtube.com/embed/x6i9gXS5VEQ" allowfullscreen seamless frameBorder="0"&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>MusiGali</title><link href="/projects/musigali" rel="alternate"></link><published>2016-01-10T23:00:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-01-10:/projects/musigali</id><summary type="html">&lt;p&gt;EEG controlled music for Brain Tech Israel 2013&lt;/p&gt;</summary><content type="html">&lt;p&gt;A project by Giori Politi, Sharon Duek, Jonathan Abramson and myself
+&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>MusiGali</title><link href="/projects/musigali" rel="alternate"></link><published>2016-01-10T23:00:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-01-10:/projects/musigali</id><summary type="html">&lt;p&gt;EEG controlled music for Brain Tech Israel 2013&lt;/p&gt;</summary><content type="html">&lt;p&gt;A project by Giori Politi, Sharon Duek, Jonathan Abramson and myself
 which was developed / composed especially for the &lt;a href="http://conference.israelbrain.org/2013/"&gt;Brain Tech Israel
 2013&lt;/a&gt; conference.&lt;/p&gt;
 &lt;p&gt;In this project we create a musical soundtrack based on mind waves
@@ -231,13 +231,13 @@ Team&lt;/a&gt;, the exhibition curators.&lt;/p&gt;
 &lt;p&gt;A screen capture of MusiGali Ableton Live set:&lt;/p&gt;
 &lt;div class="youtube youtube-16x9"&gt;
 &lt;iframe src="https://www.youtube.com/embed/aXbvVGCQ5wY" allowfullscreen seamless frameBorder="0"&gt;&lt;/iframe&gt;
-&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>A collaborative web synth</title><link href="/projects/a-collaborative-web-synth" rel="alternate"></link><published>2016-01-10T23:00:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-01-10:/projects/a-collaborative-web-synth</id><summary type="html">&lt;p&gt;Experimenting the Web-Audio API&lt;/p&gt;</summary><content type="html">&lt;p&gt;My experiments with the &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API"&gt;Web-Audio
+&lt;/div&gt;</content><category term="Projects"></category></entry><entry><title>A collaborative web synth</title><link href="/projects/a-collaborative-web-synth" rel="alternate"></link><published>2016-01-10T23:00:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-01-10:/projects/a-collaborative-web-synth</id><summary type="html">&lt;p&gt;Experimenting the Web-Audio API&lt;/p&gt;</summary><content type="html">&lt;p&gt;My experiments with the &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API"&gt;Web-Audio
 API&lt;/a&gt;,
 creating a collaborative synthesizer for the web. Using websockets to
 communicate between browsers, several players can play the keyboard
 simultaneously. The project is only a demo, but it clearly demonstrate
 the possibilities that modern web technologies have to offer for
-interactive music systems.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>Xteams!</title><link href="/projects/xteams" rel="alternate"></link><published>2015-12-31T16:00:00+00:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2015-12-31:/projects/xteams</id><summary type="html">&lt;p&gt;Create teams automatically based on discrete scores of the players&lt;/p&gt;</summary><content type="html">&lt;p&gt;You want to create teams, but:&lt;/p&gt;
+interactive music systems.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>Xteams!</title><link href="/projects/xteams" rel="alternate"></link><published>2015-12-31T16:00:00+00:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2015-12-31:/projects/xteams</id><summary type="html">&lt;p&gt;Create teams automatically based on discrete scores of the players&lt;/p&gt;</summary><content type="html">&lt;p&gt;You want to create teams, but:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;How can one create teams when Dana doesn't want to play with Haim,
     who must play with Jacob but not with Yossi... You've got the
@@ -252,6 +252,6 @@ interactive music systems.&lt;/p&gt;</content><category term="Projects"></catego
 &lt;p&gt;Using Xteams, group managers can give scores to players in the
 management panel. Players of the group can't access this panel but can
 see the list of players, mark which of them arrived to the game and
-create teams easily.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>dbdapy</title><link href="/projects/dbdapy" rel="alternate"></link><published>2016-10-17T22:00:00+01:00</published><updated>2024-07-10T08:12:57+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-10-17:/projects/dbdapy</id><summary type="html">&lt;p&gt;"Doing Bayesian Data Analysis" in python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python solutions to the exercises of Doing Bayesian Data Analysis, 2nd
+create teams easily.&lt;/p&gt;</content><category term="Projects"></category></entry><entry><title>dbdapy</title><link href="/projects/dbdapy" rel="alternate"></link><published>2016-10-17T22:00:00+01:00</published><updated>2024-07-10T08:20:48+01:00</updated><author><name>Tom Leverstone</name></author><id>tag:None,2016-10-17:/projects/dbdapy</id><summary type="html">&lt;p&gt;"Doing Bayesian Data Analysis" in python&lt;/p&gt;</summary><content type="html">&lt;p&gt;Python solutions to the exercises of Doing Bayesian Data Analysis, 2nd
 Edition, by J. L. Kruschke, using
 &lt;a href="https://github.com/pymc-devs/pymc3"&gt;pymc3&lt;/a&gt;.&lt;/p&gt;</content><category term="Projects"></category></entry></feed>
