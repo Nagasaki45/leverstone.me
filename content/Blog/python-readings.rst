@@ -128,7 +128,7 @@ Scientific computing with python
 As already noted, I've never thought that I will find myslef
 programming python in a full time job. Essentially, I've decided to
 learn python as a data analysis tool for my `MA
-research <https://leverstone.me/an-audio-only-augmented-reality-system-for-social-interaction.html>`__. These
+research <{filename}/Projects/ma_thesis.md>`__. These
 are the main sources I've used to get the necessary knowledge.
 
 `Python for Data Analysis (Wes McKinney) <http://www.amazon.com/Python-Data-Analysis-Wrangling-IPython/dp/1449319793>`__

@@ -12,7 +12,7 @@ links:
     url: https://github.com/Nagasaki45/Web-Audio
     icon: fab fa-github
   - text: more thoughts
-    url: https://leverstone.me/blog/web-audio-api-some-thoughts-and-experiments.html
+    url: '/blog/web-audio-api-some-thoughts-and-experiments'
     icon: fas fa-blog
 ---
 

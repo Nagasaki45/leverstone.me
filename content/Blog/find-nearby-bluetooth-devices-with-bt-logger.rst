@@ -12,6 +12,6 @@ in \\BluetoothData directory on the main device storage.
 The application primary use is to evaluate my Bluetooth based relative
 indoor positioning system that you should already be familiar with.
 Otherwise you can find all the necessary information regarding my master
-thesis `here <https://leverstone.me/an-audio-only-augmented-reality-system-for-social-interaction.html>`__.
+thesis `here <{filename}/Projects/ma_thesis.md>`__.
 As always, everything is
 `opensource <https://github.com/Nagasaki45/BT-logger>`__.

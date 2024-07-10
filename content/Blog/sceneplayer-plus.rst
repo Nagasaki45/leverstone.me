@@ -30,7 +30,7 @@ instruction for creating scenes for ScenePlayer Plus can be found at the
 `project wiki <https://github.com/Nagasaki45/ScenePlayer-Plus/wiki>`__.
 ScenePlayer Plus has been developed as part of my master thesis as an
 implementation of the `proposed
-system <http://leverstone.me/an-audio-only-augmented-reality-system-for-social-interaction.html>`__.
+system <{filename}/Projects/ma_thesis.md>`__.
 With the abilities of `libpd <http://libpd.cc/>`__ and the ease of use
 of ScenePlayer I've found that the only component that is necessary for
 me to develop is the Bluetooth discovery routine for the relative indoor
