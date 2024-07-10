@@ -11,7 +11,7 @@ programmer) by reading python books.
 A year ago I've started to learn web development from `Udi
 Oron <http://www.10x.org.il/>`__ in
 `Hackita <https://hackita.hasadna.org.il/>`__ (my impressions
-`here </hackita>`__), and
+`here <{filename}/Blog/hackita.rst>`__), and
 shortly after started to work with him as a python teaching assistant in
 his courses. Few months ago I've got a permanent position in one of
 those companies we've taught in and the stigma of someone that can

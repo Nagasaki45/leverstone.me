@@ -9,8 +9,8 @@ Media and arts projects - part 1
   :alt: Sunset Riders - Bury me with my money
   :width: 100%
 
-I recently shared some of my `first experiences as a PhD student </my-first-assignment-as-a-phd-student
-.html>`_ in the `Media and Arts Technology program <http://www.mat.qmul.ac.uk/>`_, Queen Mary University of London.
+I recently shared some of my `first experiences as a PhD student <{filename}/Blog/my-first-assignment-as-a-phd-student
+.rst>`_ in the `Media and Arts Technology program <http://www.mat.qmul.ac.uk/>`_, Queen Mary University of London.
 Now, when the first term is over and the second one is about to begin, it is a good time to show the projects I have been working on.
 This post is therefore the first in a series of 3 posts.
 Here I will present my assignments to the Sound Recording and Production Techniques module.

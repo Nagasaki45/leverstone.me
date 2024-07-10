@@ -56,4 +56,4 @@ Here are some more pictures from the process, including pictures with some of th
 
 .. class:: bold
 
-TL;DR: Go build `nezbokaj's insert for Dead of Winter: The Long Night <https://www.reddit.com/r/foamcore/comments/51mvio/comfc_dead_of_winter_the_long_night/>`_, possibly using my `cutting pattern </images/dow_tln_insert.svg>`_.
+TL;DR: Go build `nezbokaj's insert for Dead of Winter: The Long Night <https://www.reddit.com/r/foamcore/comments/51mvio/comfc_dead_of_winter_the_long_night/>`_, possibly using my `cutting pattern </images/blog/dow_tln_insert.svg>`_.

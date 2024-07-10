@@ -10,7 +10,7 @@ write an utility library. The first book was `Python in Practice, by
 Mark
 Summerfield <http://www.amazon.com/Python-Practice-Concurrency-Libraries-Developers/dp/0321905636/>`__
 (my opinion about the book can be found
-`here </python-readings>`__),
+`here <{filename}/Blog/python-readings.rst>`__),
 and the second, which I'm still reading, is `Doing Bayesian Data Analysis,
 Second Edition, by John Kruschke
 <http://www.amazon.com/Doing-Bayesian-Data-Analysis-Second/dp/0124058884>`__.

@@ -7,7 +7,7 @@ Intro to git workshop
 :description: A 4 hours intro to git workshop for my PhD fellas.
 
 A 4 hours introduction to git workshop for my PhD fellas.
-Based on an old `git crash course </git-crash-course>`_ blog post.
+Based on an old `git crash course <{filename}/Blog/git_crash_course.rst>`_ blog post.
 
 .. image:: /images/blog/git_logo.gif
   :alt: git logo
