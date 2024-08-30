@@ -1,5 +1,5 @@
 body {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.5;
     color: #515151;
     font-family: "Montserrat",sans-serif;
@@ -7,17 +7,17 @@ body {
 
 hr {
     max-width: 50px;
-    border-color: #fa743e;
+    border-color: #d73e00;
     border-width: 3px;
 }
 
 a {
-    color: #fa743e;
+    color: #d73e00;
 }
 
 a:hover,
 a:focus {
-    color: #eb3812;
+    color: #ad3100;
 }
 
 a.icon {
@@ -34,7 +34,7 @@ a.icon {
 }
 
 .btn-primary {
-    background-color: #fa743e;
+    background-color: #d73e00;
     color: #fff;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
@@ -80,6 +80,10 @@ section {
     margin: 0.5em 0;
 }
 
+.content a {
+    text-decoration: underline;
+}
+
 .title {
     margin: 0.5em 0;
     font-weight: bold;
@@ -88,7 +92,7 @@ section {
 time {
     margin-top: -.5rem;
     margin-bottom: 1rem;
-    color: #9a9a9a;
+    color: #6d6d6d;
     display: block;
 }
 
@@ -131,7 +135,7 @@ nav li {
     border-width: 10px;
     border-style: solid;
     border-color: black;
-    background-color: #fa743e;
+    background-color: #d73e00;
     min-height: 100vh;
 }
 
@@ -141,13 +145,13 @@ nav li {
 }
 
 #about a {
-    color: rgba(255,255,255,.8);
+    color: white;
     white-space: nowrap;
 }
 
 #about a:hover,
 #about a:focus {
-    color: white;
+    color: black;
 }
 
 #about .avatar {
@@ -159,22 +163,6 @@ nav li {
     max-width: 70%;
     margin-left: auto;
     margin-right: auto;
-}
-
-
-/* HOBBIES */
-#hobbies .items {
-	display: flex;
-	align-items: stretch;
-	flex-flow: row wrap;
-	gap: 0.5em 2em;
-    justify-content: center;
-}
-
-#hobbies .item {
-	flex: 1 1 0;
-	min-width: 300px;
-	max-width: 800px;
 }
 
 /* PORTFOLIO */
@@ -194,7 +182,7 @@ nav li {
     bottom: 0;
     width: 100%;
     color: #fff;
-    background: rgba(240,95,64,.9);
+    background: rgba(160, 43, 17, 0.9);
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
@@ -253,10 +241,13 @@ nav li {
     padding-left: 0;
 }
 
+.portfolio-item-badges {
+    margin-bottom: 1em;
+}
+
 /* ARTICLE */
 .article-container {
     max-width: 800px;
-    margin-bottom: 3em;
 }
 
 /* CATEGORY */
