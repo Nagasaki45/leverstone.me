@@ -3,9 +3,7 @@
 {% block page %}
 <div id="about">
     <div class="wrapper text-center">
-        <a href="{{ SITEURL }}" class="u-url">
-            <img class="u-photo avatar" src="/images/me.jpg">
-        </a>
+        <img class="u-photo avatar" src="/images/me.jpg" alt="Tom's profile picture">
         <h1 class="p-name title">{{ ABOUT_TITLE }}</h1>
         <p class="p-note content">{{ DESCRIPTION }}</p>
 
@@ -20,7 +18,7 @@
             {% if name == 'fa fa-envelope' %}
             <a class="icon" href="{{ link }}">
             {% else %}
-            <a class="icon" href="{{ link }}" rel="me">
+            <a class="icon" href="{{ link }}" rel="me" target="_blank">
             {% endif %}
                 <i class="{{ name }}"></i>&nbsp;{{ text }}
             </a>
