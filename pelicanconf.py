@@ -81,6 +81,7 @@ PLUGINS = [
 SOCIAL = (
     ('fab fa-github', 'https://github.com/Nagasaki45', 'GitHub'),
     ('fab fa-linkedin', 'https://www.linkedin.com/in/tleverstone/', 'LinkedIn'),
+    ('fab fa-goodreads', ' https://www.goodreads.com/nagasaki45', 'Goodreads'),
     ('fa fa-envelope', 'mailto:tleverstone@gmail.com', 'Email'),
 )
 
