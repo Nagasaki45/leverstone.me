@@ -7,7 +7,7 @@ Deployment tech for the hobbyist, again
 
 **TL;DR:** Try `Dokku`_ if you want to run multiple toy web apps on a single server and keep the cost at minimum.
 
-.. image:: /images/blog/dokku-logo-with-name.png
+.. image:: /images/blog/dokku-logo-with-name.webp
   :alt: Dokku logo with name
   :width: 100%
 
@@ -45,7 +45,7 @@ The tagline is 'An open-source PaaS alternative to Heroku', and based on my good
 As already mentioned, I also have good experience with `Digital Ocean`_.
 If only I can have `Dokku`_ running in a Digital Ocean droplet 🤔
 
-.. image:: /images/blog/dokku-on-digitalocean.png
+.. image:: /images/blog/dokku-on-digitalocean.webp
   :alt: Dokku on Digit Ocean
 
 Yes! A quick search reveals a `one click deployment of Dokku on Digital ocean through their marketplace`_.

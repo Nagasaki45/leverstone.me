@@ -125,7 +125,7 @@ We used a 2nd computer that takes mixer's output and streams it back to the live
 The entire system looks something like this.
 The area in blue is for the laptop running tidal and the area in pink is the SC + hardware synth end of the system.
 
-.. image:: /images/blog/tidal_remote_diagram.jpg
+.. image:: /images/blog/tidal_remote_diagram.avif
   :alt: TidalCycles logo
   :width: 100%
 

@@ -2,7 +2,7 @@
 title: MusiGali
 date: 2016-01-10 23:00
 order: 08
-img: musigali.jpg
+img: musigali.avif
 summary: EEG controlled music for Brain Tech Israel 2013
 ---
 

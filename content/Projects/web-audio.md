@@ -2,7 +2,7 @@
 title: A collaborative web synth
 date: 2016-01-10 23:00
 order: 09
-img: web-audio.png
+img: web-audio.webp
 summary: Experimenting the Web-Audio API
 links:
   - text: website

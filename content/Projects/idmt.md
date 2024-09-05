@@ -2,7 +2,7 @@
 title: nagasaki45 / IDMT?
 date: 2020-04-06 00:00
 order: 0
-img: idmt.jpg
+img: idmt.avif
 summary: Improvised, polymetric, modular, avant-pop, mess
 links:
   - text: more

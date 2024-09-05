@@ -7,7 +7,7 @@ The Krihelinator reached end-of-life
 :slug: krihelinator-eol
 :description: The Krihelinator project reached its end-of-life
 
-.. image:: /images/blog/krihelinator-eol.png
+.. image:: /images/blog/krihelinator-eol.webp
   :alt: The Krihelinator RIP
   :width: 100%
 

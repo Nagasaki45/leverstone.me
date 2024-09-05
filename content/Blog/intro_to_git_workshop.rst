@@ -48,7 +48,7 @@ There are two ways to start to work in such a repository:
 Unstaged ➜ staged ➜ committed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: /images/blog/git_staging_commit.png
+.. image:: /images/blog/git_staging_commit.webp
   :alt: git local workflow
   :width: 100%
 
@@ -122,7 +122,7 @@ If you have permissions to push code to the remote repository you can update the
 
 **Remember!** Always ``pull`` before you ``push`` to avoid unnecessary conflicts.
 
-.. image:: /images/blog/git_meme.jpg
+.. image:: /images/blog/git_meme.avif
   :alt: git Austin Powers meme
   :width: 100%
 
@@ -153,7 +153,7 @@ If you don't have permissions to push code to a remote repository.
 1. Fork the repository.
    It will copy the remote repository to your account.
 
-.. image:: /images/blog/github_fork.png
+.. image:: /images/blog/github_fork.webp
   :alt: GitHub fork button
   :width: 100%
 
@@ -167,7 +167,7 @@ If you don't have permissions to push code to a remote repository.
 
 4. Send your commits to the owner(s) of the projects using a pull request.
 
-.. image:: /images/blog/github_pull_request.png
+.. image:: /images/blog/github_pull_request.webp
   :alt: GitHub pull request button
   :width: 100%
 

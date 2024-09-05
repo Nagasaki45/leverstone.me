@@ -3,7 +3,7 @@ title: The Pragmatic Programmer Review
 date: 2024-06-21T22:00:00.000Z
 ---
 
-![The Pragmatic Programmer 20th Anniversary Edition book cover](/images/blog/pragmatic_programmer_cover.jpg)
+![The Pragmatic Programmer 20th Anniversary Edition book cover](/images/blog/pragmatic_programmer_cover.avif)
 
 The Pragmatic Programmer 20th Anniversary Edition, by David Thomas and Andrew Hunt, offers high-level, actionable advice for software engineers. Unlike many technical books that focus on specific coding practices or languages, it focuses on cultivating a mindset that leads to better software development practices.
 

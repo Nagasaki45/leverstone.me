@@ -2,7 +2,7 @@
 title: Schleikess
 date: 2017-07-24 12:00
 order: 05
-img: schleikess.jpg
+img: schleikess.avif
 summary: '"suspenders" in Yiddish'
 links:
   - text: source code

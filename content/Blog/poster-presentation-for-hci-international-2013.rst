@@ -11,6 +11,6 @@ The poster is already in printing: 42" x 60" with glossy finish. But
 for the most of you `here is the original pdf <http://db.tt/Rx7FnAxn>`__.
 Comments are more than welcome.
 
-.. image:: /images/blog/hci_poster.jpg
+.. image:: /images/blog/hci_poster.avif
   :width: 100%
   :alt: Poster for HCI International 2013

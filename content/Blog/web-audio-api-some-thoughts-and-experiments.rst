@@ -40,7 +40,7 @@ usage because of the next reasons:
 
    <div class="separator" style="clear: both; text-align: center;">
 
-.. image:: /images/blog/web_audio_screenshot.png
+.. image:: /images/blog/web_audio_screenshot.webp
   :target: https://web-audio.leverstone.me/
   :alt: Web-audio experiment screenshot
 

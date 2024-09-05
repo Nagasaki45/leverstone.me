@@ -19,7 +19,7 @@ If I tell you to highlight the words / phrases associated with 'phrases relating
 
 Here's what the extracted feature picked:
 
-![A snippet of text with the phrases 'but we' and 'you that you're' highlighted.]({static}/images/blog/openai_human_imperfection_feature_extraction_example.png)
+![A snippet of text with the phrases 'but we' and 'you that you're' highlighted.]({static}/images/blog/openai_human_imperfection_feature_extraction_example.webp)
 
 This is not an isolated critique. It is the first example provided in their blog post.
 

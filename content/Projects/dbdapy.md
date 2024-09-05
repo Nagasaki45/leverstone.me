@@ -2,7 +2,7 @@
 title: dbdapy
 date: 2016-10-17 22:00
 order: 11
-img: dbdapy.png
+img: dbdapy.webp
 summary: '"Doing Bayesian Data Analysis" in python'
 links:
   - text: notebooks

@@ -5,14 +5,14 @@ Getting started with Python for data analysis
 :tags: thoughts, books, python
 :slug: getting-started-with-python
 
-.. image:: /images/blog/python_books.png
+.. image:: /images/blog/python_books.webp
   :width: 100%
   :alt: Python books covers
 
 A few days ago another friend asked me to recommend reading materials to get started with python.
 Yesterday, I saw this tweet.
 
-.. image:: /images/blog/write_a_blog_post_tweet.png
+.. image:: /images/blog/write_a_blog_post_tweet.webp
   :width: 100%
   :alt: "When you’ve written the same code 3 times, write a function. When you’ve given the same in-person advice 3 times, write a blog post" - David Robinson‏
 

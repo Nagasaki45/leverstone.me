@@ -26,7 +26,7 @@ Go ahead and clone a project of interest.
 Working locally
 ---------------
 
-.. image:: /images/blog/git_staging_commit.png
+.. image:: /images/blog/git_staging_commit.webp
   :alt: git local workflow
   :width: 100%
 
@@ -82,7 +82,7 @@ To update the remote with your changes (commits) run:
 
 **Remember!** Always ``pull`` before you ``push`` to avoid unnecessary conflicts.
 
-.. image:: /images/blog/git_meme.jpg
+.. image:: /images/blog/git_meme.avif
   :alt: git Austin Powers meme
   :width: 100%
 

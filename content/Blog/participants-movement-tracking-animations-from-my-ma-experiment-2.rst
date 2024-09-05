@@ -8,7 +8,7 @@ Participants movement tracking animations from my MA experiment #2
 The following animated renditions are a byproduct of the video
 tracking an analysis of my MA thesis second experiment.
 
-.. image:: /images/blog/experiment_design.png
+.. image:: /images/blog/experiment_design.webp
   :alt: Experiment design
   :width: 100%
 

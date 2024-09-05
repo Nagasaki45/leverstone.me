@@ -2,7 +2,7 @@
 title: OS GR
 date: 2021-05-24 17:00
 order: 01.5
-img: os_gr.png
+img: os_gr.webp
 summary: Android app to convert to and from OS grid reference.
 links:
   - text: Google Play
@@ -29,7 +29,7 @@ support opening a location in a different app (i.e. google maps and
 komoot), so you cannot get the GR from these. You can still type in a GR
 and open it in komoot for example.
 
-![OS GR screenshots]({static}/images/portfolio/os_gr_screenshots.png)
+![OS GR screenshots]({static}/images/portfolio/os_gr_screenshots.webp)
 
 ## Wanna help?
 

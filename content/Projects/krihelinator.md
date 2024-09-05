@@ -2,7 +2,7 @@
 title: The Krihelinator
 date: 2016-10-17 22:00
 order: 03
-img: krihelinator.png
+img: krihelinator.webp
 summary: '"Trendiness of OSS should be assessed by contribution rate, not by stars" - Meir Kriheli'
 links:
   - text: website

@@ -2,7 +2,7 @@
 title: Malinka
 date: 2015-12-31 16:00
 order: 04
-img: malinka.jpg
+img: malinka.avif
 summary: My indie-rock band, lead by Stav German
 links:
   - text: facebook

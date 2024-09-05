@@ -14,14 +14,14 @@ This blog post is about the box the game came in, and what I did to make it usab
 Below you can see the cards, standees, and tokens after a single play.
 Yes, that's a complete mess!
 
-.. image:: /images/blog/dow-mess.jpg
+.. image:: /images/blog/dow-mess.avif
   :alt: DoW: TLN box after one play. A total mess.
   :width: 100%
 
 
 Thankfully, I'm not the first to be frustrated about this. A quick google search found `nezbokaj's plans <https://www.reddit.com/r/foamcore/comments/51mvio/comfc_dead_of_winter_the_long_night/>`_ for a DIY foamboard insert to keep all of the components organized. I followed his plans and I'm super happy with the results.
 
-.. image:: /images/blog/dow-organized-1.jpg
+.. image:: /images/blog/dow-organized-1.avif
   :alt: The box with all of the components organized.
   :width: 100%
 
@@ -34,7 +34,7 @@ Maybe about 5-7mm.
 I think that a few millimeters can be taken of the deepest measurement (the 6.3cm).
 On the other hand, the result is good enough for me.
 
-.. image:: /images/blog/dow-lid.jpg
+.. image:: /images/blog/dow-lid.avif
   :alt: The lid is lifted by a few millimeters.
   :width: 100%
 
@@ -42,15 +42,15 @@ The entire thing costed £6. £2.5 for the foamboard and the rest for some glue 
 
 Here are some more pictures from the process, including pictures with some of the boards in the box.
 
-.. image:: /images/blog/dow-insert.jpg
+.. image:: /images/blog/dow-insert.avif
   :alt: The foamboard insert, before it got into the box.
   :width: 100%
 
-.. image:: /images/blog/dow-organized-2.jpg
+.. image:: /images/blog/dow-organized-2.avif
   :alt: Small boards (locations and player aids) in the box.
   :width: 100%
 
-.. image:: /images/blog/dow-organized-3.jpg
+.. image:: /images/blog/dow-organized-3.avif
   :alt: Larger boards in the box.
   :width: 100%
 

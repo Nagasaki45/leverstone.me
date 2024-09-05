@@ -2,7 +2,7 @@
 title: Unsocial VR
 date: 2017-07-14 10:00
 order: 02
-img: unsocial-vr.png
+img: unsocial-vr.webp
 summary: Fake social behaviours in shared virtual environment
 links:
   - text: source code

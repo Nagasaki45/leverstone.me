@@ -7,7 +7,7 @@ DIY eurorack case
 :slug: eurorack-case
 :description: Laser cutting a eurorack case. Some pictures and conclusions from the process.
 
-.. image:: /images/blog/eurorack_case_header.jpg
+.. image:: /images/blog/eurorack_case_header.avif
   :alt: Final eurorack case.
   :width: 100%
 
@@ -40,7 +40,7 @@ All of them could be avoided easily.
 
 - Consider the position of the screws that connect the rails to the case. I didn't thought about it, and it ended to be very close to a cut, as you can see in the picture.
 
-.. image:: /images/blog/eurorack_case_screw.jpg
+.. image:: /images/blog/eurorack_case_screw.avif
   :alt: Problematic screw positioning.
   :width: 100%
 
@@ -62,7 +62,7 @@ I really glad I did that for few reasons.
 - I didn't know if the printer will move like a regular printer (with one axis moving forwards all the time and the other forwards and backwards repeatedly), or that it will do the lines one by one as they were "recorded" in the pdf (random order), or will optimize the movement. Apparently, it optimizes the movement, meaning that it starts from one corner and draws line by line from there towards the other side of the board. If I had send the whole plan, and the process was too slow, I would have been ended up with only half of the board engraved. Fortunately, each layer took "only" 53 minutes, so it wasn't a real problem.
 - Second, with this layered approach I could see the state of the engraving after each layer and decide if I want to continue to the next layer or not. Eventually, I stopped after the 4th layer as the result was good enough for me.
 
-.. image:: /images/blog/eurorack_case_engraving.jpg
+.. image:: /images/blog/eurorack_case_engraving.avif
   :alt: The engraved texture before cutting.
   :width: 100%
 
@@ -86,7 +86,7 @@ It's not the most accurate build, but my new case does the job.
 Despite the problems, IMHO the end result looks very good.
 And finally I'm starting to play with it, and enjoy every moment!
 
-.. image:: /images/blog/eurorack_case_jam.jpg
+.. image:: /images/blog/eurorack_case_jam.avif
   :alt: Jamming with my new eurorack case.
   :width: 100%
 

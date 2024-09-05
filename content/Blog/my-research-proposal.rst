@@ -5,7 +5,7 @@ My research proposal
 :tags: projects, MA thesis
 :slug: my-research-proposal
 
-.. image:: /images/portfolio/ma_thesis.jpg
+.. image:: /images/portfolio/ma_thesis.avif
   :width: 100%
   :alt: Baloon bundles on the dance floor
 

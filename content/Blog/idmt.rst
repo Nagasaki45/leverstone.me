@@ -5,7 +5,7 @@ Media and arts projects - part 2
 :tags: projects, arduino, demo, music programming
 :slug: media-and-arts-projects-part-2
 
-.. image:: /images/blog/tapeless_cassettes_header.jpg
+.. image:: /images/blog/tapeless_cassettes_header.avif
   :alt: The tapeless cassettes
   :width: 100%
 

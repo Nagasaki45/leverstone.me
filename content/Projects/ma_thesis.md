@@ -2,7 +2,7 @@
 title: An Audio-Only Augmented Reality System for Social Interaction
 date: 2015-12-31 10:30
 order: 01
-img: ma_thesis.jpg
+img: ma_thesis.avif
 summary: Master thesis in Music Technology, Bar-Ilan Music Department
 links:
   - text: Download PDF

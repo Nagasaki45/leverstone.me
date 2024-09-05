@@ -2,7 +2,7 @@
 title: Xteams!
 date: 2015-12-31 16:00
 order: 10
-img: xteams.jpg
+img: xteams.avif
 summary: Create teams automatically based on discrete scores of the players
 links:
   - text: website

@@ -2,7 +2,7 @@
 title: Sign-language
 date: 2016-03-05 00:00
 order: 07
-img: sign-language.jpg
+img: sign-language.avif
 summary: A gesture to speech application
 links:
   - text: source code

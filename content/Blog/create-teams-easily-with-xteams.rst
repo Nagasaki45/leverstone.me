@@ -5,7 +5,7 @@ Create teams easily with Xteams!
 :tags: projects, django, python, web
 :slug: create-teams-easily-with-xteams
 
-.. image:: /images/blog/xteams.jpg
+.. image:: /images/blog/xteams.avif
   :width: 100%
   :alt: Playing volleyball
 

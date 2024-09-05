@@ -5,7 +5,7 @@ date: 2024-08-02T12:00:00.000Z
 
 I read the first seven chapters of "Designing Data-Intensive Applications" before deciding to stop. It's about half of this hefty book. In the spirit of learning in public through this blog, I'll reflect on what I learned from this experience before putting the book aside.
 
-![Book cover]({static}/images/blog/designing_data_intensive_applications_cover.jpg)
+![Book cover]({static}/images/blog/designing_data_intensive_applications_cover.avif)
 
 The book delves deep into the internals of databases and distributed systems. By dive deep I mean, really deep! It starts slowly with the first chapter covering reliability, scalability, and maintainability - the main concerns in these sorts of applications. From there it goes into covering types of databases (SQL, NoSQL, graph) and query languages, the techniques databases use to store data on disk, data serialization formats, replication, partitioning, and transactions. The list goes on, but I will stop here, because that's what I read.
 

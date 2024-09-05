@@ -9,7 +9,7 @@ ScenePlayer Plus
 
    <div class="separator" style="clear: both; text-align: center;">
 
-.. image:: /images/blog/sceneplayerplus_logo.png
+.. image:: /images/blog/sceneplayerplus_logo.webp
   :alt: ScenePlayer Plus logo
 
 .. raw:: html

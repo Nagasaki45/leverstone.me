@@ -23,10 +23,10 @@ the data from the headset.
 Many thanks to Zvika Markfeld and Saron Paz from `ForReal
 Team <http://forrealteam.com/>`__, the exhibition curators.
 
-.. image:: /images/blog/musigali_presentation1.jpg
+.. image:: /images/blog/musigali_presentation1.avif
   :width: 100%
   :alt: MusiGali project presentation at Brain Tech Israel 2013
 
-.. image:: /images/blog/musigali_presentation2.jpg
+.. image:: /images/blog/musigali_presentation2.avif
   :width: 100%
   :alt: MusiGali project presentation at Brain Tech Israel 2013

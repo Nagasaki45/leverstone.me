@@ -7,7 +7,7 @@ My new portfolio site
 
 I have a new site!
 
-.. image:: /images/blog/portfolio_header.jpg
+.. image:: /images/blog/portfolio_header.avif
   :width: 100%
   :alt: My portfolio header
 

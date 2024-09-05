@@ -5,7 +5,7 @@ Continuous integration and delivery with travis-ci and codeship
 :tags: thoughts, web, tools
 :slug: continuous-integration-and-delivery-with-travis-ci-and-codeship
 
-.. image:: /images/blog/travis_codeship.png
+.. image:: /images/blog/travis_codeship.webp
   :width: 100%
   :alt: Travis vs. Codeship
 
