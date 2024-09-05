@@ -9,7 +9,7 @@ sys.path.append(os.curdir)
 AUTHOR = 'Tom Leverstone'
 SITENAME = 'Tom Leverstone'
 ABOUT_TITLE = "Hi! I'm Tom 👋"
-DESCRIPTION = 'A father, software engineer, and hobbies collector. You may know me as Tom Gurion. Now it\'s Tom Leverstone.'
+DESCRIPTION = 'A father, software engineer, and hobbies collector.'
 
 SITEURL = ''
 
