@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% set page_title = category.name %}
+
 {% block page %}
 {% if category.name == "Hobbies" %}
 {% include "partials/hobbies.html" %}

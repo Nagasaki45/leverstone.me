@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
+{% set page_title = article.title %}
+
 {% block page %}
 <div class="container article-container">
     {% include "partials/navbar.html" %}
     <h1 class="title">{{ article.title }}</h1>
-    {% if article.date %}
-        <time datetime="{{ article.date.date().isoformat() }}">
-            {{ article.date.strftime('%B %d, %Y') }}
-        </time>
-    {% endif %}
+    {% with date=article.date %}
+        {% include "partials/date.html" %}
+    {% endwith %}
     <div class="content">
         {% if article.img %}
             <p><img src="/images/portfolio/{{ article.img }}" /></p>

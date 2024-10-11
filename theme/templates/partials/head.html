@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="{{ AUTHOR }}">
 <meta name="description" content="{{ DESCRIPTION }}">
-<title>{{ SITENAME }}</title>
+<title>{% if page_title %}{{ page_title }} | {% endif%}{{ SITENAME }}</title>
 <!-- Favicon -->
 <link rel="shortcut icon" href="{{ SITEURL }}/favicon.ico">
 <!-- Bootstrap Core CSS -->
@@ -18,7 +18,7 @@
 <!-- Open graph protocol -->
 <meta property="og:title" content="{{ SITENAME }}" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="{{ SITEURL }}" />
+<meta property="og:url" content="{% if page_title %}{{ page_title }} | {% endif%}{{ SITENAME }}" />
 <meta property="og:image:secure_url" itemprop="image" content="{{ SITEURL }}/images/me.jpg" />
 <meta property="og:description" content="{{ DESCRIPTION }}" />
 
