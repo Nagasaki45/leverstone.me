@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Tom Leverstone">
 <meta name="description" content="A father, software engineer, and hobbies collector.">
-<title>Tom Leverstone</title>
+<title>Thoughts about Anthropic / OpenAI work on interpretability in LLMs | Tom Leverstone</title>
 <!-- Favicon -->
 <link rel="shortcut icon" href="/favicon.ico">
 <!-- Bootstrap Core CSS -->
@@ -21,7 +21,7 @@
 <!-- Open graph protocol -->
 <meta property="og:title" content="Tom Leverstone" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="" />
+<meta property="og:url" content="Thoughts about Anthropic / OpenAI work on interpretability in LLMs | Tom Leverstone" />
 <meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
 <meta property="og:description" content="A father, software engineer, and hobbies collector." />
 
@@ -52,9 +52,9 @@
     </li>
   </ul>
 </nav>    <h1 class="title">Thoughts about Anthropic / OpenAI work on interpretability in LLMs</h1>
-        <time datetime="2024-06-07">
-            June 07, 2024
-        </time>
+    <time datetime="2024-06-07">
+        Fri 07 June 2024
+    </time>
     <div class="content">
         <p>A few weeks ago, Anthropic came out with <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">this paper</a>, showing how they found interpretable features in one of their models. This means that they could see which features activate when the LLM generates, and the feature could be scaled up and down to make the generation more or less focused on that feature. For example, their "Golden Gate Claude" model, with the Golden Gate feature boosted to the max, kept steering the conversation to talk about the Golden Gate.</p>
 <p>Yesterday, OpenAI published <a href="https://openai.com/index/extracting-concepts-from-gpt-4/">a similar paper</a>. Maybe it's just me, or the high pace of news in AI is enough to make groundbreaking research seem underwhelming, but this new paper seems lacking in comparison. Note that my understanding of the internal workings of these models, and the two studies above, are very limited, so take this with a grain of salt. Having said that, here are some thought for why the OpenAI paper is underwhelming.</p>
