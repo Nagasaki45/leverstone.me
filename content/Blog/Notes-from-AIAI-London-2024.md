@@ -5,7 +5,7 @@ date: 2024-11-08T10:00:00.000Z
 
 ![AIAI GenAI Summit]({static}/images/blog/aiai_gen_ai_summit.webp)
 
-I attended the AI Accelerator Institute's Generative AI Summit that happened yesterday in London - AIAI London in short. Here are my notes. These are by no means exhaustive. Just a bunch of things I found interesting.
+I attended the [AI Accelerator Institute's Generative AI Summit that happened yesterday in London](https://world.aiacceleratorinstitute.com/location/london/) - AIAI London in short. Here are my notes. These are by no means exhaustive. Just a bunch of things I found interesting.
 
 # Themes
 
