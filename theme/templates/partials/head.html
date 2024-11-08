@@ -16,9 +16,9 @@
 <link rel="stylesheet" href="{{ SITEURL }}/theme/css/creative.css" type="text/css">
 
 <!-- Open graph protocol -->
-<meta property="og:title" content="{{ SITENAME }}" />
+<meta property="og:title" content="{% if page_title %}{{ page_title }} | {% endif%}{{ SITENAME }}" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="{% if page_title %}{{ page_title }} | {% endif%}{{ SITENAME }}" />
+<meta property="og:url" content="{{ SITEURL }}/{{ output_file }}" />
 <meta property="og:image:secure_url" itemprop="image" content="{{ SITEURL }}/images/me.jpg" />
 <meta property="og:description" content="{{ DESCRIPTION }}" />
 
