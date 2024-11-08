@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Notes from AIAI London 2024 | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="Notes from AIAI London 2024 | Tom Leverstone" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies/">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Notes from AIAI London 2024</h1>
+    <time datetime="2024-11-08">
+        Fri 08 November 2024
+    </time>
+    <div class="content">
+        <p><img alt="AIAI GenAI Summit" src="/images/blog/aiai_gen_ai_summit.webp"></p>
+<p>I attended the AI Accelerator Institute's Generative AI Summit that happened yesterday in London - AIAI London in short. Here are my notes. These are by no means exhaustive. Just a bunch of things I found interesting.</p>
+<h1>Themes</h1>
+<ul>
+<li>Multiple talks implied that companies struggle to get GenAI applications to production, or getting value from them. These talks focused on best practices for building AI applications (make sure there are guardrails in place, develop evaluation tools, etc.) or on making sure the applications produce value. As someone who works on a GenAI application that is in production for almost a year I was a bit surprised. It felt like there's an underlying problem of companies trying to come up with AI solutions for the sake of it (the "everything is a nail" problem).</li>
+<li>LLM as a judge is a common practice, and proved to be useful in large variety of cases. From my recent experience evaluating our GenAI application with the help of LLMs I'm not surprised (stay tuned for a blog post about this subject). This is a very powerful technique.</li>
+<li>Two talks about GenAI in healthcare stressed the point that we shouldn't let GenAI take decisions. The final decision, at least for now, should always be done by a human. AI can help us get to these decisions faster. This approach aligns with <a href="/blog/thoughts-about-agi">my thoughts about AGI</a>, that we are not ready for AI to take decisions, not because of AI capabilities, but because of social structures and ethics that help us navigate decision making.</li>
+<li>There were some discussions about safety. It wasn't about 'AI will kill us all', but about ensuring we build AI applications that do no harm, either to people or to the companies that develop them. A few speakers tackled these from different angles: healthcare, regulation (e.g. the EU AI Act), and the importance of putting guardrails in place when developing GenAI applications.</li>
+</ul>
+<h1>Talks</h1>
+<p>These are the talks that stood out to me personally.</p>
+<ul>
+<li><strong>"Can't I just ask ChatGPT?" Production pipelines shaping the visual intelligence renaissance</strong>. Dr. Dmitry Kazhdan from Tenyks talked about how new GenAI models simplifies and democratise the computer vision landscape. Instead of long and expensive processes for training AI models in house, most modern computer vision applications can be built using off-the-shelf AI models. The training process is replaced by prompting, potentially with minor fine-tuning. I'm not a data scientist, and have no interest in computer vision, so why did this talk speak to me? Mainly because it was full of excellent insight about building advance search capabilities on top of videos. For example, they discussed techniques to extract metadata from the raw material at index time, and how to search through this metadata on simple queries, or fallback to vector search on more complicated queries. I need to dig through <a href="https://www.tenyks.ai/blog">Tenyks' blog</a> to learn more about these ideas. I expect these to be super valuable for the work I'm doing.</li>
+<li><strong>Optimising GenAI outcomes in financial services with DSPy</strong>. This very technical talk by Alberto Romero from Citi showed how to use DSPy to optimise system prompts, including few-shot, and chain-of-thought techniques, with examples and metrics. I was aware of DSPy, but nothing more than that. As mentioned earlier, I invested a lot of time recently on our quality evaluation suite. A few days ago I claimed that "we cannot achieve a higher groundedness  score (also known as faithfulness score) with prompt changes alone". This DSPy talk inspires me to try to automatically optimise for this metric. I still suspect that we are close to hitting a limit. We might be able to optimise for this metric on the expense of some other goals. In any case, that would be an interesting experiment.</li>
+<li><strong>Large language models in practice: Insights from building LLM-based pipelines for paediatric healthcare data</strong>. This talk by Pavithra Rajendran and Shiren Patel from the NHS had two equaly interesting parts. First, Shiren dived into goals and design principles for AI applications for healthcare: human-in-the-loop, do no harm, explainability, and focusing on making clinicians more efficient, among other ideas. The second part, by Pavithra, was more technical. The NHS has to run everything in house and got no budget for expensive GPUs (surprise surprise) so the AI team had to figure out ways to work with very small LLMs that can run efficiently on CPUs. They showed a few examples of successes from running these models.</li>
+</ul>
+<h1>Small talk</h1>
+<p>Beyond the presentations, I enjoyed the chats I had with the attendees. In most (if not all) of the conferences I've been to before I barely had any interactions with others. Granted, this was a long time ago, so maybe I changed, but I think people were more approachable than I'm used to.</p>
+<p>I met two familiar faces and enjoyed hearing what they do these days. I had interesting conversations about relationships between productivity and religion, measuring carbon footprint of aeroplanes from satellite images, <a href="/blog/thoughts-about-agi">thoughts about social readiness to GenAI and AGI</a>, how ChatGPT is way more 'human' in voice mode, and more.</p>
+<p>In conclusion, I had great time at AIAI London. I learned a few tricks, got inspiration to try a few ideas, met interesting people, and enjoyed the presentations and the conversations I had.</p>
+    </div>
+
+<button id="openSubscribeModal" class="subscribe btn btn-secondary btn-sm">
+  Subscribe
+</button>
+
+<div id="subscribeModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>
+          Either use the RSS feed
+          <a target="_blank" href="/blog/atom.xml">here</a>, or
+          subscribe to the email newsletter.
+        </p>
+        <form
+          action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/"
+          method="post"
+        >
+          <div class="form-group">
+            <label for="emailField">Email</label>
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              id="emailField"
+              aria-describedby="emailHelp"
+              placeholder="name@example.com"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <!-- Anti spam protection -->
+          <div style="position: absolute; left: -5000px" aria-hidden="true">
+            <input type="text" name="b28-ft" tabindex="-1" value="" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="closeSubscribeModal"
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/subscribe.js"></script>    </body>
+</html>
