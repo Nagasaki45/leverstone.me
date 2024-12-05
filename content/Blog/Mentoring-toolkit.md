@@ -23,7 +23,7 @@ Try to discuss career goals and aspirations, but accept that you might not get a
 
 # Find ways to explore interests at work
 
-A few months ago, I presented my manager with a long list of technologies that I wanted to explore. He suggested going over the list one by one and figuring out if there were opportunities to explore each item within our work context. We asked: what other teams are using these technologies? Is there a way I can help these teams and learn something new along the way? That was a brilliant idea! I reached out to a few teams and got the ball rolling on things I wanted to learn. While I haven't used this technique yet with my mentees, I took note and plan to incorporate it in the future.
+A few months ago, I presented my manager a long list of technologies that I wanted to explore. He suggested going over the list one by one and figuring out if there were opportunities to explore each item within our work context. We asked: what other teams are using these technologies? Is there a way I can help these teams and learn something new along the way? That was a brilliant idea! I reached out to a few teams and got the ball rolling on things I wanted to learn. While I haven't used this technique yet with my mentees, I took note and plan to incorporate it in the future.
 
 # Retrospect
 
@@ -31,7 +31,7 @@ Don't run the tricks above just once. Go back to them. Ask the mentee what works
 
 # Take notes
 
-Make sure to keep notes of the important points raised in this meetings. Personally, I don't share them with the mentee, because I think it can be overwhelming and suggest they need to do something about the notes, which is not the point. I take notes to help me ask questions about things they raised that are important to them. It helps with the retrospectives mentioned above.
+Make sure to keep notes of the important points raised in these meetings. Personally, I don't share them with the mentee, because I think it can be overwhelming and suggest they need to do something about the notes, which is not the point. I take notes to help me ask questions about things they raised that are important to them. It helps with the retrospectives mentioned above.
 
 # Summary
 
