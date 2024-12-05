@@ -11,7 +11,7 @@ I'm lucky that I developed good personal connections with my mentees quite early
 
 # Stay independent from company interests
 
-Mentoring sessions should be a safe space. This is crucial for the above point to work. What it means is that my priorities while mentoring are focused on the mentee, not the company. I try to make it very clear that they can speak freely about anything, even if it clashes with what the company expects from them.
+Mentoring sessions should be a safe space. It means that my priority is the mentee, their growth, their feelings, etc., not the company. I try to make it very clear that they can speak freely about anything, even if it clashes with what the company expects from them. This is mostly done by building trust. There's no much point saying "you can talk about anything here". Make sure they can trust you, but if needed, make it clear that you are not a company representative in these mentoring sessions.
 
 # Do not shy away from discussing the purpose of mentoring
 
@@ -19,8 +19,7 @@ When I started mentoring, I tried to almost hide the fact that these meetings we
 
 # Explore career direction and goals
 
-Try to discuss career goals and aspirations, but accept that you might not get a clear answer. Also, accept that it's absolutely fine not to answer this question at all!
-If there's no clear purpose, it's absolutely fine. To be honest, I couldn't answer these questions for most of my life, and I don't think this is necessarily a problem.
+Try to discuss career goals and aspirations, but accept that you might not get a clear answer. Also, accept that it's absolutely fine not to answer this question at all! If there's no clear purpose, it's absolutely fine. To be honest, I couldn't answer these questions for most of my life, and I don't think this is necessarily a problem.
 
 # Find ways to explore interests at work
 
@@ -29,6 +28,10 @@ A few months ago, I presented my manager with a long list of technologies that I
 # Retrospect
 
 Don't run the tricks above just once. Go back to them. Ask the mentee what works. Make sure the mentoring sessions work for them. Make sure they trust you and can speak freely. The last thing you want is for them to say "it's useful" just to avoid offending you.
+
+# Take notes
+
+Make sure to keep notes of the important points raised in this meetings. Personally, I don't share them with the mentee, because I think it can be overwhelming and suggest they need to do something about the notes, which is not the point. I take notes to help me ask questions about things they raised that are important to them. It helps with the retrospectives mentioned above.
 
 # Summary
 
