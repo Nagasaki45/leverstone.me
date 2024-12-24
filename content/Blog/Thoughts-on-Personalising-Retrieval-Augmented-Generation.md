@@ -34,3 +34,7 @@ Alternatively, we could ask users directly about their context. For example, whe
 Personalising RAG systems isn’t about fixing things that already work. If the user provides a clear, detailed query, the system doesn’t need much help. But when faced with vague queries, personalisation could help by guiding the system in the right direction.
 
 These ideas aren’t revolutionary, and they might not even work in practice, but they feel like a promising starting point. What do you think? Does this approach make sense, or are there better ways to think about personalisation in RAG? Let me know—I’d love to hear your thoughts.
+
+***
+
+This blog post was made with the help of Gemini 2.0 exp.
