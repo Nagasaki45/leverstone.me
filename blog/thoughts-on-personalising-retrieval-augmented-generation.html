@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Thoughts on Personalising Retrieval-Augmented Generation | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Thoughts on Personalising Retrieval-Augmented Generation | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/thoughts-on-personalising-retrieval-augmented-generation.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies/">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Thoughts on Personalising Retrieval-Augmented Generation</h1>
+    <time datetime="2024-12-23">
+        Mon 23 December 2024
+    </time>
+    <div class="content">
+        <p>I’ve been thinking about personalising Retrieval-Augmented Generation (RAG) lately. This is partly because my team is now building a chatbot that answers questions using a RAG setup. It’s a continuation of my work with a previous team, where we developed a search system for market research content. Both products rely on the same underlying data, but the chatbot offers a modern, AI-driven, user experience.</p>
+<p>In the search system, personalisation usually meant boosting documents based on signals like the categories of the users' most-visited documents. Now, with the chatbot, we’re revisiting personalisation in a slightly different context, and it’s got me reflecting on how it can work effectively. These are just some initial ideas, and I’m not claiming to have all the answers—but I thought it’d be worth putting them out there.</p>
+<h1>What Are We Trying to Achieve with Personalisation?</h1>
+<p>Let’s start with a classic example: a user types "cheese" into our RAG system. What do they actually want? They could be interested in recent marketing campaigns for cheese, looking for consumer preferences, or focused on specific markets like the UK or US. The query is so vague that it’s hard to produce a useful answer.</p>
+<p>Contrast this with a much more specific query: "What are the latest trends in cheddar consumption in the UK?" That’s clear, and it gives the system a much better shot at providing a meaningful answer.</p>
+<p>So, where does personalisation fit in? If the query is already specific, I don’t think personalisation adds much value. A well-designed RAG system—both the search and the answer generation—should handle specific queries effectively by retrieving the most relevant documents and using them to produce a coherent, accurate answer. But for vague queries like "cheese," personalisation can step in to improve the process.</p>
+<h1>A Personalisation Proposal</h1>
+<p>Here’s the main idea: use personalisation to help expand under-specified queries.</p>
+<p>Imagine this: the query and previous messages in the conversation are passed through a personalisation step. This step evaluates the query to see if it’s specific enough. If the query is under-specified, the step enriches it with context about the user (e.g., their preference for UK-specific data).</p>
+<p>From there, the personalised query is sent to the search engine, which retrieves the most relevant documents. These documents, along with the personalised query, are then passed to the language model to generate a final response.</p>
+<h1>What About Collecting Preferences?</h1>
+<p>I haven’t said much about how we’d gather user preferences—partly because I think it’s a separate problem. In the past, we’ve kept track of things like the categories users visit most often, and I imagine something similar could work here.</p>
+<p>Alternatively, we could ask users directly about their context. For example, when they register, we could prompt them to choose a focus area or specify regions they’re interested in. Either way, the real challenge is figuring out how to use this information effectively, not just how to collect it.</p>
+<h1>Final Thoughts</h1>
+<p>Personalising RAG systems isn’t about fixing things that already work. If the user provides a clear, detailed query, the system doesn’t need much help. But when faced with vague queries, personalisation could help by guiding the system in the right direction.</p>
+<p>These ideas aren’t revolutionary, and they might not even work in practice, but they feel like a promising starting point. What do you think? Does this approach make sense, or are there better ways to think about personalisation in RAG? Let me know—I’d love to hear your thoughts.</p>
+    </div>
+
+<button id="openSubscribeModal" class="subscribe btn btn-secondary btn-sm">
+  Subscribe
+</button>
+
+<div id="subscribeModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>
+          Either use the RSS feed
+          <a target="_blank" href="/blog/atom.xml">here</a>, or
+          subscribe to the email newsletter.
+        </p>
+        <form
+          action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/"
+          method="post"
+        >
+          <div class="form-group">
+            <label for="emailField">Email</label>
+            <input
+              name="email"
+              type="email"
+              class="form-control"
+              id="emailField"
+              aria-describedby="emailHelp"
+              placeholder="name@example.com"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <!-- Anti spam protection -->
+          <div style="position: absolute; left: -5000px" aria-hidden="true">
+            <input type="text" name="b28-ft" tabindex="-1" value="" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="closeSubscribeModal"
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/theme/js/jquery.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/subscribe.js"></script>    </body>
+</html>
