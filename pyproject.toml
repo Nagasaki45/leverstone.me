@@ -1,13 +1,15 @@
-[tool.poetry]
+[project]
 name = "leverstone-me"
 version = "0.1.0"
 description = "Tom Leverstone's personal website"
-authors = ["Tom Leverstone <nagasaki45@gmail.com>"]
+authors = [
+    {name = "Tom Leverstone", email = "nagasaki45@gmail.com"},
+]
 readme = "README.md"
 package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.12"
-pelican = {extras = ["markdown"], version = "^4.9.1"}
-pelican-yaml-metadata = "^2.1.2"
-pelican-youtube = "^0.2.1"
+requires-python = "<4.0,>=3.12"
+dependencies = [
+    "pelican[markdown]<5.0.0,>=4.9.1",
+    "pelican-yaml-metadata<3.0.0,>=2.1.2",
+    "pelican-youtube<1.0.0,>=0.2.1",
+]

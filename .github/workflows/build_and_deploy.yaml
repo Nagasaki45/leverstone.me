@@ -12,13 +12,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: "1.8.3"
+      - uses: astral-sh/setup-uv@v5
 
-      - run: poetry install
+      - run: uv sync
 
-      - run: poetry run pelican
+      - run: uv run pelican
         env:
             FEED_DOMAIN: https://leverstone.me
 
