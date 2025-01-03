@@ -17,7 +17,7 @@ Publication in the proceedings of HCI International 2013
    </div>
 
 `Gurion, Tom, and Nori Jacoby. "Audio-Only Augmented Reality System
-for Social Interaction." HCI International 2013-Posters’ Extended
+for Social Interaction." HCI International 2013-Posters' Extended
 Abstracts. Springer Berlin Heidelberg, 2013.
 322-326. <http://db.tt/zpgwMFKJ>`__
 Here's the `paper page at

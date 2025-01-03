@@ -14,7 +14,7 @@ Yesterday, I saw this tweet.
 
 .. image:: /images/blog/write_a_blog_post_tweet.webp
   :width: 100%
-  :alt: "When you’ve written the same code 3 times, write a function. When you’ve given the same in-person advice 3 times, write a blog post" - David Robinson‏
+  :alt: "When you've written the same code 3 times, write a function. When you've given the same in-person advice 3 times, write a blog post" - David Robinson‏
 
 So here I am, writing this blog post.
 

@@ -13,13 +13,13 @@ Generally speaking, continuous integration (CI) is the process of
 running your test suite automatically when you push code to your repo.
 Continuous delivery / deployment (CD) is the process of deploying the
 new code to your server whenever you push to specific branches in your
-repo. There is enough information about these on the web so I won’t
+repo. There is enough information about these on the web so I won't
 cover it here. Instead, I would like to talk about travis-ci and
 codeship, which are: online services that help you accomplish these
 tasks easily; tightly integrated with github; free for open source
 projects; very recommended. There are many similar services, of course,
-but I won’t mention them as I didn’t use them enough to have an opinion.
-So, let’s start with travis.
+but I won't mention them as I didn't use them enough to have an opinion.
+So, let's start with travis.
 
 `Travis-CI`_
 ------------
@@ -27,7 +27,7 @@ So, let’s start with travis.
 AFAIK, travis is the natural CI choice for python developers, and for
 good reasons:
 
--  It’s the easiest to configure and use.
+-  It's the easiest to configure and use.
 -  Configuration is kept in the git repo, using a YAML file. Therefore,
    it is version controlled, which is always a good thing.
 -  It will run your tests against a set of python versions, each one in
@@ -44,11 +44,11 @@ Codeship is clearly inferior:
 
 -  It is configured using a web interface, using bash scripts to prepare
    the environment, run the tests, and deploy (with different script per
-   branch, which is nice). Yep, you’re expected to type bash scripts into
+   branch, which is nice). Yep, you're expected to type bash scripts into
    web forms!
 -  The environment setup is lacking. The `official recommendation for setting
    the python version`_, for example, looks like a hack.
--  You can’t define a test matrix.
+-  You can't define a test matrix.
 
 It sounds bad, I know, but on the other hand codeship has one feature
 that is crucial to my workflow. Each project on codeship have an
