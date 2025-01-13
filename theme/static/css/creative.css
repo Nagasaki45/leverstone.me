@@ -305,6 +305,12 @@ nav li {
 
 /* SUBSCRIBE */
 
-.modal {
-    background-color: rgba(0,0,0,0.6);
+dialog {
+    padding: 0;
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }
