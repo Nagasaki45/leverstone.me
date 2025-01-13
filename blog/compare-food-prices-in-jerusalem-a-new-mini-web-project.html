@@ -71,58 +71,52 @@ And as always, source code can be found at
 <a class="reference external" href="https://github.com/Nagasaki45/MarketPrices">github</a>.</p>
 
     </div>
-
-<button id="openSubscribeModal" class="subscribe btn btn-secondary btn-sm">
-  Subscribe
-</button>
-
-<div id="subscribeModal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>
-          Either use the RSS feed
-          <a target="_blank" href="/blog/atom.xml">here</a>, or
-          subscribe to the email newsletter.
-        </p>
-        <form
-          action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/"
-          method="post"
-        >
-          <div class="form-group">
-            <label for="emailField">Email</label>
-            <input
-              name="email"
-              type="email"
-              class="form-control"
-              id="emailField"
-              aria-describedby="emailHelp"
-              placeholder="name@example.com"
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <!-- Anti spam protection -->
-          <div style="position: absolute; left: -5000px" aria-hidden="true">
-            <input type="text" name="b28-ft" tabindex="-1" value="" />
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          id="closeSubscribeModal"
-          type="button"
-          class="btn btn-secondary"
-          data-dismiss="modal"
-        >
-          Close
-        </button>
-      </div>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
     </div>
-  </div>
-</div></div>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="/theme/js/jquery.js"></script>
-<script src="/theme/js/bootstrap.min.js"></script>
-<script src="/theme/js/subscribe.js"></script>    </body>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href=" https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>    </body>
 </html>
