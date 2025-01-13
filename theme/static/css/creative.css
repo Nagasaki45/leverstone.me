@@ -314,3 +314,30 @@ dialog {
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* FOOTER */
+
+footer {
+    background-color: #515151;
+    color: #fff;
+    padding: 3em 0;
+}
+
+footer h4 {
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+footer p {
+    font-size: 0.9em;
+    margin-bottom: 1em;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+footer .links a {
+    display: block;
+    margin: 0;
+}

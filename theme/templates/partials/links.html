@@ -1,0 +1,9 @@
+{% for name, link, text in SOCIAL %}
+{% if name == 'fa fa-envelope' %}
+<a class="icon" href="{{ link }}">
+{% else %}
+<a class="icon" href="{{ link }}" rel="me" target="_blank">
+{% endif %}
+    <i class="{{ name }}"></i>&nbsp;{{ text }}
+</a>
+{% endfor %}
