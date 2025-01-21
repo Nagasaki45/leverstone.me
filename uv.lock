@@ -78,7 +78,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "pelican", extras = ["markdown"], specifier = ">=4.9.1,<5.0.0" },
+    { name = "pelican", extras = ["markdown"], specifier = ">=4.11,<5.0.0" },
     { name = "pelican-yaml-metadata", specifier = ">=2.1.2,<3.0.0" },
     { name = "pelican-youtube", specifier = ">=0.2.1,<1.0.0" },
 ]
@@ -162,7 +162,7 @@ wheels = [
 
 [[package]]
 name = "pelican"
-version = "4.10.2"
+version = "4.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "blinker" },
@@ -177,9 +177,9 @@ dependencies = [
     { name = "unidecode" },
     { name = "watchfiles" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/31/3e/9ae7aafe3386465467dbb462c1fca2e3e9a6d80b9cca2aee3958ca1d9449/pelican-4.10.2.tar.gz", hash = "sha256:04932e82dc7542bae7f1830710978836ca00608aa4ece7206dc13185a08c4562", size = 1243855 }
+sdist = { url = "https://files.pythonhosted.org/packages/27/42/c06c1a7a3136729ece5a1f98544ede83edd593b3cd9110c9ad61bcc7f4dd/pelican-4.11.0.tar.gz", hash = "sha256:b90234487b818d391733acc1306b785934009749b1fc112b879df9bd89478bd8", size = 24148058 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4f/eb/b959487fa45d107ce388c77d0c694cdab42a6be9e2149f44cba1fe6a08c7/pelican-4.10.2-py3-none-any.whl", hash = "sha256:534b3c279b9630a006b5687ea6e8e6113ca17c64ac45f4328cf66bf0be367bdf", size = 1347714 },
+    { url = "https://files.pythonhosted.org/packages/79/32/01df483f255438e792771b11ebe804af15957739e88673ca95c89289c0f4/pelican-4.11.0-py3-none-any.whl", hash = "sha256:aca6993f6b8a03a20f6828471089cb0504a4dca71e0d30b341fa80ab65668fa4", size = 24127868 },
 ]
 
 [package.optional-dependencies]

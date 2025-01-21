@@ -9,7 +9,7 @@ readme = "README.md"
 package-mode = false
 requires-python = "<4.0,>=3.12"
 dependencies = [
-    "pelican[markdown]<5.0.0,>=4.9.1",
+    "pelican[markdown]<5.0.0,>=4.11",
     "pelican-yaml-metadata<3.0.0,>=2.1.2",
     "pelican-youtube<1.0.0,>=0.2.1",
 ]
