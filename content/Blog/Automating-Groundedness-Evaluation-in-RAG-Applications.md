@@ -95,7 +95,7 @@ The key to this solution is the understanding that we don't need to do anything 
 
 # The Details
 
-The fact-checker LLM model we use is gpt-4o-mini, set to 0 temperature. We also rely on [structured output](https://openai.com/index/introducing-structured-outputs-in-the-api/). We had good experience using this model for LLM-as-a-judge tasks in the past, so we ended up using it without trying different models or parameters.
+The fact-checker LLM model we use is gpt-4o, set to 0 temperature. We also rely on [structured output](https://openai.com/index/introducing-structured-outputs-in-the-api/). We had good experience using this model for LLM-as-a-judge tasks in the past, so we ended up using it without trying different models or parameters.
 
 The system prompt is:
 
