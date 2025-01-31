@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/performance-profiling-in-python-tools-techniques-and-an-unexpected-culprit.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies/">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit</h1>
+    <time datetime="2025-01-31">
+        Fri 31 January 2025
+    </time>
+    <div class="content">
+        <p>Recently, my team encountered a performance issue with our Python service that uses FastAPI, gunicorn, uvicorn, and the OpenAI API. The service works fine in development, but when we load-tested it in our staging environment, the response time skyrocketed, and the throughput became embarrassingly low. Luckily, it was us stressing the service.</p>
+<p>In this post, I'll walk through how we diagnosed and fixed this performance bottleneck. While the specific issue we found might not match your next performance problem, the debugging process and tools we used should be helpful for any Python developer dealing with similar challenges.</p>
+<p>I've created a <a href="https://github.com/Nagasaki45/OTEL-OpenAI-performance-investigation">minimal reproducible example</a> that demonstrates the exact same issue we encountered. Let's dive in.</p>
+<h1>Recognizing the Symptoms</h1>
+<p>We noticed that as we scaled up concurrent users, response times became significantly worse. We load-tested the service to understand its behaviour under pressure. Using <a href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Benchmark (ab)</a>, a handy tool for simulating user load, we were able to quantify the problem.</p>
+<p>We can run it as follows to simulate a single user hitting the service:</p>
+<div class="highlight"><pre><span></span><code>ab<span class="w"> </span>-l<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>http://localhost:9000/
+</code></pre></div>
+
+<p>The median response time in this case is 1545 milliseconds, and the throughput is 0.58 requests per second (RPS).</p>
+<p>Based on this, in an ideal world, 75 concurrent users should receive the same response time, and the throughput should increase 75-fold to about 43 RPS. Let's try:</p>
+<div class="highlight"><pre><span></span><code>ab<span class="w"> </span>-l<span class="w"> </span>-c<span class="w"> </span><span class="m">75</span><span class="w"> </span>-n<span class="w"> </span><span class="m">200</span><span class="w"> </span>http://localhost:9000/
+</code></pre></div>
+
+<p>Results:</p>
+<ul>
+<li>Median response time: 35306ms</li>
+<li>RPS: 1.95</li>
+</ul>
+<p>Huston, we have a problem! But where to begin?</p>
+<h1>Suspects</h1>
+<p>The application relies on AsyncIO, so our initial hunch was that there might be a blocking call somewhere causing multiple requests to wait for each other. We enabled the <a href="https://docs.python.org/3/library/asyncio-dev.html">debug mode for AsyncIO</a> but couldn't find coroutines with unexpectedly long execution times. That wasn't the issue.</p>
+<p>Next was the DB. We use <a href="https://opentelemetry.io/">OpenTelemetry</a> to collect traces from our apps, including traces for DB queries. A quick look at our traces showed that the DB queries were very efficient, taking only a few milliseconds each, and there were only a few of them per request. Even if DB queries blocked the event loop, they couldn't cause the performance issue we were observing.</p>
+<p>Lastly, we checked the CPU utilisation while load-testing the service. It was clearly at 100%. We were on to something!</p>
+<h1>Investigating Inefficient Code</h1>
+<p>The code is inefficient? Here comes the profiler! It allowed us to examine the time spent in each function, the number of times each function is called, and the relationships between function calls.</p>
+<p>While Python's built-in cProfile is a common choice, we opted for <a href="https://github.com/sumerc/yappi">Yappi</a> instead. Why? Because our service heavily relies on asynchronous code (coroutines), and <a href="https://github.com/sumerc/yappi/blob/master/doc/coroutine-profiling.md">Yappi handles them better than cProfile</a>. A rule of thumb: if you use AsyncIO, just use Yappi. We tried cProfile, and it didn't help us much in this case.</p>
+<h2>Setting up Yappi</h2>
+<p>Integrating Yappi into our FastAPI application was straightforward:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">yappi</span>
+<span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+
+<span class="nd">@contextlib</span><span class="o">.</span><span class="n">asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">FastAPI</span><span class="p">):</span>
+    <span class="n">yappi</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">yappi</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">ps</span> <span class="o">=</span> <span class="n">yappi</span><span class="o">.</span><span class="n">convert2pstats</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="c1"># TIME is total time spent within function excluding callees</span>
+        <span class="n">ps</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="n">pstats</span><span class="o">.</span><span class="n">SortKey</span><span class="o">.</span><span class="n">TIME</span><span class="p">)</span>
+        <span class="n">ps</span><span class="o">.</span><span class="n">dump_stats</span><span class="p">(</span><span class="s2">&quot;profile.stats&quot;</span><span class="p">)</span>  <span class="c1"># Dump profiling info to profile.stats</span>
+        <span class="n">ps</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Printing the top 20 calls</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">)</span>
+</code></pre></div>
+
+<p>With this setup, whenever the service stopped, Yappi would dump the profiling data, sorted by total time in descending order. We initially tried cumulative time but this resulted in a report of the top-level functions (like the endpoint handler), not the most inefficient ones.</p>
+<p>It is time to gather some evidence!</p>
+<h2>Profiling under Load</h2>
+<p>We ran the same load test again, with Yappi enabled:</p>
+<div class="highlight"><pre><span></span><code>ab<span class="w"> </span>-l<span class="w"> </span>-c<span class="w"> </span><span class="m">75</span><span class="w"> </span>-n<span class="w"> </span><span class="m">200</span><span class="w"> </span>http://localhost:9000/
+</code></pre></div>
+
+<p>At the top of the profiling data, we found this:</p>
+<div class="highlight"><pre><span></span><code>   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    43450   16.802    0.000   73.513    0.002 /home/tgurion/.local/share/uv/python/cpython-3.12.6-linux-x86_64-gnu/lib/python3.12/email/feedparser.py:216(FeedParser._parsegen)
+  5497700   15.427    0.000   22.207    0.000 /home/tgurion/.local/share/uv/python/cpython-3.12.6-linux-x86_64-gnu/lib/python3.12/email/feedparser.py:77(BufferedSubFile.readline)
+  5497700   14.446    0.000   36.653    0.000 /home/tgurion/.local/share/uv/python/cpython-3.12.6-linux-x86_64-gnu/lib/python3.12/email/feedparser.py:127(BufferedSubFile.__next__)
+</code></pre></div>
+
+<p>A significant amount of time was spent in <code>email/feedparser.py</code>! This was unexpected, as our service didn't directly use email parsing. Where does this call come from?</p>
+<h2>Visualising the Call Relationships</h2>
+<p>To visualise the call relationships, we used <a href="https://github.com/jrfonseca/gprof2dot">gprof2dot</a> - a tool to convert the profiling output into a <a href="https://graphviz.org/docs/layouts/dot/">Graphviz <code>.dot</code> file</a>, which is a common file format for graph diagrams. We then used <a href="https://graphviz.org/docs/attr-types/xdot/">xdot</a> to view the diagram. There's also an option to use dot directly to convert the file to <code>png</code>. More specifically:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Convert the profiling output to a .dot file</span>
+gprof2dot<span class="w"> </span>-f<span class="w"> </span>pstats<span class="w"> </span>profile.stats<span class="w"> </span>&gt;<span class="w"> </span>profile.dot
+<span class="c1"># Convert the .dot file to png</span>
+dot<span class="w"> </span>-Tpng<span class="w"> </span>profile.dot<span class="w"> </span>-o<span class="w"> </span>profile.png
+<span class="c1"># Open the .dot file in an interactive viewer</span>
+xdot<span class="w"> </span>profile.dot
+</code></pre></div>
+
+<p>Here are the profiling results. It shows the call graph of the service. Each node represents a function, and the edges represent calls between functions. More on the meaning of the stats on nodes and edges can be found <a href="https://github.com/jrfonseca/gprof2dot?tab=readme-ov-file#output">in the gprof2dot docs</a>.</p>
+<p><img alt="Annotated dot representation of the profiling output. The red area is feedparser.py. The blue area is opentelemetry-instrumentation-openai" src="/images/blog/dot_representation_of_performance_investigation_profile.avif"></p>
+<p><em>Note: I wish I could have dropped an xdot-like interactive experience here, but that's hard to do, so you've got a manually annotated image instead. You can enlarge it; it's high-res.</em></p>
+<p>The <code>feedparser.py</code> functions are annotated in red. Almost all of the calls to it are coming from a single source, annotated in blue. This is the <a href="https://pypi.org/project/opentelemetry-instrumentation-openai/">opentelemetry-instrumentation-openai</a> library 😱</p>
+<h2>The Culprit: OpenTelemetry OpenAI Instrumentation</h2>
+<p>The OpenTelemetry OpenAI instrumentation helps us understand our calls to OpenAI. While convenient, it appeared to be a major performance bottleneck. But before we pronounce the defendant guilty, one last test.</p>
+<p>We removed the opentelemetry-instrumentation-openai library and reran the load test. Here are the results before and after the change:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Before</th>
+<th style="text-align: right;">After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Median response time (ms)</td>
+<td style="text-align: right;">35306</td>
+<td style="text-align: right;">15161</td>
+</tr>
+<tr>
+<td>Requests per second</td>
+<td style="text-align: right;">1.95</td>
+<td style="text-align: right;">4.76</td>
+</tr>
+</tbody>
+</table>
+<p>That's more than double the throughput with less than half the response time!</p>
+<p>At this point, we removed the instrumentation library. But let's not finish our story on a negative note. Back to the <code>.dot</code> file!</p>
+<h1>The Fix</h1>
+<p>The <code>.dot</code> call graph suggested that <a href="https://importlib-metadata.readthedocs.io/en/latest/api.html#importlib_metadata.version"><code>importlib_meta.version</code></a> might be the bottleneck. This function takes a distribution (something you might install with pip) and returns the version currently installed. It was called 8604 times, and it is responsible for the calls to <code>feedparser.py</code>, which accounts for almost 84% of the total execution time of the service. Checking the opentelemetry-instrumentation-openai source, I found <a href="https://github.com/traceloop/openllmetry/blob/3539e34026a06d4cccdc1b73fd26d3f6b97fee02/packages/opentelemetry-instrumentation-openai/opentelemetry/instrumentation/openai/utils.py#L14">two</a> <a href="https://github.com/traceloop/openllmetry/blob/3539e34026a06d4cccdc1b73fd26d3f6b97fee02/packages/opentelemetry-instrumentation-openai/opentelemetry/instrumentation/openai/shared/__init__.py#L238">calls</a> to this function. I was very happy to find that this is the bottleneck as, although computationally intensive, it is: (a) completely deterministic, and (b) called only with 2 literal values: <code>version("openai")</code> and <code>version("pydantic")</code>. <a href="https://github.com/traceloop/openllmetry/pull/2577">Moving these to happen at import time was a simple fix</a>.</p>
+<p>At the time of writing, the maintainers of the library have not yet merged the PR. We are waiting for that and will then add the instrumentation library back to our service.</p>
+<h1>Sharing the Findings</h1>
+<p>I've documented this entire investigation in <a href="https://github.com/Nagasaki45/OTEL-OpenAI-performance-investigation">this GitHub repository</a>, including the code, instructions for reproducing the issue, and the profiling results. I've also raised an issue on the <a href="https://github.com/traceloop/openllmetry/issues/2547">OpenTelemetry instrumentation library's repository</a> to inform the maintainers of the performance problem and <a href="https://github.com/traceloop/openllmetry/pull/2577">submitted a PR with a fix</a>.</p>
+<h1>Lessons Learned</h1>
+<p>This investigation taught us valuable lessons about debugging performance issues:</p>
+<ul>
+<li><strong>Load testing is crucial</strong>. We regularly load test our staging environment, which is configured very similarly to our production environment. When we notice issues, we usually manage to replicate them quite easily in local development. In this case, the minimal reproducible repo (from which all of the examples in this post are drawn) was enough to reproduce the problem, find the culprit, and come up with a fix.</li>
+<li><strong>Having the right tools is essential</strong>. AsyncIO debug mode showed us immediately that the issue was not related to blocking calls from coroutines. Traces from the DB queries confirmed it wasn't a DB issue either. <code>htop</code> hinted at the issue when we saw 100% CPU utilisation during load tests, as up to that point we assumed the service is IO bound, not CPU bound. Yappi immediately sent us in the right direction. Visualising the profiling output helped us quickly understand what was going on and come up with the fix.</li>
+<li><strong>Validate your changes</strong>. Once you've made a change, re-run your load tests to confirm that it has resolved the issue.</li>
+<li><strong>Continuous learning is important</strong>. The techniques described above worked for me in this case. They might not work in a different investigation. There are certainly other ways to profile services, understand the call graph, and so on. I'm keen to learn about them! This post serves as a reminder for myself of what I've done, should I encounter similar problems in the future, and as a guide for anyone interested in learning some techniques to do the same.</li>
+<li><strong>The AI stack is still evolving</strong>. On a broader level, we learned that much of the rapidly moving AI stack is not as robust and performant as one would expect. This is not the first time our team has encountered performance issues with popular libraries, raising the question of how these things even run in production. It seems that a lot of current development work focuses on delivering prototypes without much emphasis on performance. There might be another blog post dedicated to this topic coming soon 😉</li>
+</ul>
+<hr>
+<p>This blog post was made with the help of Gemini Experimental 1206 and Claude 3.5 Sonnet.</p>
+    </div>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href=" https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>    </body>
+</html>
