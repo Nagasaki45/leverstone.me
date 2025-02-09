@@ -3,7 +3,7 @@ title: Quoting Chip Huyen
 date: 2025-02-08T23:00:00.000Z
 ---
 
-The best explanation I've to date for why AI is not going to replace software engineers:
+The best explanation I've seen for why AI is not going to replace software engineers:
 
 > I think it goes back to the question of what software engineering really is. An analogy might help explain this better: Let's look at writing. We tend to confuse the most salient activity of something as the thing itself. In the past, writing meant the physical act of putting words onto paper, and people took pride in calligraphy - "beautiful handwriting means you must be smart and intelligent." But with computers, writing no longer refers to that physical act. Instead, it refers to the process of arranging ideas into a readable format.
 >
