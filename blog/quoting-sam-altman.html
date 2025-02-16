@@ -58,7 +58,7 @@
         Sun 16 February 2025
     </time>
     <div class="content">
-        <p>A few days ago Sam Altman shared an <a href="https://x.com/sama/status/1889755723078443244">update about OpenAI's roadmap on twitter</a>. Here's what I'm reading between the lines:</p>
+        <p>A few days ago Sam Altman shared <a href="https://x.com/sama/status/1889755723078443244">an update about OpenAI's roadmap on twitter</a>. Here's what I'm reading between the lines:</p>
 <blockquote>
 <p>We hate the model picker as much as you do and want to return to magic unified intelligence.</p>
 </blockquote>
@@ -66,9 +66,10 @@
 <blockquote>
 <p>We will next ship GPT-4.5, the model we called Orion internally, as our last non-chain-of-thought model.</p>
 </blockquote>
-<p>For my understanding there's a lot of value in "small" models like 4o-mini, Gemini flash, etc. These are generally faster and cheaper than their larger siblings, and perfectly adequate for many tasks. I think this is also reflected in the wide range of sizes of open weights models. The point here suggests that OpenAI are confident they can compete in the space of "small" models with only chain-of-thought models. This is interesting because like there's always a performance penalty for this type of models - their thinking time until the final output starts.</p>
+<p>As I understand it there's a lot of value in "small" models like 4o-mini, Gemini flash, etc. These are generally faster and cheaper than their larger siblings, and perfectly adequate for many tasks. I think this is also reflected in the wide range of sizes of open weights models. The point here suggests that OpenAI are confident they can compete in the space of "small" models with only chain-of-thought models. This is interesting because there's always a performance penalty for this type of models as they "burn" tokens on thinking before answering.</p>
 <blockquote>
-<p>After that, a top goal for us is to unify o-series models and GPT-series models by creating systems that can use all our tools, know when to think for a long time or not, and generally be useful for a very wide range of tasks.In both ChatGPT and our API, we will release GPT-5 as a system that integrates a lot of our technology, including o3. We will no longer ship o3 as a standalone model.</p>
+<p>After that, a top goal for us is to unify o-series models and GPT-series models by creating systems that can use all our tools, know when to think for a long time or not, and generally be useful for a very wide range of tasks.</p>
+<p>In both ChatGPT and our API, we will release GPT-5 as a system that integrates a lot of our technology, including o3. We will no longer ship o3 as a standalone model.</p>
 </blockquote>
 <p>There's a lot to unpack here:</p>
 <ul>
@@ -76,11 +77,15 @@
 <li>If GPT 5 is not going to be a new kind of intelligence we didn't see before, what does it say about OpenAI's AGI mission?</li>
 </ul>
 <blockquote>
-<p>The free tier of ChatGPT will get unlimited chat access to GPT-5 at the standard intelligence setting (!!), subject to abuse thresholds.Plus subscribers will be able to run GPT-5 at a higher level of intelligence, and Pro subscribers will be able to run GPT-5 at an even higher level of intelligence. These models will incorporate voice, canvas, search, deep research, and more.</p>
+<p>The free tier of ChatGPT will get unlimited chat access to GPT-5 at the standard intelligence setting (!!), subject to abuse thresholds.</p>
+<p>Plus subscribers will be able to run GPT-5 at a higher level of intelligence, and Pro subscribers will be able to run GPT-5 at an even higher level of intelligence. These models will incorporate voice, canvas, search, deep research, and more.</p>
 </blockquote>
-<p>So, in the future there's just one model, or rather a software system orchestrating multiple models, to which the only parameter is the intelligence level. This sounds potentially simpler than picking a model, but might also mean less opportunity to tune the system to someone's needs.</p>
+<ul>
+<li>So, in the future there's just one model, or rather a software system orchestrating multiple models, to which the only parameter is the intelligence level. This sounds potentially simpler than picking a model, but might also mean less opportunity to tune the system to someone's needs.</li>
+<li>The only monetisation is the level of intelligence, not features. That's a bold move! As someone that works on an AI driven application we often struggle with this question. The downside is that free tier users are not going to get a good picture of what AI is capable of. Essentially it's like going back to the days of free GPT 3.5, when non-paying users say AI is crap, while paying users are getting much more out of 4o. I don't think it worked well for OpenAI. otherwise they wouldn't have changed this.</li>
+</ul>
 <hr>
-<p>Overall, to me, it all sounds great for serving ChatGPT users. It doesn't sound very appealing for builders of applications on top of OpenAI's APIs. On the other I think it's great that OpenAI keeps innovating. I don't think the future of AI is necessarily about the best intelligence. There's a lot to be gained from better software systems that wrap models. Even if OpenAI ends up being more consumer focused there's enough players that can push the enterprise use case forwards and overall the field will benefit from the diversity.</p>
+<p>Overall, to me, it all sounds great for serving ChatGPT users. It doesn't sound very appealing for builders of applications on top of OpenAI's APIs. On the other hand I think it's great that OpenAI keeps innovating. I don't think the future of AI is necessarily about the best intelligence. There's a lot to be gained from better software systems that wrap models. Even if OpenAI ends up being consumer focused there's enough players that can push the enterprise use case forwards and overall the field will benefit from the diversity.</p>
     </div>
 </div>
 <footer>
