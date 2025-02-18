@@ -18,18 +18,6 @@ jobs:
         env:
             FEED_DOMAIN: https://leverstone.me
 
-      - run: yarn
-
-      - run: yarn tinacms build
-        env:
-          NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
-          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
-
-      # TinaCMS creates a .gitignore in the output to ignore the `index.html`.
-      # It causes the next action to exclude the `index.html` from being copied
-      # to the gh-pages branch.
-      - run: rm output/admin/.gitignore
-
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
