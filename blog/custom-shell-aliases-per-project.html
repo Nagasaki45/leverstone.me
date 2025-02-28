@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Custom shell aliases per project | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Custom shell aliases per project | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/custom-shell-aliases-per-project.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies/">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <h1 class="title">Custom shell aliases per project</h1>
+    <time datetime="2025-02-28">
+        Fri 28 February 2025
+    </time>
+    <div class="content">
+        <p>I've been playing with <a href="https://aider.chat/">aider</a> recently. I's an "AI pair programming in your terminal". Think GitHub Copilot, Cursor, etc. but for the command line. This blog post is not about that. It's about making it easier to run aider in my projects.</p>
+<p>Confused? Let's see...</p>
+<p>In one of my projects I run aider like this</p>
+<div class="highlight"><pre><span></span><code>aider<span class="w"> </span>--architect<span class="w"> </span>--test-cmd<span class="w"> </span><span class="s1">&#39;uv run python -m pytest&#39;</span><span class="w"> </span>--lint-cmd<span class="w"> </span><span class="s1">&#39;make format&#39;</span>
+</code></pre></div>
+
+<p>In another I run it like this</p>
+<div class="highlight"><pre><span></span><code>aider<span class="w"> </span>--architect<span class="w"> </span>--model<span class="w"> </span>o3-mini<span class="w"> </span>--editor-model<span class="w"> </span>sonnet<span class="w"> </span>--test-cmd<span class="w"> </span><span class="s1">&#39;docker run --rm -v .:/ app my-app pytest&#39;</span><span class="w"> </span>--lint-cmd<span class="w"> </span><span class="s1">&#39;make docker/format&#39;</span>
+</code></pre></div>
+
+<p>The point is, this is a long command line to type every time.</p>
+<p><strong>Wouldn't it be nice if I had custom aliases, per project, so I can just run <code>aider</code> within the repo and it will run the full command for me? 🤔</strong></p>
+<p>I googled and asked some LLMs but couldn't find a simple existing solution. Having something custom sounded easy, so I tried to get something done with the help of ChatGPT, and it worked surprisingly well!</p>
+<h1><code>trusted-source</code></h1>
+<p>This custom <a href="https://ohmyz.sh/">oh-my-zsh</a> plugin looks for <code>.trusted-source</code> files in the current directory, ask the user to confirm they are trusted, and if so, sources them.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Function to source trusted `.trusted-source` files in the current directory.</span>
+<span class="k">function</span><span class="w"> </span>load_trusted_source<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">file_to_source</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/.trusted-source&quot;</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">trust_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.trusted-sources&quot;</span><span class="w">  </span><span class="c1"># File to store trusted hashes.</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span>file_hash
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_to_source</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># Compute a checksum</span>
+<span class="w">    </span><span class="nv">file_hash</span><span class="o">=</span><span class="k">$(</span>shasum<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_to_source</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+
+<span class="w">    </span><span class="c1"># Retrieve the last trusted hash for this directory.</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>saved_hash
+<span class="w">    </span><span class="nv">saved_hash</span><span class="o">=</span><span class="k">$(</span>grep<span class="w"> </span><span class="s2">&quot;^</span><span class="nv">$PWD</span><span class="s2"> &quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$trust_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$saved_hash</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_hash</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;New or changed .trusted-source file detected in </span><span class="nv">$PWD</span><span class="s2">.&quot;</span>
+<span class="w">      </span><span class="nb">read</span><span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;REPLY?Do you trust and want to source it? [y/N] &quot;</span>
+<span class="w">      </span><span class="nb">echo</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REPLY</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>Yy<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="c1"># Append the new trusted hash to the trust file.</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2"> </span><span class="nv">$file_hash</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$trust_file</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_to_source</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">      </span><span class="c1"># The file is trusted; load it silently.</span>
+<span class="w">      </span><span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_to_source</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="c1"># Hook the function into zsh&#39;s directory-change mechanism.</span>
+<span class="nv">chpwd_functions</span><span class="o">+=(</span>load_trusted_source<span class="o">)</span>
+
+<span class="c1"># Optionally, run it once on shell startup.</span>
+load_trusted_source
+</code></pre></div>
+
+<p>To use it, copy it to <code>~/.oh-my-zsh/custom/plugins/trusted-source/trusted-source.plugin.zsh</code>. And add <code>trusted-source</code> to the list of plugins in your <code>~/.zshrc</code>.</p>
+<p>With this set up I have this <code>.trusted-source</code> in the root of my project:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">alias</span><span class="w"> </span><span class="nv">aider</span><span class="o">=</span>aider<span class="w"> </span>--architect<span class="w"> </span>--test-cmd<span class="w"> </span><span class="s1">&#39;uv run python -m pytest&#39;</span><span class="w"> </span>--lint-cmd<span class="w"> </span><span class="s1">&#39;make format&#39;</span>
+</code></pre></div>
+
+<p>and to run aider I can just run <code>aider</code> 🙌</p>
+<p>This is just one use case of course. I can use this for env vars (replacing <a href="https://github.com/direnv/direnv">direnv</a>), source my Python virtual environment (something I rarely do now that I mostly use uv / poetry), etc. This plugin is for zsh and oh-my-zsh, but the idea should be very much transferable to other shells. I'm documenting it here for my future self, but maybe someone will also find it interesting.</p>
+<p>And what about aider, you ask? I'm still struggling with all of this AI for writing code idea. For writing prose? Definitely! For exploring technical ideas? Of course! For translating what's in my head to an easy to read and maintainable python code? I'm not yet there, but I'm trying. We will see how it goes...</p>
+    </div>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href=" https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>    </body>
+</html>
