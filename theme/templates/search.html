@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% set page_title = page.title %}
+
+{% block page %}
+
+<div class="container article-container">
+    <div class="close-container">
+        <button
+            class="btn btn-primary"
+            onclick="window.history.back()"
+            aria-label="Close search panel"
+        >
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div id="search"></div>
+</div>
+
+<style>
+    .close-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1em 0;
+}
+
+    #search {
+        margin: 2em 0;
+    }
+</style>
+<link rel="stylesheet" href="{{ SITEURL }}/pagefind/pagefind-ui.css" type="text/css">
+<script src="{{ SITEURL }}/pagefind/pagefind-ui.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
+{% endblock %}

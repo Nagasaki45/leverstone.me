@@ -6,6 +6,11 @@
   {% endif %}
   <ul {% if not skip_home %}class="float"{% endif %}>
     <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
       <a class="btn {% if page_name == '/blog' %}selected{% endif %}" href="/blog/">
         Blog
       </a>

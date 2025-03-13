@@ -5,6 +5,7 @@ Static, [pelican](https://docs.getpelican.com/en/stable/) generated, site.
 ```bash
 uv sync             # only once
 uv run pelican -rl  # Regenerate and listen on localhost:8000
+uv run python -m pagefind --site output # Create the search index
 ```
 
 ## Newsletter

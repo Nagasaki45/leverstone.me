@@ -18,6 +18,8 @@ jobs:
         env:
             FEED_DOMAIN: https://leverstone.me
 
+      - run: uv run python -m pagefind --site output
+
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages

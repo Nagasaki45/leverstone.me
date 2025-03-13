@@ -5,19 +5,21 @@
 {% block page %}
 <div class="container article-container">
     {% include "partials/navbar.html" %}
-    <h1 class="title">{{ article.title }}</h1>
-    {% with date=article.date %}
-        {% include "partials/date.html" %}
-    {% endwith %}
-    <div class="content">
-        {% if article.img %}
-            <p><img src="/images/portfolio/{{ article.img }}" /></p>
+    <article data-pagefind-body>
+        <h1 class="title">{{ article.title }}</h1>
+        {% with date=article.date %}
+            {% include "partials/date.html" %}
+        {% endwith %}
+        <div class="content">
+            {% if article.img %}
+                <p><img src="/images/portfolio/{{ article.img }}" /></p>
+            {% endif %}
+            {{ article.content  }}
+        </div>
+        {% if article.links %}
+        {% include "partials/portfolio_item_badges.html" %}
         {% endif %}
-        {{ article.content  }}
-    </div>
-    {% if article.links %}
-    {% include "partials/portfolio_item_badges.html" %}
-    {% endif %}
+    </article>
 </div>
 {% include "partials/footer.html" %}
 {% endblock %}
