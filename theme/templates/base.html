@@ -2,11 +2,10 @@
 <html lang="en-US">
     <head>
         {% include "partials/head.html" %}
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/header-links.css">
     </head>
     <body>
         {% block page %}
         {% endblock %}
-        <script src="{{ SITEURL }}/theme/js/header-links.js"></script>
+        {% include "partials/js.html" %}
     </body>
 </html>
