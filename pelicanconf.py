@@ -86,3 +86,15 @@ SOCIAL = (
 )
 
 SUMMARY_MAX_LENGTH = 35
+
+# Markdown config
+
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        'markdown.extensions.toc': {},
+    },
+    'output_format': 'html5',
+}
