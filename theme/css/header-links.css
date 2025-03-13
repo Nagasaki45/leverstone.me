@@ -1,0 +1,14 @@
+.header-link {
+  opacity: 0;
+  margin: 0 0.25em;
+}
+
+.content h1:hover .header-link,
+.content h2:hover .header-link,
+.content h3:hover .header-link,
+.content h4:hover .header-link,
+.content h5:hover .header-link,
+.content h6:hover .header-link {
+  opacity: 1;
+  text-decoration: none;
+}

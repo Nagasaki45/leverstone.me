@@ -29,7 +29,8 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />    </head>
+<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
+    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -101,7 +102,7 @@ miniflux.leverstone.me: 2025-05-22T00:02:03Z
 </code></pre></div>
 
 <p>Looks good!</p>
-<h1>Notes</h1>
+<h1 id="notes">Notes</h1>
 <ul>
 <li><a href="https://github.com/projectdiscovery/subfinder"><code>subfinder</code></a> is an open source 'Fast passive subdomain enumeration tool' for penetration testers and bug bounty hunters. You'll have to install it. On arch linux <code>yay -S subfinder</code> was enough. Perplexity suggested it when I asked for ways to find subdomain of a domain from the command line.</li>
 <li><a href="https://github.com/openssl/openssl">OpenSSL</a> is used to fetch the certificate and extract the expiry time. The command <code>echo | openssl s_client -servername "$subdomain" -connect "$subdomain":443 2&gt;/dev/null | openssl x509 -enddate -noout</code> was suggested by Claude 3.7 Sonnet when asked for ways to get the expiry time of a certificate of a domain.</li>
@@ -155,5 +156,6 @@ miniflux.leverstone.me: 2025-05-22T00:02:03Z
             </div>
         </div>
     </div>
-</footer>    </body>
+</footer>        <script src="/theme/js/header-links.js"></script>
+    </body>
 </html>

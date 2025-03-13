@@ -29,7 +29,8 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />    </head>
+<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
+    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -71,7 +72,7 @@
 <p>The point is, this is a long command line to type every time.</p>
 <p><strong>Wouldn't it be nice if I had custom aliases, per project, so I can just run <code>aider</code> within the repo and it will run the full command for me? 🤔</strong></p>
 <p>I googled and asked some LLMs but couldn't find a simple existing solution. Having something custom sounded easy, so I tried to get something done with the help of ChatGPT, and it worked surprisingly well!</p>
-<h1><code>trusted-source</code></h1>
+<h1 id="trusted-source"><code>trusted-source</code></h1>
 <p>This custom <a href="https://ohmyz.sh/">oh-my-zsh</a> plugin looks for <code>.trusted-source</code> files in the current directory, ask the user to confirm they are trusted, and if so, sources them.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Function to source trusted `.trusted-source` files in the current directory.</span>
 <span class="k">function</span><span class="w"> </span>load_trusted_source<span class="o">()</span><span class="w"> </span><span class="o">{</span>
@@ -166,5 +167,6 @@ load_trusted_source
             </div>
         </div>
     </div>
-</footer>    </body>
+</footer>        <script src="/theme/js/header-links.js"></script>
+    </body>
 </html>

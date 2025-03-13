@@ -29,7 +29,8 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />    </head>
+<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
+    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -61,7 +62,7 @@
         <p>Recently, my team encountered a performance issue with our Python service that uses FastAPI, gunicorn, uvicorn, and the OpenAI API. The service works fine in development, but when we load-tested it in our staging environment, the response time skyrocketed, and the throughput became embarrassingly low. Luckily, it was us stressing the service.</p>
 <p>In this post, I'll walk through how we diagnosed and fixed this performance bottleneck. While the specific issue we found might not match your next performance problem, the debugging process and tools we used should be helpful for any Python developer dealing with similar challenges.</p>
 <p>I've created a <a href="https://github.com/Nagasaki45/OTEL-OpenAI-performance-investigation">minimal reproducible example</a> that demonstrates the exact same issue we encountered. Let's dive in.</p>
-<h1>Recognizing the Symptoms</h1>
+<h1 id="recognizing-the-symptoms">Recognizing the Symptoms</h1>
 <p>We noticed that as we scaled up concurrent users, response times became significantly worse. We load-tested the service to understand its behaviour under pressure. Using <a href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Benchmark (ab)</a>, a handy tool for simulating user load, we were able to quantify the problem.</p>
 <p>We can run it as follows to simulate a single user hitting the service:</p>
 <div class="highlight"><pre><span></span><code>ab<span class="w"> </span>-l<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>http://localhost:9000/
@@ -78,14 +79,14 @@
 <li>RPS: 1.95</li>
 </ul>
 <p>Huston, we have a problem! But where to begin?</p>
-<h1>Suspects</h1>
+<h1 id="suspects">Suspects</h1>
 <p>The application relies on AsyncIO, so our initial hunch was that there might be a blocking call somewhere causing multiple requests to wait for each other. We enabled the <a href="https://docs.python.org/3/library/asyncio-dev.html">debug mode for AsyncIO</a> but couldn't find coroutines with unexpectedly long execution times. That wasn't the issue.</p>
 <p>Next was the DB. We use <a href="https://opentelemetry.io/">OpenTelemetry</a> to collect traces from our apps, including traces for DB queries. A quick look at our traces showed that the DB queries were very efficient, taking only a few milliseconds each, and there were only a few of them per request. Even if DB queries blocked the event loop, they couldn't cause the performance issue we were observing.</p>
 <p>Lastly, we checked the CPU utilisation while load-testing the service. It was clearly at 100%. We were on to something!</p>
-<h1>Investigating Inefficient Code</h1>
+<h1 id="investigating-inefficient-code">Investigating Inefficient Code</h1>
 <p>The code is inefficient? Here comes the profiler! It allowed us to examine the time spent in each function, the number of times each function is called, and the relationships between function calls.</p>
 <p>While Python's built-in cProfile is a common choice, we opted for <a href="https://github.com/sumerc/yappi">Yappi</a> instead. Why? Because our service heavily relies on asynchronous code (coroutines), and <a href="https://github.com/sumerc/yappi/blob/master/doc/coroutine-profiling.md">Yappi handles them better than cProfile</a>. A rule of thumb: if you use AsyncIO, just use Yappi. We tried cProfile, and it didn't help us much in this case.</p>
-<h2>Setting up Yappi</h2>
+<h2 id="setting-up-yappi">Setting up Yappi</h2>
 <p>Integrating Yappi into our FastAPI application was straightforward:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">contextlib</span>
 <span class="kn">import</span> <span class="nn">yappi</span>
@@ -109,7 +110,7 @@
 
 <p>With this setup, whenever the service stopped, Yappi would dump the profiling data, sorted by total time in descending order. We initially tried cumulative time but this resulted in a report of the top-level functions (like the endpoint handler), not the most inefficient ones.</p>
 <p>It is time to gather some evidence!</p>
-<h2>Profiling under Load</h2>
+<h2 id="profiling-under-load">Profiling under Load</h2>
 <p>We ran the same load test again, with Yappi enabled:</p>
 <div class="highlight"><pre><span></span><code>ab<span class="w"> </span>-l<span class="w"> </span>-c<span class="w"> </span><span class="m">75</span><span class="w"> </span>-n<span class="w"> </span><span class="m">200</span><span class="w"> </span>http://localhost:9000/
 </code></pre></div>
@@ -122,7 +123,7 @@
 </code></pre></div>
 
 <p>A significant amount of time was spent in <code>email/feedparser.py</code>! This was unexpected, as our service didn't directly use email parsing. Where does this call come from?</p>
-<h2>Visualising the Call Relationships</h2>
+<h2 id="visualising-the-call-relationships">Visualising the Call Relationships</h2>
 <p>To visualise the call relationships, we used <a href="https://github.com/jrfonseca/gprof2dot">gprof2dot</a> - a tool to convert the profiling output into a <a href="https://graphviz.org/docs/layouts/dot/">Graphviz <code>.dot</code> file</a>, which is a common file format for graph diagrams. We then used <a href="https://graphviz.org/docs/attr-types/xdot/">xdot</a> to view the diagram. There's also an option to use dot directly to convert the file to <code>png</code>. More specifically:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Convert the profiling output to a .dot file</span>
 gprof2dot<span class="w"> </span>-f<span class="w"> </span>pstats<span class="w"> </span>profile.stats<span class="w"> </span>&gt;<span class="w"> </span>profile.dot
@@ -136,7 +137,7 @@ xdot<span class="w"> </span>profile.dot
 <p><img alt="Annotated dot representation of the profiling output. The red area is feedparser.py. The blue area is opentelemetry-instrumentation-openai" src="/images/blog/dot_representation_of_performance_investigation_profile.avif"></p>
 <p><em>Note: I wish I could have dropped an xdot-like interactive experience here, but that's hard to do, so you've got a manually annotated image instead. You can enlarge it; it's high-res.</em></p>
 <p>The <code>feedparser.py</code> functions are annotated in red. Almost all of the calls to it are coming from a single source, annotated in blue. This is the <a href="https://pypi.org/project/opentelemetry-instrumentation-openai/">opentelemetry-instrumentation-openai</a> library 😱</p>
-<h2>The Culprit: OpenTelemetry OpenAI Instrumentation</h2>
+<h2 id="the-culprit-opentelemetry-openai-instrumentation">The Culprit: OpenTelemetry OpenAI Instrumentation</h2>
 <p>The OpenTelemetry OpenAI instrumentation helps us understand our calls to OpenAI. While convenient, it appeared to be a major performance bottleneck. But before we pronounce the defendant guilty, one last test.</p>
 <p>We removed the opentelemetry-instrumentation-openai library and reran the load test. Here are the results before and after the change:</p>
 <table>
@@ -162,12 +163,12 @@ xdot<span class="w"> </span>profile.dot
 </table>
 <p>That's more than double the throughput with less than half the response time!</p>
 <p>At this point, we removed the instrumentation library. But let's not finish our story on a negative note. Back to the <code>.dot</code> file!</p>
-<h1>The Fix</h1>
+<h1 id="the-fix">The Fix</h1>
 <p>The <code>.dot</code> call graph suggested that <a href="https://importlib-metadata.readthedocs.io/en/latest/api.html#importlib_metadata.version"><code>importlib_meta.version</code></a> might be the bottleneck. This function takes a distribution (something you might install with pip) and returns the version currently installed. It was called 8604 times, and it is responsible for the calls to <code>feedparser.py</code>, which accounts for almost 84% of the total execution time of the service. Checking the opentelemetry-instrumentation-openai source, I found <a href="https://github.com/traceloop/openllmetry/blob/3539e34026a06d4cccdc1b73fd26d3f6b97fee02/packages/opentelemetry-instrumentation-openai/opentelemetry/instrumentation/openai/utils.py#L14">two</a> <a href="https://github.com/traceloop/openllmetry/blob/3539e34026a06d4cccdc1b73fd26d3f6b97fee02/packages/opentelemetry-instrumentation-openai/opentelemetry/instrumentation/openai/shared/__init__.py#L238">calls</a> to this function. I was very happy to find that this is the bottleneck as, although computationally intensive, it is: (a) completely deterministic, and (b) called only with 2 literal values: <code>version("openai")</code> and <code>version("pydantic")</code>. <a href="https://github.com/traceloop/openllmetry/pull/2577">Moving these to happen at import time was a simple fix</a>.</p>
 <p>At the time of writing, the maintainers of the library have not yet merged the PR. We are waiting for that and will then add the instrumentation library back to our service.</p>
-<h1>Sharing the Findings</h1>
+<h1 id="sharing-the-findings">Sharing the Findings</h1>
 <p>I've documented this entire investigation in <a href="https://github.com/Nagasaki45/OTEL-OpenAI-performance-investigation">this GitHub repository</a>, including the code, instructions for reproducing the issue, and the profiling results. I've also raised an issue on the <a href="https://github.com/traceloop/openllmetry/issues/2547">OpenTelemetry instrumentation library's repository</a> to inform the maintainers of the performance problem and <a href="https://github.com/traceloop/openllmetry/pull/2577">submitted a PR with a fix</a>.</p>
-<h1>Lessons Learned</h1>
+<h1 id="lessons-learned">Lessons Learned</h1>
 <p>This investigation taught us valuable lessons about debugging performance issues:</p>
 <ul>
 <li><strong>Load testing is crucial</strong>. We regularly load test our staging environment, which is configured very similarly to our production environment. When we notice issues, we usually manage to replicate them quite easily in local development. In this case, the minimal reproducible repo (from which all of the examples in this post are drawn) was enough to reproduce the problem, find the culprit, and come up with a fix.</li>
@@ -226,5 +227,6 @@ xdot<span class="w"> </span>profile.dot
             </div>
         </div>
     </div>
-</footer>    </body>
+</footer>        <script src="/theme/js/header-links.js"></script>
+    </body>
 </html>
