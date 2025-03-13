@@ -47,21 +47,41 @@
 </div>
 
 <style>
-    .close-container {
+body {
+    --pagefind-ui-background: #fff0;
+    --pagefind-ui-border: #d73e00;
+    --pagefind-ui-border-width: 3px;
+    --pagefind-ui-border-radius: 0px;
+    --pagefind-ui-image-border-radius: 0px;
+    --pagefind-ui-font: "Montserrat", sans-serif
+}
+
+.close-container {
     display: flex;
     justify-content: flex-end;
     margin: 1em 0;
 }
 
-    #search {
-        margin: 2em 0;
-    }
+#search {
+    margin: 2em 0;
+}
+
+#search input {
+    border-width: 10px;
+}
 </style>
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" type="text/css">
 <script src="/pagefind/pagefind-ui.js"></script>
 <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({ element: "#search", showSubResults: true });
+        new PagefindUI(
+            {
+                element: "#search",
+                showSubResults: true,
+                autofocus: true,
+                pageSize: 20,
+            }
+        );
     });
 </script>
 <script src="/theme/js/header-links.js"></script>    </body>
