@@ -23,7 +23,7 @@ DEFAULT_LANG = 'en'
 
 
 def ARTICLE_ORDER_BY(article):
-    if article.category in ["Projects", "Hobbies"]:
+    if article.category in ["Projects"]:
         return float(article.order)
     return -article.date.timestamp()
 

@@ -3,9 +3,7 @@
 {% set page_title = category.name %}
 
 {% block page %}
-{% if category.name == "Hobbies" %}
-{% include "partials/hobbies.html" %}
-{% elif category.name == "Projects" %}
+{% if category.name == "Projects" %}
 {% include "partials/portfolio.html" %}
 {% else %}
 {% include "partials/generic_category.html" %}
