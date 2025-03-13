@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Deployment tech for the hobbyist, again | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Deployment tech for the hobbyist, again</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Deployment tech for the hobbyist, again</h1>
     <time datetime="2023-12-15">
         Fri 15 December 2023
     </time>
-    <div class="content">
-        <p><strong>TL;DR:</strong> Try <a class="reference external" href="https://dokku.com/">Dokku</a> if you want to run multiple toy web apps on a single server and keep the cost at minimum.</p>
+        <div class="content">
+            <p><strong>TL;DR:</strong> Try <a class="reference external" href="https://dokku.com/">Dokku</a> if you want to run multiple toy web apps on a single server and keep the cost at minimum.</p>
 <img alt="Dokku logo with name" src="/images/blog/dokku-logo-with-name.webp" style="width: 100%;" />
 <p>Let's talk, yet again, about deploying toy web apps.
 I wrote about this topic many moons ago (see docker-compose in production <a class="reference external" href="/blog/docker-compose-in-production">part 1</a> and <a class="reference external" href="/blog/docker-compose-in-production-part-2">part 2</a>), but things have changed and it's time for an update.</p>
@@ -149,7 +155,8 @@ So overall it seems that the transition succeeded.</p>
 </div>
 </div>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -197,6 +204,5 @@ So overall it seems that the transition succeeded.</p>
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="My Jupyter (tmpnb) server and Thebe | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">My Jupyter (tmpnb) server and Thebe</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">My Jupyter (tmpnb) server and Thebe</h1>
     <time datetime="2015-08-04">
         Tue 04 August 2015
     </time>
-    <div class="content">
-        <p><strong>Notice: code execution in the browser is currently broken</strong></p>
+        <div class="content">
+            <p><strong>Notice: code execution in the browser is currently broken</strong></p>
 <div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -115,7 +121,8 @@ namely <a class="reference external" href="https://oreillyorchard.com:8000/">htt
 there are no kernal failures when running the examples.</p>
 </div>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -163,6 +170,5 @@ there are no kernal failures when running the examples.</p>
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

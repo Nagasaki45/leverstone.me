@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Poor man's trick to add and remove conda from $PATH | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Poor man's trick to add and remove conda from $PATH</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Poor man's trick to add and remove conda from $PATH</h1>
     <time datetime="2015-10-24">
         Sat 24 October 2015
     </time>
-    <div class="content">
-        <p><a class="reference external" href="http://conda.pydata.org/docs/">Conda</a> is great for managing
+        <div class="content">
+            <p><a class="reference external" href="http://conda.pydata.org/docs/">Conda</a> is great for managing
 dependencies as matplotlib and scipy: try to install these with pip, in
 a virtualenv, and you will be convinced that conda is better in that
 regard.
@@ -85,7 +91,8 @@ are ready to go.
 Don't forget to remove the line in your <tt class="docutils literal">.bashrc</tt> that add miniconda to
 the path in the first place.</p>
 <div class="youtube youtube-16x9"><iframe src="https://www.youtube.com/embed/UdQgJdnrEDw" allowfullscreen seamless frameBorder="0"></iframe></div>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -133,6 +140,5 @@ the path in the first place.</p>
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

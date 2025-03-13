@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Custom shell aliases per project | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Custom shell aliases per project</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Custom shell aliases per project</h1>
     <time datetime="2025-02-28">
         Fri 28 February 2025
     </time>
-    <div class="content">
-        <p>I've been playing with <a href="https://aider.chat/">aider</a> recently. I's an "AI pair programming in your terminal". Think GitHub Copilot, Cursor, etc. but for the command line. This blog post is not about that. It's about making it easier to run aider in my projects.</p>
+        <div class="content">
+            <p>I've been playing with <a href="https://aider.chat/">aider</a> recently. I's an "AI pair programming in your terminal". Think GitHub Copilot, Cursor, etc. but for the command line. This blog post is not about that. It's about making it easier to run aider in my projects.</p>
 <p>Confused? Let's see...</p>
 <p>In one of my projects I run aider like this</p>
 <div class="highlight"><pre><span></span><code>aider<span class="w"> </span>--architect<span class="w"> </span>--test-cmd<span class="w"> </span><span class="s1">&#39;uv run python -m pytest&#39;</span><span class="w"> </span>--lint-cmd<span class="w"> </span><span class="s1">&#39;make format&#39;</span>
@@ -119,7 +125,8 @@ load_trusted_source
 <p>and to run aider I can just run <code>aider</code> 🙌</p>
 <p>This is just one use case of course. I can use this for env vars (replacing <a href="https://github.com/direnv/direnv">direnv</a>), source my Python virtual environment (something I rarely do now that I mostly use uv / poetry), etc. This plugin is for zsh and oh-my-zsh, but the idea should be very much transferable to other shells. I'm documenting it here for my future self, but maybe someone will also find it interesting.</p>
 <p>And what about aider, you ask? I'm still struggling with all of this AI for writing code idea. For writing prose? Definitely! For exploring technical ideas? Of course! For translating what's in my head to an easy to read and maintainable python code? I'm not yet there, but I'm trying. We will see how it goes...</p>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -167,6 +174,5 @@ load_trusted_source
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

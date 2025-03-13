@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="docker-compose in production | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">docker-compose in production</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">docker-compose in production</h1>
     <time datetime="2016-02-29">
         Mon 29 February 2016
     </time>
-    <div class="content">
-        <p>Deployment sucks! I'm not a dev ops / sys admin type of person, and
+        <div class="content">
+            <p>Deployment sucks! I'm not a dev ops / sys admin type of person, and
 every time I'm into deploying a web project I start to rethink the whole
 process and get confused. Recently, I decided to restart the work on one
 of my older django projects,
@@ -212,7 +218,8 @@ Therefor, feel free to criticize and share your experience about the
 subject!</p>
 </div>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -260,6 +267,5 @@ subject!</p>
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

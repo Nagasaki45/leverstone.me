@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Migrating to python3 | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Migrating to python3</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Migrating to python3</h1>
     <time datetime="2016-06-25">
         Sat 25 June 2016
     </time>
-    <div class="content">
-        <p>I was recently asked, by my boss, about the possible benefits of migrating our
+        <div class="content">
+            <p>I was recently asked, by my boss, about the possible benefits of migrating our
 code base at work from python 2.6 to python 3. Instead of sending an email back
 to my boss with my answer, I decided that it worth a blog post. Why? because the
 internet is full with comparisons between python 2 and python 3, but it is hard
@@ -146,7 +152,8 @@ standard library continuously improves with new and shiny tools, such as
 <tt class="docutils literal">concurrent.futures</tt> and <tt class="docutils literal">asyncio</tt>.</p>
 </div>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -194,6 +201,5 @@ standard library continuously improves with new and shiny tools, such as
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

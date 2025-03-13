@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit</h1>
     <time datetime="2025-01-31">
         Fri 31 January 2025
     </time>
-    <div class="content">
-        <p>Recently, my team encountered a performance issue with our Python service that uses FastAPI, gunicorn, uvicorn, and the OpenAI API. The service works fine in development, but when we load-tested it in our staging environment, the response time skyrocketed, and the throughput became embarrassingly low. Luckily, it was us stressing the service.</p>
+        <div class="content">
+            <p>Recently, my team encountered a performance issue with our Python service that uses FastAPI, gunicorn, uvicorn, and the OpenAI API. The service works fine in development, but when we load-tested it in our staging environment, the response time skyrocketed, and the throughput became embarrassingly low. Luckily, it was us stressing the service.</p>
 <p>In this post, I'll walk through how we diagnosed and fixed this performance bottleneck. While the specific issue we found might not match your next performance problem, the debugging process and tools we used should be helpful for any Python developer dealing with similar challenges.</p>
 <p>I've created a <a href="https://github.com/Nagasaki45/OTEL-OpenAI-performance-investigation">minimal reproducible example</a> that demonstrates the exact same issue we encountered. Let's dive in.</p>
 <h1 id="recognizing-the-symptoms">Recognizing the Symptoms</h1>
@@ -179,7 +185,8 @@ xdot<span class="w"> </span>profile.dot
 </ul>
 <hr>
 <p>This blog post was made with the help of Gemini Experimental 1206 and Claude 3.5 Sonnet.</p>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -227,6 +234,5 @@ xdot<span class="w"> </span>profile.dot
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

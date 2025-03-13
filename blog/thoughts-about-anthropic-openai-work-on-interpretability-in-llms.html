@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Thoughts about Anthropic / OpenAI work on interpretability in LLMs | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Thoughts about Anthropic / OpenAI work on interpretability in LLMs</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Thoughts about Anthropic / OpenAI work on interpretability in LLMs</h1>
     <time datetime="2024-06-07">
         Fri 07 June 2024
     </time>
-    <div class="content">
-        <p>A few weeks ago, Anthropic came out with <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">this paper</a>, showing how they found interpretable features in one of their models. This means that they could see which features activate when the LLM generates, and the feature could be scaled up and down to make the generation more or less focused on that feature. For example, their "Golden Gate Claude" model, with the Golden Gate feature boosted to the max, kept steering the conversation to talk about the Golden Gate.</p>
+        <div class="content">
+            <p>A few weeks ago, Anthropic came out with <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">this paper</a>, showing how they found interpretable features in one of their models. This means that they could see which features activate when the LLM generates, and the feature could be scaled up and down to make the generation more or less focused on that feature. For example, their "Golden Gate Claude" model, with the Golden Gate feature boosted to the max, kept steering the conversation to talk about the Golden Gate.</p>
 <p>Yesterday, OpenAI published <a href="https://openai.com/index/extracting-concepts-from-gpt-4/">a similar paper</a>. Maybe it's just me, or the high pace of news in AI is enough to make groundbreaking research seem underwhelming, but this new paper seems lacking in comparison. Note that my understanding of the internal workings of these models, and the two studies above, are very limited, so take this with a grain of salt. Having said that, here are some thought for why the OpenAI paper is underwhelming.</p>
 <p>They extracted 16 million features from their GPT-4 model. Who needs 16 million features?!? We are trying to understand, in human terms, how these things work. For that we need to find ways to get them down to human understandable scales. How many characteristics can you find in a person? For example, someone might be a great leader, very inspiring, but also a bit rush, and cannot stop fidgeting their legs. Can you think about 100 basic characteristics for people? Yeah, potentially. Obviously these are going to be a reduction of who this person really is, but so do the 16 million features in OpenAI's research. If the goal is interpretability, then extracting that many features "that we hope are human interpretable" doesn't seem like the best approach.</p>
 <p>To be fair here, Anthropic encoded 1 million, 4 million, and 34 million features, so they didn't reduce the problem to a more human-understandable scale either, but the focus of their research is not the number of features, and how well they cover the model capabilities, and more about extracting meaning from the model.</p>
@@ -72,7 +78,8 @@
 <p><img alt="A snippet of text with the phrases 'but we' and 'you that you're' highlighted." src="/images/blog/openai_human_imperfection_feature_extraction_example.webp"></p>
 <p>This is not an isolated critique. It is the first example provided in their blog post.</p>
 <p>Having said all of that, I would love to see more work on interpretability of these models, both from OpenAI and Anthropic.</p>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -120,6 +127,5 @@
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

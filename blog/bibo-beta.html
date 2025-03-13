@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="bibo, the command line reference manager, is in beta now! | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">bibo, the command line reference manager, is in beta now!</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">bibo, the command line reference manager, is in beta now!</h1>
     <time datetime="2020-05-28">
         Thu 28 May 2020
     </time>
-    <div class="content">
-        <object data="/images/blog/bibo_beta_release_banner.svg" style="width: 100%;" type="image/svg+xml">bibo beta release banner</object>
+        <div class="content">
+            <object data="/images/blog/bibo_beta_release_banner.svg" style="width: 100%;" type="image/svg+xml">bibo beta release banner</object>
 <p>bibo is a command line reference manager with a single source of truth: the <tt class="docutils literal">.bib</tt> file. It is inspired by <a class="reference external" href="https://github.com/beetbox/beets">beets</a>. After 3 years in the making I believe it's ready for other people to use.</p>
 <p>What are the advantages over mendeley / zotero / etc. you ask?</p>
 <ul class="simple">
@@ -72,7 +78,8 @@
 <p>This beta release (0.1.0) marks the first release that is fully functional, was tested extensively, and should work for most people. It's not a production ready software yet, so make sure you backup your bibliography (and PDFs) before using it! It is, however, used already by a few people, so give it a spin if you like the idea.</p>
 <p>If anything is broken, please reach out! I will be happy to read about <a class="reference external" href="https://github.com/Nagasaki45/bibo/issues">issues on github</a>. Contributions are also super welcome. More about this in the docs.</p>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -120,6 +127,5 @@
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Remote TidalCycles jamming setup | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Remote TidalCycles jamming setup</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Remote TidalCycles jamming setup</h1>
     <time datetime="2020-09-18">
         Fri 18 September 2020
     </time>
-    <div class="content">
-        <object data="https://upload.wikimedia.org/wikipedia/commons/8/80/TidalCycles_identity.svg" style="width: 100%;" type="image/svg+xml">TidalCycles logo</object>
+        <div class="content">
+            <object data="https://upload.wikimedia.org/wikipedia/commons/8/80/TidalCycles_identity.svg" style="width: 100%;" type="image/svg+xml">TidalCycles logo</object>
 <p><a class="reference external" href="https://tidalcycles.org/i">TidalCycles</a> (tidal in short) is a live coding language for music performance / composition.
 I don't use it myself but been playing with a live coder, Lizzie, AKA <a class="reference external" href="https://lwlsn.github.io/digitalselves-web/">digital selves</a>, for the last year and a half.
 Check her out!
@@ -182,7 +188,8 @@ socat TCP-LISTEN:12345,fork UDP4:localhost:57121
 </table>
 </div>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -230,6 +237,5 @@ socat TCP-LISTEN:12345,fork UDP4:localhost:57121
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

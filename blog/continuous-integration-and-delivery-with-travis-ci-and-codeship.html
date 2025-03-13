@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Continuous integration and delivery with travis-ci and codeship | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Continuous integration and delivery with travis-ci and codeship</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Continuous integration and delivery with travis-ci and codeship</h1>
     <time datetime="2016-05-30">
         Mon 30 May 2016
     </time>
-    <div class="content">
-        <img alt="Travis vs. Codeship" src="/images/blog/travis_codeship.webp" style="width: 100%;" />
+        <div class="content">
+            <img alt="Travis vs. Codeship" src="/images/blog/travis_codeship.webp" style="width: 100%;" />
 <p>Generally speaking, continuous integration (CI) is the process of
 running your test suite automatically when you push code to your repo.
 Continuous delivery / deployment (CD) is the process of deploying the
@@ -136,7 +142,8 @@ applications.</li>
 </ul>
 </div>
 
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -184,6 +191,5 @@ applications.</li>
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

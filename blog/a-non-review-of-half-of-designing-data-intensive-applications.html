@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="A non-review of half of Designing Data-Intensive Applications | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">A non-review of half of Designing Data-Intensive Applications</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">A non-review of half of Designing Data-Intensive Applications</h1>
     <time datetime="2024-08-02">
         Fri 02 August 2024
     </time>
-    <div class="content">
-        <p>I read the first seven chapters of "Designing Data-Intensive Applications" before deciding to stop. It's about half of this hefty book. In the spirit of learning in public through this blog, I'll reflect on what I learned from this experience before putting the book aside.</p>
+        <div class="content">
+            <p>I read the first seven chapters of "Designing Data-Intensive Applications" before deciding to stop. It's about half of this hefty book. In the spirit of learning in public through this blog, I'll reflect on what I learned from this experience before putting the book aside.</p>
 <p><img alt="Book cover" src="/images/blog/designing_data_intensive_applications_cover.avif"></p>
 <p>The book delves deep into the internals of databases and distributed systems. By dive deep I mean, really deep! It starts slowly with the first chapter covering reliability, scalability, and maintainability - the main concerns in these sorts of applications. From there it goes into covering types of databases (SQL, NoSQL, graph) and query languages, the techniques databases use to store data on disk, data serialization formats, replication, partitioning, and transactions. The list goes on, but I will stop here, because that's what I read.</p>
 <h1 id="the-review-part">The review part</h1>
@@ -87,7 +93,8 @@ There's just so much to learn and so little time. I can't justify spending time 
 <p>To sum up, this is a great book, but it's not the right time for me to read it. I'll focus on resources that are more directly useful for my current work and immediate career goals. And when the time is right, I'll definitely pick this book up again.</p>
 <hr>
 <p>This blog post was made with the help of Claude 3.5 Sonnet and GitHub Copilot.</p>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -135,6 +142,5 @@ There's just so much to learn and so little time. I can't justify spending time 
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

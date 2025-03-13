@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Script for Checking TLS Certificate Expiry Dates | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Script for Checking TLS Certificate Expiry Dates</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Script for Checking TLS Certificate Expiry Dates</h1>
     <time datetime="2025-03-10">
         Mon 10 March 2025
     </time>
-    <div class="content">
-        <p>I have multiple projects on subdomains of leverstone.me. What's the expiration date of the TLS certificates on these subdomains? I have no idea 🤷</p>
+        <div class="content">
+            <p>I have multiple projects on subdomains of leverstone.me. What's the expiration date of the TLS certificates on these subdomains? I have no idea 🤷</p>
 <p>Wouldn't it be nice if there was a CLI tool that, given a domain, lists the expiry dates of its subdomains? I couldn't find one so asked perplexity and Claude 3.7 Sonnet to help me write it.</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
@@ -108,7 +114,8 @@ miniflux.leverstone.me: 2025-05-22T00:02:03Z
 <li><a href="https://github.com/openssl/openssl">OpenSSL</a> is used to fetch the certificate and extract the expiry time. The command <code>echo | openssl s_client -servername "$subdomain" -connect "$subdomain":443 2&gt;/dev/null | openssl x509 -enddate -noout</code> was suggested by Claude 3.7 Sonnet when asked for ways to get the expiry time of a certificate of a domain.</li>
 <li>The rest of the script was created by iterating on some basic prompts with Claude.</li>
 </ul>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -156,6 +163,5 @@ miniflux.leverstone.me: 2025-05-22T00:02:03Z
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

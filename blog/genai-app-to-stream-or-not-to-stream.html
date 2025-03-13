@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="GenAI App: To Stream or Not to Stream? | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">GenAI App: To Stream or Not to Stream?</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">GenAI App: To Stream or Not to Stream?</h1>
     <time datetime="2025-01-03">
         Fri 03 January 2025
     </time>
-    <div class="content">
-        <p>Generative AI applications, particularly those with LLM-powered chat interfaces like ChatGPT, stream responses. We type our query, and the answer gradually generates, word by word. This streaming approach has become so commonplace that it's almost expected. But is it always the best approach?</p>
+        <div class="content">
+            <p>Generative AI applications, particularly those with LLM-powered chat interfaces like ChatGPT, stream responses. We type our query, and the answer gradually generates, word by word. This streaming approach has become so commonplace that it's almost expected. But is it always the best approach?</p>
 <h1 id="the-cost-of-streaming">The cost of streaming</h1>
 <p>As you might know, I work on a Retrieval-Augmented Generation (RAG) application. This application currently streams responses, providing a familiar user interface. This comes at a cost. In my experience it's much harder to develop a streaming application, here's why.</p>
 <ul>
@@ -86,7 +92,8 @@
 <p>These days, streaming is undoubtedly the de-facto standard for GenAI applications, particularly in chat interfaces. The influence of leading products has firmly established this pattern in users' minds. Personally, I believe that with the ongoing acceleration of LLM generation speeds, we will see a gradual decline in the prevalence of streaming. The benefits of instantaneous, full responses will start to outweigh the perceived advantages of a token-by-token reveal. However, as a developer working on a GenAI application, it's a challenge to even consider moving away from streaming, especially when your application already streams responses. The established user expectation is a powerful force. Yet, the efficiency gains that could be realized by making the change are worth thinking about. We could streamline development, simplify our architecture, and potentially deliver a more robust and feature-rich experience in the long run.</p>
 <hr>
 <p>This blog post was made with the help of Gemini Experimental 1206.</p>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -134,6 +141,5 @@
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>

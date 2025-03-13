@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-GB">
     <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
 <!-- Custom CSS -->
 <link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
 <meta property="og:title" content="Automating Groundedness Evaluation in RAG Applications | Tom Leverstone" />
@@ -29,8 +30,7 @@
 
 <!-- Twitter cards -->
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:image" content="/images/me.jpg" />        <link rel="stylesheet" href="/theme/css/header-links.css">
-    </head>
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
     <body>
 <div class="container article-container">
 <nav>
@@ -38,6 +38,11 @@
     <span class="fas fa-home"></span>
   </a>
   <ul class="float">
+    <li>
+      <a class="btn" href="/search/">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
     <li>
       <a class="btn " href="/blog/">
         Blog
@@ -54,12 +59,13 @@
       </a>
     </li>
   </ul>
-</nav>    <h1 class="title">Automating Groundedness Evaluation in RAG Applications</h1>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Automating Groundedness Evaluation in RAG Applications</h1>
     <time datetime="2025-01-21">
         Tue 21 January 2025
     </time>
-    <div class="content">
-        <p>As a software engineer working on a Retrieval-Augmented Generation (RAG) application, one of my primary concerns is the accuracy and reliability of the answers it provides. A RAG application works by first searching for content that matches a user's query and then passing the results and the query to a Large Language Model (LLM) to generate an answer. While this approach leverages the strengths of both search and generative AI, it is not immune to issues like hallucinations, misinterpretation of sources, and failure to properly cite them. These issues can be grouped under the umbrella term "groundedness." While groundedness is not the only quality of a RAG application response (other important qualities include relevance and style), it is a key metric for evaluating its reliability.</p>
+        <div class="content">
+            <p>As a software engineer working on a Retrieval-Augmented Generation (RAG) application, one of my primary concerns is the accuracy and reliability of the answers it provides. A RAG application works by first searching for content that matches a user's query and then passing the results and the query to a Large Language Model (LLM) to generate an answer. While this approach leverages the strengths of both search and generative AI, it is not immune to issues like hallucinations, misinterpretation of sources, and failure to properly cite them. These issues can be grouped under the umbrella term "groundedness." While groundedness is not the only quality of a RAG application response (other important qualities include relevance and style), it is a key metric for evaluating its reliability.</p>
 <h1 id="the-challenge">The Challenge</h1>
 <p>Initially, my team evaluated the groundedness of our RAG application's answers manually. This involved running a set of test queries through the system, examining the answers and the sources, and determining if the answers were well-supported by the sources. We would run each query multiple times because LLM outputs are not deterministic and can vary slightly between runs. This manual process was time-consuming, taking approximately one developer-day to evaluate just one question.</p>
 <h1 id="example">Example</h1>
@@ -148,7 +154,8 @@
 <p>We have developed a robust and efficient way to measure the groundedness of answers from our RAG application. This automated solution produces results comparable in quality to manual evaluation but in a fraction of the time. This tool allows us to confidently investigate new models, prompt changes, and other techniques for improving the groundedness of answers in our RAG application. While there's always room for improvement, this system represents a significant step forward in our ability to evaluate and enhance the reliability of our application.</p>
 <hr>
 <p>This blog post was made with the help of Gemini Experimental 1206.</p>
-    </div>
+        </div>
+    </article>
 </div>
 <footer>
     <div class="container article-container">
@@ -196,6 +203,5 @@
             </div>
         </div>
     </div>
-</footer>        <script src="/theme/js/header-links.js"></script>
-    </body>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
 </html>
