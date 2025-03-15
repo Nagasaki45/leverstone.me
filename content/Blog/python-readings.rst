@@ -158,8 +158,8 @@ Summary: Pandas is a great tool, use it! But I don't think that this
 book is a good your way to learn data analysis with python, whether you
 are a beginner or not.
 
-`Python Scientific Lecture Notes <https://scipy-lectures.github.io/>`__
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`Python Scientific Lecture Notes <https://lectures.scientific-python.org/>`__
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 I have to admit, I've read only the first section of the "lecture
 notes", but if you are looking for an introduction to scientific
 computing with python this "book" is definitely worth reading. It covers
@@ -234,13 +234,13 @@ other python resources and I will do my best to answer.
 
 .. |image0| image:: http://ecx.images-amazon.com/images/I/51afqHmFrML._SX258_BO1,204,203,200_.jpg
    :width: 180px
-.. |image1| image:: http://www.qtrac.eu/pipbookm.png
+.. |image1| image:: https://mark-summerfield.github.io/images/pipbookm.png
    :width: 180px
 .. |image2| image:: http://ecx.images-amazon.com/images/I/51zDEWm5kcL._SX258_BO1,204,203,200_.jpg
    :width: 180px
 .. |image3| image:: https://d.gr-assets.com/books/1356132971l/14744694.jpg
    :width: 180px
-.. |image4| image:: http://www.arruda.blog.br/wp-content/uploads/2014/03/IMG_1894.jpg
+.. |image4| image:: https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1391889816i/20754237.jpg
    :width: 180px
 .. |image5| image:: http://orm-other.s3.amazonaws.com/tddwithpython/final_cover.jpg
    :width: 180px

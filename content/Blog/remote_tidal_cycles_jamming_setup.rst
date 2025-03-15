@@ -10,7 +10,7 @@ Remote TidalCycles jamming setup
   :alt: TidalCycles logo
   :width: 100%
 
-`TidalCycles <https://tidalcycles.org/i>`_ (tidal in short) is a live coding language for music performance / composition.
+`TidalCycles <https://tidalcycles.org>`_ (tidal in short) is a live coding language for music performance / composition.
 I don't use it myself but been playing with a live coder, Lizzie, AKA `digital selves <https://lwlsn.github.io/digitalselves-web/>`_, for the last year and a half.
 Check her out!
 With a COVID 2nd wave around the corner we decided to search for a solution for remote jamming together.

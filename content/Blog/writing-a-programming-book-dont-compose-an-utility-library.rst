@@ -71,7 +71,7 @@ tutorial for beginners. I really don't want to look for the book when
 I'm interesting in put in use some less obvious function from an utility
 library.
 
-.. image:: https://sites.google.com/site/doingbayesiandataanalysis/_/rsrc/1403617861639/config/customLogo.gif?revision=5
+.. image:: https://lh6.googleusercontent.com/R563ddoYp_JArt338PZqp_qqISnv0k4kTGKtp8rrls6K-K8h3maMRccSFgaMOFkMft59Lhu3SzFq_1M64agOFQozaL7eQQTLnvgR6p7Uiy2M0oLW=w1280
   :alt: Doing Bayesian Data Analysis, Second Edition, by John Kruschke
   :width: 100%
 

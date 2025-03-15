@@ -32,7 +32,7 @@ deployment requirements:
 #. Keep deployment scripts to the bare minimum.
 #. Not over-engineer the issue.
 
-`Dokku <http://dokku.viewdocs.io/dokku/>`__
+`Dokku <https://dokku.com/>`__
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 I liked heroku. Deploying is really easy, and if I can accomplish a
