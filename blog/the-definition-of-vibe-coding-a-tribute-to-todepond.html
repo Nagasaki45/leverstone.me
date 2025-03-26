@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Tom Leverstone">
 <meta name="description" content="A father, software engineer, and hobbies collector.">
-<title>The definition of live coding - A tribute to Todepond | Tom Leverstone</title>
+<title>The definition of vibe coding - A tribute to Todepond | Tom Leverstone</title>
 <!-- Favicon -->
 <link rel="shortcut icon" href="/favicon.ico">
 <!-- Bootstrap Core CSS -->
@@ -22,9 +22,9 @@
 <link rel="stylesheet" href="/theme/css/header-links.css">
 
 <!-- Open graph protocol -->
-<meta property="og:title" content="The definition of live coding - A tribute to Todepond | Tom Leverstone" />
+<meta property="og:title" content="The definition of vibe coding - A tribute to Todepond | Tom Leverstone" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/blog/the-definition-of-live-coding-a-tribute-to-todepond.html" />
+<meta property="og:url" content="/blog/the-definition-of-vibe-coding-a-tribute-to-todepond.html" />
 <meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
 <meta property="og:description" content="A father, software engineer, and hobbies collector." />
 
@@ -60,12 +60,12 @@
     </li>
   </ul>
 </nav>    <article data-pagefind-body>
-        <h1 class="title">The definition of live coding - A tribute to Todepond</h1>
+        <h1 class="title">The definition of vibe coding - A tribute to Todepond</h1>
     <time datetime="2025-03-26">
         Wed 26 March 2025
     </time>
         <div class="content">
-            <p>If you're not following Lu Wilson, a.k.a Todepond, <strong>you really should!</strong></p>
+            <p>If you're not following <a href="https://www.todepond.com/">Lu Wilson, a.k.a Todepond</a>, <strong>you really should!</strong></p>
 <p>They published a blog post titled <a href="https://www.todepond.com/sky/definition-of-live-coding/">Definition of "live coding"</a> about a week ago. My initial reaction:</p>
 <p><img alt="Chart of the quality of the definition of live coding over the past 10 years" src="/images/blog/the-definition-of-live-coding-from-iclc.webp"></p>
 <p>Many things went wrong during COVID. Apparently, the definition of live coding is one of them. I wanted to plot this 👆 and share somewhere, but what's the point? It's probably a waste of time. I moved on.</p>
@@ -79,7 +79,7 @@
 <p>Did you see how fast it was?!? And the legend? 😵 Perfect!</p>
 <h1 id="a-note-about-api-keys">A note about API keys</h1>
 <p>When you click the button to convert the sketch to an XKCD chart you'll be asked for a Gemini API key. It will be stored in local storage from now on. You can trust me that this is not leaked anywhere <strong>but you probably shouldn't!</strong> You can read the source to make sure I'm not doing anything nasty with the key. Or at least make sure you don't use a key that is attached to a payment method.</p>
-<h1 id="the-details">The details</h1>
+<h1 id="vibe-coding">Vibe coding</h1>
 <p>This was an exercise in <a href="https://x.com/karpathy/status/1886192184808149383">vibe coding</a> - asking LLMs to write code and accepting their suggestions without reviewing. Don't do it in your production code kids! Anyway, it went surprisingly smooth. I used a mix of <code>gemini-2.5-pro-exp-03-25</code> and <code>claude-3.7-sonnet</code>. Why? I'm not sure. I really like Gemini for writing and I initially thought I will ask for a plan, and then drop to Sonnet for the implementation. I ended up one-shotting the implementation and then iterating on it.</p>
 <p>I'm not using any code writing AI tool here, just the trustworthy <a href="https://llm.datasette.io/en/stable/"><code>llm</code> command line tool from Simon Willison</a>. The entire thing is one file, so I'm just feeding the file to a model, copy-pasting any errors I see in the web console. Dealing with other requests (e.g. layout changes) is similar. For every new topic (e.g. fixing a bug, changing the layout) I started a new conversation.</p>
 <p>I tried to guide the LLM with clear instructions:</p>
