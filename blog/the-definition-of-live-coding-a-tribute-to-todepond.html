@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>The definition of live coding - A tribute to Todepond | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="The definition of live coding - A tribute to Todepond | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/the-definition-of-live-coding-a-tribute-to-todepond.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">The definition of live coding - A tribute to Todepond</h1>
+    <time datetime="2025-03-26">
+        Wed 26 March 2025
+    </time>
+        <div class="content">
+            <p>If you're not following Lu Wilson, a.k.a Todepond, <strong>you really should!</strong></p>
+<p>They published a blog post titled <a href="https://www.todepond.com/sky/definition-of-live-coding/">Definition of "live coding"</a> about a week ago. My initial reaction:</p>
+<p><img alt="Chart of the quality of the definition of live coding over the past 10 years" src="/images/blog/the-definition-of-live-coding-from-iclc.webp"></p>
+<p>Many things went wrong during COVID. Apparently, the definition of live coding is one of them. I wanted to plot this 👆 and share somewhere, but what's the point? It's probably a waste of time. I moved on.</p>
+<p>Then, this appeared on my RSS feed: <a href="https://www.todepond.com/sky/okay-fine-ill-define-live-coding/">Okay fine I’ll define live coding</a>. What a beautifully written thought provoking piece! Seriously.</p>
+<p>So the plot has to be updated. Should I spend 5 minutes just doing the plot in any existing tool? Nahhhhh. Let's just <a href="https://www.youtube.com/watch?v=JjHD5f058qw">sketch-it-and-let-the-AI-figure-it-out</a>. Or, even better, create an interface to do just that, <a href="https://github.com/tldraw/draw-fast">draw-fast</a> style.</p>
+<p>Presenting to you 🥁... <a href="https://plot-fast.leverstone.me/"><strong>Plot Fast</strong></a></p>
+<video controls style="max-width: 100%;">
+  <source src="/images/blog/the-definition-of-live-coding-plot-fast.mp4" type="video/mp4">
+</video>
+
+<p>Did you see how fast it was?!? And the legend? 😵 Perfect!</p>
+<h1 id="a-note-about-api-keys">A note about API keys</h1>
+<p>When you click the button to convert the sketch to an XKCD chart you'll be asked for a Gemini API key. It will be stored in local storage from now on. You can trust me that this is not leaked anywhere <strong>but you probably shouldn't!</strong> You can read the source to make sure I'm not doing anything nasty with the key. Or at least make sure you don't use a key that is attached to a payment method.</p>
+<h1 id="the-details">The details</h1>
+<p>This was an exercise in <a href="https://x.com/karpathy/status/1886192184808149383">vibe coding</a> - asking LLMs to write code and accepting their suggestions without reviewing. Don't do it in your production code kids! Anyway, it went surprisingly smooth. I used a mix of <code>gemini-2.5-pro-exp-03-25</code> and <code>claude-3.7-sonnet</code>. Why? I'm not sure. I really like Gemini for writing and I initially thought I will ask for a plan, and then drop to Sonnet for the implementation. I ended up one-shotting the implementation and then iterating on it.</p>
+<p>I'm not using any code writing AI tool here, just the trustworthy <a href="https://llm.datasette.io/en/stable/"><code>llm</code> command line tool from Simon Willison</a>. The entire thing is one file, so I'm just feeding the file to a model, copy-pasting any errors I see in the web console. Dealing with other requests (e.g. layout changes) is similar. For every new topic (e.g. fixing a bug, changing the layout) I started a new conversation.</p>
+<p>I tried to guide the LLM with clear instructions:</p>
+<blockquote>
+<p>Project brief: A digital canvas to draw diagrams by hand - ms paint style. One button to convert the diagram to a nicely plotted one, potentially in XKCD or cartoonish style. Implementation details: use canvas, upon button press convert the canvas to an image and send it to an LLM (gemini-2.0-flash) to return a JSON for the chart spec. This is then loaded in chart.xkcd. It should all be done in a single HTML page. When the user clicks the button for the first time they are asked for an API key which is then stored in local memory.</p>
+</blockquote>
+<p>Generating the system prompt was interesting. I used <a href="https://shot-scraper.datasette.io/en/stable/index.html"><code>shot-scraper</code></a>, another tool from Simon Willison, to take a screenshot of <a href="https://timqian.com/chart.xkcd/">the chart.xkcd docs</a>, then fed it to the LLM with the following prompt:</p>
+<blockquote>
+<p>I want an LLM to take an image of a hand made chart in MS Paint and produce a JSON object that can be passed to chart.xkcd for rendering. Create a system prompt with documentation for how to use chart.xkcd. Include examples. Make sure that when the LLM receives an image it will output only a valid JSON containing the data to pass to chart.xkcd. At the top level of the JSON there should be two keys: chartType, and spec. The chart type is 'line', 'xy', 'bar', etc. The spec is the object to pass to the library.</p>
+</blockquote>
+<p>That's pretty much it! Thanks for reading. And thanks Lu again for the inspiration!</p>
+<p>Happy vibe-plotting 📈</p>
+        </div>
+    </article>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>    </body>
+</html>
