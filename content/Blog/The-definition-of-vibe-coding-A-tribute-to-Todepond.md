@@ -1,9 +1,9 @@
 ---
-title: The definition of live coding - A tribute to Todepond
+title: The definition of vibe coding - A tribute to Todepond
 date: 2025-03-26T01:00:00.000Z
 ---
 
-If you're not following Lu Wilson, a.k.a Todepond, **you really should!**
+If you're not following [Lu Wilson, a.k.a Todepond](https://www.todepond.com/), **you really should!**
 
 They published a blog post titled [Definition of "live coding"](https://www.todepond.com/sky/definition-of-live-coding/) about a week ago. My initial reaction:
 
@@ -27,7 +27,7 @@ Did you see how fast it was?!? And the legend? 😵 Perfect!
 
 When you click the button to convert the sketch to an XKCD chart you'll be asked for a Gemini API key. It will be stored in local storage from now on. You can trust me that this is not leaked anywhere **but you probably shouldn't!** You can read the source to make sure I'm not doing anything nasty with the key. Or at least make sure you don't use a key that is attached to a payment method.
 
-# The details
+# Vibe coding
 
 This was an exercise in [vibe coding](https://x.com/karpathy/status/1886192184808149383) - asking LLMs to write code and accepting their suggestions without reviewing. Don't do it in your production code kids! Anyway, it went surprisingly smooth. I used a mix of `gemini-2.5-pro-exp-03-25` and `claude-3.7-sonnet`. Why? I'm not sure. I really like Gemini for writing and I initially thought I will ask for a plan, and then drop to Sonnet for the implementation. I ended up one-shotting the implementation and then iterating on it.
 
