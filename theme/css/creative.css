@@ -119,6 +119,10 @@ section {
     text-decoration: underline;
 }
 
+.content a:visited {
+    color: #ad3100;
+}
+
 .title {
     margin: 0.5em 0;
     font-weight: bold;
