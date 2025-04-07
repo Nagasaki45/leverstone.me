@@ -61,10 +61,13 @@
   </ul>
 </nav>    <article data-pagefind-body>
         <h1 class="title">OpenAI Model Spec</h1>
-    <time datetime="2024-05-08">
-        Wed 08 May 2024
-    </time>
-        <div class="content">
+<div class="meta">
+        <time datetime="2024-05-08T23:00:00+00:00">
+            08 May 2024
+        </time>
+            <span class="meta-separator"></span>
+        <span>1 minute read</span>
+</div>        <div class="content">
             <p>OpenAI has recently published a document titled <a href="https://cdn.openai.com/spec/model-spec-2024-05-08.html">'Model Spec'</a>. It defines an ethics and norms framework models should follow. A few things that stood out:</p>
 <ul>
 <li>It surprisingly resembles Isaac Asimov's "Three Laws of Robotics", with a 'chain of command' for resolving conflicting objectives. The logic is <code>Platform &gt; Developer &gt; User &gt; Tool</code>. The platform consists of the instructions given to the model by OpenAI themselves (training, reinforcement learning from human feedback, and platform message that is added before the system message). The term 'developer' here refers to what was previously known as the system role message. User and tool are self explanatory, I think. Then, the document provides numerous examples of conflicts, demonstrating the preferred resolution for each.</li>

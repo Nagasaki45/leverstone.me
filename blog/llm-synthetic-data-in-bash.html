@@ -61,10 +61,13 @@
   </ul>
 </nav>    <article data-pagefind-body>
         <h1 class="title">LLM synthetic data in bash</h1>
-    <time datetime="2024-05-23">
-        Thu 23 May 2024
-    </time>
-        <div class="content">
+<div class="meta">
+        <time datetime="2024-05-23T23:00:00+00:00">
+            23 May 2024
+        </time>
+            <span class="meta-separator"></span>
+        <span>1 minute read</span>
+</div>        <div class="content">
             <p>The <a href="https://github.com/simonw/llm"><code>llm</code> command line tool by Simon Willison</a> lets you interact with LLMs from the command line. I've been using it recently, and while it's nice and convenient, I wasn't doing anythin I couldn't do with a "vanila" LLM ChatBot a la ChatGPT. Until today!</p>
 <p>Today, I had to test our retrieval-augmented generation (RAG) system. I wanted to hit a endpoint repeatedly and monitor the response time while running some operations on the server. Sure, I can throw something together with a bash loop and <code>curl</code>. But what if my experiment will be skewed by caching somewhere in the system if the request is always the same 🤔</p>
 <p>Here's what I ended up with</p>

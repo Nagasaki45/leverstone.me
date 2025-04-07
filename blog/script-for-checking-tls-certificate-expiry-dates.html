@@ -61,10 +61,13 @@
   </ul>
 </nav>    <article data-pagefind-body>
         <h1 class="title">Script for Checking TLS Certificate Expiry Dates</h1>
-    <time datetime="2025-03-10">
-        Mon 10 March 2025
-    </time>
-        <div class="content">
+<div class="meta">
+        <time datetime="2025-03-10T23:00:00+00:00">
+            10 March 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>3 minutes read</span>
+</div>        <div class="content">
             <p>I have multiple projects on subdomains of leverstone.me. What's the expiration date of the TLS certificates on these subdomains? I have no idea 🤷</p>
 <p>Wouldn't it be nice if there was a CLI tool that, given a domain, lists the expiry dates of its subdomains? I couldn't find one so asked perplexity and Claude 3.7 Sonnet to help me write it.</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>

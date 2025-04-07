@@ -61,10 +61,13 @@
   </ul>
 </nav>    <article data-pagefind-body>
         <h1 class="title">Automating Groundedness Evaluation in RAG Applications</h1>
-    <time datetime="2025-01-21">
-        Tue 21 January 2025
-    </time>
-        <div class="content">
+<div class="meta">
+        <time datetime="2025-01-21T00:00:00+00:00">
+            21 January 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>13 minutes read</span>
+</div>        <div class="content">
             <p>As a software engineer working on a Retrieval-Augmented Generation (RAG) application, one of my primary concerns is the accuracy and reliability of the answers it provides. A RAG application works by first searching for content that matches a user's query and then passing the results and the query to a Large Language Model (LLM) to generate an answer. While this approach leverages the strengths of both search and generative AI, it is not immune to issues like hallucinations, misinterpretation of sources, and failure to properly cite them. These issues can be grouped under the umbrella term "groundedness." While groundedness is not the only quality of a RAG application response (other important qualities include relevance and style), it is a key metric for evaluating its reliability.</p>
 <h1 id="the-challenge">The Challenge</h1>
 <p>Initially, my team evaluated the groundedness of our RAG application's answers manually. This involved running a set of test queries through the system, examining the answers and the sources, and determining if the answers were well-supported by the sources. We would run each query multiple times because LLM outputs are not deterministic and can vary slightly between runs. This manual process was time-consuming, taking approximately one developer-day to evaluate just one question.</p>

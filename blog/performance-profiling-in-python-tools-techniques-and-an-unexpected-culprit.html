@@ -61,10 +61,13 @@
   </ul>
 </nav>    <article data-pagefind-body>
         <h1 class="title">Performance Profiling in Python: Tools, Techniques, and an Unexpected Culprit</h1>
-    <time datetime="2025-01-31">
-        Fri 31 January 2025
-    </time>
-        <div class="content">
+<div class="meta">
+        <time datetime="2025-01-31T13:00:00+00:00">
+            31 January 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>11 minutes read</span>
+</div>        <div class="content">
             <p>Recently, my team encountered a performance issue with our Python service that uses FastAPI, gunicorn, uvicorn, and the OpenAI API. The service works fine in development, but when we load-tested it in our staging environment, the response time skyrocketed, and the throughput became embarrassingly low. Luckily, it was us stressing the service.</p>
 <p>In this post, I'll walk through how we diagnosed and fixed this performance bottleneck. While the specific issue we found might not match your next performance problem, the debugging process and tools we used should be helpful for any Python developer dealing with similar challenges.</p>
 <p>I've created a <a href="https://github.com/Nagasaki45/OTEL-OpenAI-performance-investigation">minimal reproducible example</a> that demonstrates the exact same issue we encountered. Let's dive in.</p>
