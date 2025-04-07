@@ -76,7 +76,10 @@ EXTRA_PATH_METADATA = {
 PLUGINS = [
     'pelican_youtube',
     'yaml_metadata',
+    'readtime',
 ]
+
+READTIME_WPM = 150
 
 # Content
 

@@ -7,9 +7,7 @@
     {% include "partials/navbar.html" %}
     <article data-pagefind-body>
         <h1 class="title">{{ article.title }}</h1>
-        {% with date=article.date %}
-            {% include "partials/date.html" %}
-        {% endwith %}
+        {% include "partials/article_meta.html" %}
         <div class="content">
             {% if article.img %}
                 <p><img src="/images/portfolio/{{ article.img }}" /></p>

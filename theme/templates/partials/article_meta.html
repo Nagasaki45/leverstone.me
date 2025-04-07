@@ -1,0 +1,13 @@
+<div class="meta">
+    {% if article.date %}
+        <time datetime="{{ article.date.isoformat() }}">
+            {{ article.date.strftime('%d %B %Y') }}
+        </time>
+    {% endif %}
+    {% if article.readtime_string %}
+        {% if article.date %}
+            <span class="meta-separator"></span>
+        {% endif %}
+        <span>{{ article.readtime_string }} read</span>
+    {% endif %}
+</div>
