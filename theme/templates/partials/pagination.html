@@ -1,14 +1,10 @@
-<div class="pagination">
-  {% if articles_page.has_previous() %}
-  {% set num = articles_page.previous_page_number() %}
-  <a class="btn btn-primary" href="{{ page_name }}/index{{ num if num > 1 else '' }}.html">
-    Newer
-  </a>
-  {% endif %}
-
-  {% if articles_page.has_next() %}
-  <a class="btn btn-primary older" href="{{ page_name }}/index{{ articles_page.next_page_number() }}.html">
-    Older
-  </a>
-  {% endif %}
-</div>
+{% if articles_page.has_next() %}
+<button
+  class="btn btn-primary load-more"
+  hx-get="{{ page_name }}/index{{ articles_page.next_page_number() }}.html"
+  hx-select=".item, .load-more"
+  hx-swap="outerHTML"
+>
+  Load more
+</button>
+{% endif %}
