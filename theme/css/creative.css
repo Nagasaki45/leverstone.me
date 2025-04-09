@@ -327,12 +327,10 @@ nav li {
 }
 
 /* PAGINATION */
-.pagination {
-    width: 100%
-}
 
-.pagination .older {
-    float: right;
+.load-more {
+    width: 100%;
+    margin-bottom: 2em;
 }
 
 /* SUBSCRIBE */
