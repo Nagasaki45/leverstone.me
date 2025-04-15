@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Frontend Gems #1: Pagefind | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Frontend Gems #1: Pagefind | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/frontend-gems-1-pagefind.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Frontend Gems #1: Pagefind</h1>
+<div class="meta">
+        <time datetime="2025-04-15T23:00:00+00:00">
+            15 April 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>2 minutes read</span>
+</div>        <div class="content">
+            <p><img alt="Pagefind logo" src="/images/blog/pagefind_logo.webp"></p>
+<p>First in this series focusing on frontend technologies or techniques that I find interesting is <a href="https://pagefind.app/">Pagefind</a>. From their website:</p>
+<blockquote>
+<p>Pagefind is a fully static search library that aims to perform well on large sites, while using as little of your users’ bandwidth as possible, and without hosting any infrastructure.</p>
+</blockquote>
+<p>I was looking for a search solution for this very blog, a statically generated website built with <a href="https://getpelican.com/">Pelican</a> (<a href="https://github.com/Nagasaki45/leverstone.me">source code here</a>). I wanted to keep the site simple and entirely under my control. This meant avoiding developing and maintaining a backend, or using a third-party search-as-a-service solution like <a href="https://www.algolia.com/">Algolia</a> (nothing against them, of course). Some Googling led me to Pagefind, and I'm very happy I discovered this project! Integrating it into the site was a breeze.</p>
+<p>Pleased with the result, I showed it to a few colleagues who raised the question of scalability. While this isn't a concern for this website (with nearly 90 pages at the time of writing), could Pagefind perform well in production settings with much larger datasets? Surprisingly, I suspect the answer might be 'yes'. The project's website features impressive demos, including a search implementation across the entire MDN documentation repository – quite a feat.</p>
+<p>I won't pretend to understand all the intricacies of how Pagefind works, but here are some general observations:</p>
+<ul>
+<li>A script processes your build output folder, containing the static HTML files.</li>
+<li>The search engine runs in WebAssembly, so it is quite performant.</li>
+<li>It retrieves binary index files as needed. Observing the network tab, it appears to transfer very little data during a search – typically only a few tens of kilobytes at most.</li>
+</ul>
+<p>On second thought, the efficiency shouldn't be entirely surprising. The script creates an index from your content beforehand. Conceptually, it's similar to running Solr or ElasticSearch, where an index is built to optimize search performance. The main difference here is that the pre-built index files are fetched over the network instead of being read directly from a server's disk. The index is still an index though, with a single purpose, to avoid scanning large amounts of data at search time.</p>
+<p>On a more general note, this experience reinforces my conviction that a much larger portion of the web could function perfectly well as statically generated sites. Requiring a performant search feature is not an excuse!</p>
+<hr>
+<p>Written with the help of gemini-2.5-pro-exp-03-25.</p>
+        </div>
+    </article>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>    </body>
+</html>
