@@ -9,4 +9,4 @@ New portfolio site
 
 .. raw:: html
 
-   <video style="max-width: 100%;" controls src="/images/blog/old-portfolio-site.mp4"></video>
+   <video controls src="/images/blog/old-portfolio-site.mp4" />

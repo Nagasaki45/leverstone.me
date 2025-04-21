@@ -17,9 +17,10 @@ So the plot has to be updated. Should I spend 5 minutes just doing the plot in a
 
 Presenting to you 🥁... [**Plot Fast**](https://plot-fast.leverstone.me/)
 
-<video controls style="max-width: 100%;">
-  <source src="{static}/images/blog/the-definition-of-live-coding-plot-fast.mp4" type="video/mp4">
-</video>
+<video
+  controls
+  src="{static}/images/blog/the-definition-of-live-coding-plot-fast.mp4"
+/>
 
 Did you see how fast it was?!? And the legend? 😵 Perfect!
 

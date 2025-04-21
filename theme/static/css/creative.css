@@ -97,7 +97,8 @@ button:focus {
     color: #fff;
 }
 
-img {
+img,
+video {
     width: 100%;
 }
 
@@ -111,7 +112,8 @@ section {
     line-height: 1.6em;
 }
 
-.content img {
+.content img,
+.content video {
     margin: 0.5em 0;
 }
 
