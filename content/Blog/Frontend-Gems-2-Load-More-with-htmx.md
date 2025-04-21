@@ -49,3 +49,7 @@ I stopped here, but it should be equally simple to implement infinite scroll. Ju
 This was my first attempt to use htmx and it was much smoother than expected! When reading about htmx I always thought of it as a complement to a backend service. Here I have a statically generated site, but it provided a super simple solution for my use case. What's more, any existing links online pointing to the old `indexX.html` pages will still work perfectly; they'll simply load the specific page, which now includes the **Load More** button at the bottom. Not breaking existing links is a massive bonus!
 
 In line with my [previous blog post in this series]({filename}/Blog/Frontend-Gems-1-Pagefind.md) I think there's much to gain from using simple technologies like static sites, htmx, and the like. Not everything needs to be a full-blown Single Page App using a JS framework (React, I'm looking at you). Give simplicity a shot!
+
+---
+
+Written with the help of gemini-2.5-pro-exp-03-25.
