@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Frontend Gems #2: 'Load More' with htmx | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Frontend Gems #2: 'Load More' with htmx | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/frontend-gems-2-load-more-with-htmx.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Frontend Gems #2: 'Load More' with htmx</h1>
+<div class="meta">
+        <time datetime="2025-04-21T19:00:00+00:00">
+            21 April 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>3 minutes read</span>
+</div>        <div class="content">
+            <p>Until recently, this blog displayed 10 entries at a time, using <strong>OLDER</strong> and <strong>NEWER</strong> buttons for pagination:</p>
+<p><video
+    controls
+    src="/images/blog/pagination_traditional.webm"
+/>
+</p>
+<p>There's nothing fancy here. The <strong>OLDER</strong> button is an anchor element linking to the next blog index page (<code>index2.html</code>, <code>index3.html</code> etc.). You can see how the URL changes in the video. The <strong>NEWER</strong> button works in a similar way. <a href="https://github.com/Nagasaki45/leverstone.me/blob/b399d620c862194e224834ea8545abe8b1811cfd/theme/templates/partials/pagination.html">Here's the code</a>.</p>
+<p>Wouldn't it be nice if there was just a <strong>Load More</strong> button that loads the next page in place, without a full page load? 🤔</p>
+<p>This website is a static site, with very minimal JavaScript. In an effort to keep things simple, I looked into <a href="https://htmx.org/">htmx</a>. The solution is now live on the blog. Here's how it looks:</p>
+<p><video
+    controls
+    src="/images/blog/pagination_load_more.webm"
+/>
+</p>
+<p>Now, dear reader, how complex do you think the solution is? How many lines of code were added, and removed, to support this? Intuitively I thought it would take a lot of fiddling, but to my surprise it was super easy! Here's the crux of it:</p>
+<div class="highlight"><pre><span></span><code>{% if articles_page.has_next() %}
+<span class="p">&lt;</span><span class="nt">button</span>
+  <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary load-more&quot;</span>
+  <span class="na">hx-get</span><span class="o">=</span><span class="s">&quot;{{ page_name }}/index{{ articles_page.next_page_number() }}.html&quot;</span>
+  <span class="na">hx-select</span><span class="o">=</span><span class="s">&quot;.item, .load-more&quot;</span>
+  <span class="na">hx-swap</span><span class="o">=</span><span class="s">&quot;outerHTML&quot;</span>
+<span class="p">&gt;</span>
+  Load more
+<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+{% endif %}
+</code></pre></div>
+
+<p>So, what do we have here? If there are more articles to load, we render a <strong>Load More</strong> button with some htmx attributes:</p>
+<ul>
+<li><code>hx-get</code>: Specifies the URL to GET when the button is clicked. This is the same URL the previous <strong>OLDER</strong> button used.</li>
+<li><code>hx-select</code>: Selects the blog entries (<code>.item</code>) and the next <strong>Load More</strong> button (if any) from the HTML response received from the <code>hx-get</code> request.</li>
+<li><code>hx-swap="outerHTML"</code>: Instructs htmx to replace the <em>current</em> button (the one that was clicked) entirely with the content selected by <code>hx-select</code>.</li>
+</ul>
+<p><a href="https://github.com/Nagasaki45/leverstone.me/commit/4df289df2322cc7ba66844768f3917eb1998013f">Here's the change</a>. Yes! That's all of it. And the stats? 3 files changed: the new button implementation replaced the old pagination buttons, minor CSS changes, and adding the htmx library; +14 -19 lines changed. Yes, more lines were removed than added. This is a win in my book 🙌</p>
+<p>I stopped here, but it should be equally simple to implement infinite scroll. Just change the trigger from clicking a button to triggering the load when a specific element (like one near the bottom) enters the viewport. Note, however, it's not needed for my site as I want the footer reachable.</p>
+<p>This was my first attempt to use htmx and it was much smoother than expected! When reading about htmx I always thought of it as a complement to a backend service. Here I have a statically generated site, but it provided a super simple solution for my use case. What's more, any existing links online pointing to the old <code>indexX.html</code> pages will still work perfectly; they'll simply load the specific page, which now includes the <strong>Load More</strong> button at the bottom. Not breaking existing links is a massive bonus!</p>
+<p>In line with my <a href="/blog/frontend-gems-1-pagefind">previous blog post in this series</a> I think there's much to gain from using simple technologies like static sites, htmx, and the like. Not everything needs to be a full-blown Single Page App using a JS framework (React, I'm looking at you). Give simplicity a shot!</p>
+        </div>
+    </article>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>    </body>
+</html>
