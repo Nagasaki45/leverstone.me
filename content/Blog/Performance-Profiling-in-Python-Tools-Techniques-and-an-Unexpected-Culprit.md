@@ -54,6 +54,7 @@ Integrating Yappi into our FastAPI application was straightforward:
 
 ```python
 import contextlib
+import pstats
 import yappi
 from fastapi import FastAPI
 
@@ -63,7 +64,7 @@ async def lifespan(app=FastAPI):
     try:
         yield
     finally:
-        yappi.stop()
+        stats = yappi.get_func_stats()
         ps = yappi.convert2pstats(stats.get())
         # TIME is total time spent within function excluding callees
         ps = ps.sort_stats(pstats.SortKey.TIME)
