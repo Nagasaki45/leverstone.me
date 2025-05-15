@@ -98,6 +98,7 @@
 <h2 id="setting-up-yappi">Setting up Yappi</h2>
 <p>Integrating Yappi into our FastAPI application was straightforward:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">pstats</span>
 <span class="kn">import</span> <span class="nn">yappi</span>
 <span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
 
@@ -107,7 +108,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">yield</span>
     <span class="k">finally</span><span class="p">:</span>
-        <span class="n">yappi</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">yappi</span><span class="o">.</span><span class="n">get_func_stats</span><span class="p">()</span>
         <span class="n">ps</span> <span class="o">=</span> <span class="n">yappi</span><span class="o">.</span><span class="n">convert2pstats</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
         <span class="c1"># TIME is total time spent within function excluding callees</span>
         <span class="n">ps</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="n">pstats</span><span class="o">.</span><span class="n">SortKey</span><span class="o">.</span><span class="n">TIME</span><span class="p">)</span>
