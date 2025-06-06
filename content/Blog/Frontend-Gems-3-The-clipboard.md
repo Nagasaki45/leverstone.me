@@ -205,6 +205,8 @@ When I paste this into a Google Doc, the title is formatted, but the SVG still d
 
 That's because most applications don't know how to render SVGs directly from the clipboard. They can, however, handle standard image formats like PNG. Can we convert our SVG into an image in the browser? We definitely can! The browser has some APIs that can help us with this. As usual, let's ask an LLM for help:
 
+> &lt;script&gt;the content of our previous script here&lt;/script&gt;
+>
 > The clipboardTest div contains SVGs. When storing the content into the text/html target we need to first convert these to PNGs, encoded as URLs, and replace the SVGs with these in a cloned element, before returning the cloned element inner HTML. Only the script please, not full html page nor explanations
 
 ```html
