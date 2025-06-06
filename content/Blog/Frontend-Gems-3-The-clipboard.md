@@ -45,8 +45,6 @@ Now that we understand the basics, let's fix our chatbot's 'Copy' button! I prom
 
 > Generate a test div (with id='clipboardTest') with lorem ipsum text and a simple svg below it. Just the div please, not a full html page
 
-<details>
-    <summary>Code</summary>
 ```html
 <div id="clipboardTest" style="padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;">
   <h1>Clipboard Test Content</h1>
@@ -58,7 +56,6 @@ Now that we understand the basics, let's fix our chatbot's 'Copy' button! I prom
   </svg>
 </div>
 ```
-</details>
 
 <div id="clipboardTest" style="padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;">
   <h1>Clipboard Test Content</h1>
@@ -74,8 +71,6 @@ This simulates the chatbot answer we want to copy. Now for the 'Copy' button.
 
 > Create an html copy button. When clicked it copies the content of the element with id='clipboardTest' to the clipboard. Just the button and the JS script within &lt;script&gt; tags please, not a full html page
 
-<details>
-    <summary>Code</summary>
 ```html
 <!-- The button that triggers the copy action -->
 <button id="copyButtonPlainText">Copy Content</button>
@@ -98,7 +93,6 @@ This simulates the chatbot answer we want to copy. Now for the 'Copy' button.
     });
 </script>
 ```
-</details>
 
 <!-- The button that triggers the copy action -->
 <button id="copyButtonPlainText">Copy Content</button>
@@ -136,8 +130,6 @@ This copies our text, but *only* as plaintext. No formatting, and definitely not
 
 We need to store the HTML in the `text/html` target! That's a small manual tweak to the previous script.
 
-<details>
-    <summary>Code</summary>
 ```html
 <button id="copyButtonTextAndHtml">Copy Content - plaintext and HTML</button>
 
@@ -166,7 +158,6 @@ We need to store the HTML in the `text/html` target! That's a small manual tweak
     });
 </script>
 ```
-</details>
 
 <button id="copyButtonTextAndHtml">Copy Content - plaintext and HTML</button>
 
@@ -216,8 +207,6 @@ That's because most applications don't know how to render SVGs directly from the
 
 > The clipboardTest div contains SVGs. When storing the content into the text/html target we need to first convert these to PNGs, encoded as URLs, and replace the SVGs with these in a cloned element, before returning the cloned element inner HTML. Only the script please, not full html page nor explanations
 
-<details>
-    <summary>Code</summary>
 ```html
 <!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG -->
 <button id="copyButtonTextAndHtmlWithImages">Copy Content - plaintext and HTML w/ images</button>
@@ -295,7 +284,6 @@ That's because most applications don't know how to render SVGs directly from the
     });
 </script>
 ```
-</details>
 
 <!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG -->
 <button id="copyButtonTextAndHtmlWithImages">Copy Content - plaintext and HTML w/ images</button>
