@@ -45,6 +45,21 @@ Now that we understand the basics, let's fix our chatbot's 'Copy' button! I prom
 
 > Generate a test div (with id='clipboardTest') with lorem ipsum text and a simple svg below it. Just the div please, not a full html page
 
+<details>
+    <summary>Code</summary>
+```html
+<div id="clipboardTest" style="padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;">
+  <h1>Clipboard Test Content</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+
+  <svg width="100" height="100" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" stroke="#4CAF50" stroke-width="3" fill="#8BC34A" />
+    <text x="50" y="55" font-family="Arial" font-size="20" fill="white" text-anchor="middle" alignment-baseline="middle">SVG</text>
+  </svg>
+</div>
+```
+</details>
+
 <div id="clipboardTest" style="padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;">
   <h1>Clipboard Test Content</h1>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
@@ -58,6 +73,32 @@ Now that we understand the basics, let's fix our chatbot's 'Copy' button! I prom
 This simulates the chatbot answer we want to copy. Now for the 'Copy' button.
 
 > Create an html copy button. When clicked it copies the content of the element with id='clipboardTest' to the clipboard. Just the button and the JS script within &lt;script&gt; tags please, not a full html page
+
+<details>
+    <summary>Code</summary>
+```html
+<!-- The button that triggers the copy action -->
+<button id="copyButtonPlainText">Copy Content</button>
+
+<script>
+    // Ensure the DOM is fully loaded before trying to access elements
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButtonPlainText');
+        const clipboardDiv = document.getElementById('clipboardTest');
+
+        copyButton.addEventListener('click', async () => {
+            // Get the plain text content of the div
+            // Use .innerHTML if you want to copy the raw HTML including tags
+            const textToCopy = clipboardDiv.textContent;
+
+            // Use the modern Clipboard API to write text
+            // This generally requires a secure context (HTTPS)
+            await navigator.clipboard.writeText(textToCopy);
+        });
+    });
+</script>
+```
+</details>
 
 <!-- The button that triggers the copy action -->
 <button id="copyButtonPlainText">Copy Content</button>
@@ -94,6 +135,38 @@ This copies our text, but *only* as plaintext. No formatting, and definitely not
 ```
 
 We need to store the HTML in the `text/html` target! That's a small manual tweak to the previous script.
+
+<details>
+    <summary>Code</summary>
+```html
+<button id="copyButtonTextAndHtml">Copy Content - plaintext and HTML</button>
+
+<script>
+    // Ensure the DOM is fully loaded before trying to access elements
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButtonTextAndHtml');
+        const clipboardDiv = document.getElementById('clipboardTest');
+
+        copyButton.addEventListener('click', async () => {
+            // Get the plain text content of the div
+            const textToCopy = clipboardDiv.textContent;
+            // Get the HTML content, including tags
+            const htmlToCopy = clipboardDiv.innerHTML;
+
+            // Create a ClipboardItem to hold multiple data types simultaneously
+            const clipboardItem = new ClipboardItem({
+                'text/plain': new Blob([textToCopy], { type: 'text/plain' }),
+                'text/html': new Blob([htmlToCopy], { type: 'text/html' })
+            });
+
+            // Write the ClipboardItem to the clipboard
+            // This generally requires a secure context (HTTPS)
+            await navigator.clipboard.write([clipboardItem]);
+        });
+    });
+</script>
+```
+</details>
 
 <button id="copyButtonTextAndHtml">Copy Content - plaintext and HTML</button>
 
@@ -142,6 +215,87 @@ When I paste this into a Google Doc, the title is formatted, but the SVG still d
 That's because most applications don't know how to render SVGs directly from the clipboard. They can, however, handle standard image formats like PNG. Can we convert our SVG into an image in the browser? We definitely can! The browser has some APIs that can help us with this. As usual, let's ask an LLM for help:
 
 > The clipboardTest div contains SVGs. When storing the content into the text/html target we need to first convert these to PNGs, encoded as URLs, and replace the SVGs with these in a cloned element, before returning the cloned element inner HTML. Only the script please, not full html page nor explanations
+
+<details>
+    <summary>Code</summary>
+```html
+<!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG -->
+<button id="copyButtonTextAndHtmlWithImages">Copy Content - plaintext and HTML w/ images</button>
+
+<script>
+    // Converts a given SVG element to a PNG data URL.
+    const svgToPngDataURL = async (svgElement) =>
+        new Promise((resolve, reject) => {
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svgElement);
+            const svgDataUrl = `data:image/svg+xml;base64,${btoa(
+                new TextEncoder()
+                    .encode(svgString)
+                    .reduce((data, byte) => data + String.fromCharCode(byte), ""),
+            )}`;
+
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+                resolve(canvas.toDataURL("image/png", 1));
+            };
+            img.src = svgDataUrl;
+        });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButtonTextAndHtmlWithImages');
+        const clipboardDiv = document.getElementById('clipboardTest');
+
+        copyButton.addEventListener('click', async () => {
+            // Get the plain text content
+            const textToCopy = clipboardDiv.textContent;
+
+            // Create a clone of the div to modify it without affecting the original
+            const clonedDiv = clipboardDiv.cloneNode(true);
+
+            // Find all SVGs within the cloned element
+            const svgs = clonedDiv.querySelectorAll('svg');
+
+            // Create an array of promises for each SVG conversion
+            const conversionPromises = Array.from(svgs).map(async (svg) => {
+                const pngDataUrl = await svgToPngDataURL(svg);
+
+                // Create a new <img> element with the PNG data
+                const img = document.createElement('img');
+                img.src = pngDataUrl;
+
+                // Preserve original dimensions
+                img.width = svg.attributes.width.value;
+                img.height = svg.attributes.height.value;
+
+                // Replace the SVG with the new IMG in the cloned DOM
+                svg.parentNode.replaceChild(img, svg);
+            });
+
+            // Wait for all SVG-to-PNG conversions to complete
+            await Promise.all(conversionPromises);
+
+            // Get the final HTML from the modified clone
+            const htmlToCopy = clonedDiv.innerHTML;
+
+            // Create a ClipboardItem with both text and HTML formats
+            const clipboardItem = new ClipboardItem({
+                'text/plain': new Blob([textToCopy], { type: 'text/plain' }),
+                'text/html': new Blob([htmlToCopy], { type: 'text/html' })
+            });
+
+            // Write the ClipboardItem to the clipboard
+            // This generally requires a secure context (HTTPS)
+            await navigator.clipboard.write([clipboardItem]);
+        });
+    });
+</script>
+```
+</details>
 
 <!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG -->
 <button id="copyButtonTextAndHtmlWithImages">Copy Content - plaintext and HTML w/ images</button>
