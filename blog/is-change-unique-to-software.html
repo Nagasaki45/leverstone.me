@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Is change unique to software? | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Is change unique to software? | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/is-change-unique-to-software.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Is change unique to software?</h1>
+<div class="meta">
+        <time datetime="2025-06-06T11:00:00+00:00">
+            06 June 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>5 minutes read</span>
+</div>        <div class="content">
+            <p>Software changes over time. You build something, ship it, and almost immediately discover that new features are needed, the solution isn't quite right, or the underlying business problem has evolved. Things have to change. This feels natural to most of us in the field; it’s just how it is.</p>
+<p>This post isn't about the fact that software changes. It's about a specific claim I hear surprisingly often: <strong>that this constant need for change is unique to software engineering among all engineering disciplines.</strong> I recently heard this idea mentioned in an <a href="https://www.youtube.com/watch?v=CjCJ76oZXTE">interview with Martin Fowler</a> about his book <em>Refactoring</em> on the Book Overflow podcast and again in an <a href="https://techleadjournal.dev/episodes/212/">interview with Barry O'Reilly</a> on the TechLeadJournal podcast (both podcasts are highly recommended BTW). Martin's take on this is that because software is so deeply integrated with dynamic human processes, it's subject to a level of volatility that a bridge or a building is not. The example Barry gives is the engineering of a car. It is designed based on the properties of materials and physical factors like gravity and aerodynamics. These don't change very often.</p>
+<p>Why should we care about this claim? Because if we believe we're special in this way, we cut ourselves off from learning from other fields. That would be a shame.</p>
+<p>Like most software engineers, I have zero professional experience in other engineering disciplines, so it's hard for me to argue with authority. Having said that, I don't think the claim comes from people with experience in other engineering disciplines either, so maybe I shouldn't worry too much about the robustness of my arguments. 😄</p>
+<p>Let's dive in!</p>
+<p>My requirements for my own living space, for example, have changed dramatically over the last few years. The pandemic turned my flat into a full-time office. A change in employment, from a PhD to a job as a software engineer, meant I could afford a larger space. Starting a family required a different layout entirely, and now with growing children, we're hoping for a garden. The need for my physical environment to change has been constant. My solution was usually to move, not because the need didn't exist, but because the building itself couldn't easily adapt.</p>
+<p>There's another crucial difference here: scale. My effort to rearrange my flat, even if it were easy, would only benefit me. The impact of the change doesn't scale. In software, a modification made to solve one problem can be rolled out to many users instantly. This massively alters the economics and incentives. A small improvement with global reach is often worth pursuing, while a similar improvement to a single physical building is not.</p>
+<p>This brings us to a key point: perhaps we mistake the <em>ability</em> to change things cheaply for a massive audience with a unique <em>need</em> for change. The low cost and high leverage of software modifications mean we act on change requirements that would be economically unfeasible in other engineering disciplines. Isn't software often chosen to solve a problem precisely <em>because</em> its solutions can be modified and scaled so efficiently?</p>
+<p>Another example comes from my experience with modular synthesizers-this weird thing:</p>
+<p><img alt="A modular synth connected with patch cables" src="/images/blog/modular_synth.avif"></p>
+<p>It's a collection of electronic modules, analog or digital, connected externally with patch cables to create a unique musical instrument. The divide between analog and digital modules often comes down to adaptability. You can't easily change the core behaviour of an analog circuit after it leaves the factory, but a digital module can be completely transformed with a firmware update. As someone who has <a href="https://github.com/Nagasaki45/eurorack">dabbled a bit in designing modules</a>, I <em>think</em> designers and manufacturers often go digital because they want the option to change things later. Here, software isn't the thing that <em>needs</em> to change; the choice to solve a problem with software is made deliberately to <em>enable</em> change.</p>
+<p>And what about the idea that only software interfaces with fast-moving human processes? I think that's a relatively weak argument. Think of a new road system. It fundamentally alters traffic patterns, community access, and local business. Or consider the design of an office building, which directly shapes how people work together. When work patterns change (as they did during the pandemic), they directly affect our requirements for these roads and offices. The key difference is that iterating on a highway or an office building is astronomically more expensive than deploying a new software build.</p>
+<p>In short, I don't think software systems have a higher intrinsic requirement to change. I think they just have a much lower barrier to it. Because we <em>can</em> change things easily, we do.</p>
+<p>So, what can we learn from this?</p>
+<ul>
+<li>First, and in direct contrast to the proponents of the claim above, we can appreciate that software is, by its nature, quite easy to change. This is why we are constantly asked to do so. Embrace it! And ideally, make it even cheaper to change further.</li>
+<li>Second, and this is a harder one (at least for me), we should look out for insights from other fields, instead of shutting ourselves off by claiming that we are facing a unique problem.</li>
+</ul>
+<hr>
+<p>This blog post was made with the help of Gemini 2.5 Pro.</p>
+        </div>
+    </article>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>    </body>
+</html>
