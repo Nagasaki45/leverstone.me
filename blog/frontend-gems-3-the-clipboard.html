@@ -239,6 +239,7 @@
 <p><img alt="Screenshot from the Google Doc showing formatting but not the SVG" src="/images/blog/clipboard_paste_html_no_svg.webp"></p>
 <p>That's because most applications don't know how to render SVGs directly from the clipboard. They can, however, handle standard image formats like PNG. Can we convert our SVG into an image in the browser? We definitely can! The browser has some APIs that can help us with this. As usual, let's ask an LLM for help:</p>
 <blockquote>
+<p>&lt;script&gt;the content of our previous script here&lt;/script&gt;</p>
 <p>The clipboardTest div contains SVGs. When storing the content into the text/html target we need to first convert these to PNGs, encoded as URLs, and replace the SVGs with these in a cloned element, before returning the cloned element inner HTML. Only the script please, not full html page nor explanations</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG --&gt;</span>
