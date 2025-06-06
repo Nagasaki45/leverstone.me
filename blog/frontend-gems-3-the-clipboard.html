@@ -93,9 +93,6 @@
 <blockquote>
 <p>Generate a test div (with id='clipboardTest') with lorem ipsum text and a simple svg below it. Just the div please, not a full html page</p>
 </blockquote>
-<details>
-    <summary>Code</summary>
-
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;clipboardTest&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Clipboard Test Content<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -106,9 +103,6 @@
   <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-
-
-</details>
 
 <div id="clipboardTest" style="padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;">
   <h1>Clipboard Test Content</h1>
@@ -124,9 +118,6 @@
 <blockquote>
 <p>Create an html copy button. When clicked it copies the content of the element with id='clipboardTest' to the clipboard. Just the button and the JS script within &lt;script&gt; tags please, not a full html page</p>
 </blockquote>
-<details>
-    <summary>Code</summary>
-
 <div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- The button that triggers the copy action --&gt;</span>
 <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;copyButtonPlainText&quot;</span><span class="p">&gt;</span>Copy Content<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 
@@ -148,9 +139,6 @@
 <span class="w">    </span><span class="p">});</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></div>
-
-
-</details>
 
 <!-- The button that triggers the copy action -->
 <p><button id="copyButtonPlainText">Copy Content</button></p>
@@ -182,9 +170,6 @@
 </code></pre></div>
 
 <p>We need to store the HTML in the <code>text/html</code> target! That's a small manual tweak to the previous script.</p>
-<details>
-    <summary>Code</summary>
-
 <div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;copyButtonTextAndHtml&quot;</span><span class="p">&gt;</span>Copy Content - plaintext and HTML<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
@@ -212,9 +197,6 @@
 <span class="w">    </span><span class="p">});</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></div>
-
-
-</details>
 
 <p><button id="copyButtonTextAndHtml">Copy Content - plaintext and HTML</button></p>
 <script>
@@ -259,9 +241,6 @@
 <blockquote>
 <p>The clipboardTest div contains SVGs. When storing the content into the text/html target we need to first convert these to PNGs, encoded as URLs, and replace the SVGs with these in a cloned element, before returning the cloned element inner HTML. Only the script please, not full html page nor explanations</p>
 </blockquote>
-<details>
-    <summary>Code</summary>
-
 <div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG --&gt;</span>
 <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;copyButtonTextAndHtmlWithImages&quot;</span><span class="p">&gt;</span>Copy Content - plaintext and HTML w/ images<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 
@@ -338,9 +317,6 @@
 <span class="w">    </span><span class="p">});</span>
 <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </code></pre></div>
-
-
-</details>
 
 <!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG -->
 <p><button id="copyButtonTextAndHtmlWithImages">Copy Content - plaintext and HTML w/ images</button></p>
