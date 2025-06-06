@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Frontend Gems #3: The clipboard | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Frontend Gems #3: The clipboard | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/frontend-gems-3-the-clipboard.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Frontend Gems #3: The clipboard</h1>
+<div class="meta">
+        <time datetime="2025-06-06T21:00:00+00:00">
+            06 June 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>25 minutes read</span>
+</div>        <div class="content">
+            <p>The clipboard, yes, the clipboard! The thing you use to copy-paste. It's a surprisingly complex and capable technology, and I'm glad I found some time to explore it recently.</p>
+<p>While the clipboard itself is a core operating system feature, browsers provide a powerful set of frontend APIs for interacting with it. This blog post will discuss the clipboard in general, and then dive into an exploration of these APIs.</p>
+<p>First, some context. My team develops an AI chatbot. Until recently, the answers from this chatbot were mostly textual. As chatbots often do, we had a 'Copy' button under each answer so our users could quickly and easily copy it and paste it wherever they wanted—usually a presentation, a document, or an email. We recently added a feature that includes interactive charts in the answer. We quickly discovered an oversight: the 'Copy' button doesn't do anything meaningful with these charts.</p>
+<p>So, how can the clipboard help us here? The interactive charts are SVGs, not images. What does it even mean to copy-paste these? 🤔</p>
+<h1 id="targets">Targets</h1>
+<p>I got a lot of help from LLMs to explore the problem and learned that the clipboard is not just a text buffer. After all, we can copy-paste images, text from the web with formatting preserved, and even cells or tables between spreadsheets. There must be something more capable than a simple text buffer to support these features.</p>
+<p>The answer is clipboard <strong>targets</strong>. When an application copies something, it can store the information in one or more formats, called targets. Each target has a specific type. Some of these are generic, like <code>text/plain</code> or <code>text/html</code>, while others are application-specific. When pasting into an application, it can pick the best available target and pull the data from it.</p>
+<p>I'm not sure if there's a definitive standard for generic targets, but the browser's <code>Clipboard</code> API exposes a function to check what's supported. You can find more info about this on the <a href="https://developer.mozilla.org/en-US/docs/Web/API/ClipboardItem/supports_static">MDN docs</a>.</p>
+<h1 id="debugging">Debugging</h1>
+<p>Let's do a simple test. Copy some web content (maybe this blog post) that includes formatting like titles and links. Now go to your text editor and paste it. You'll likely get a plaintext dump of the selection. If you paste the same content into a Google Doc (a new email also works), you'll get it nicely formatted, similar to how it appeared online. That's because the browser copies the content into multiple targets, including <code>text/plain</code> and <code>text/html</code>. The text editor pulls from the <code>text/plain</code> target, while Google Docs pulls from <code>text/html</code> and knows how to format the content accordingly.</p>
+<p>That's a pretty shitty way to debug the clipboard, you might say. And you are right! The best technique I found for debugging this sort of stuff on Linux is to use <a href="https://github.com/astrand/xclip"><code>xclip</code></a>. Install it and run:</p>
+<div class="highlight"><pre><span></span><code>xclip<span class="w"> </span>-out<span class="w"> </span>-selection<span class="w"> </span>clipboard<span class="w"> </span>-target<span class="w"> </span>TARGETS
+</code></pre></div>
+
+<p>This will list the available targets of the <code>clipboard</code> selection (the one populated with Ctrl-C, as there are multiple selections in Linux). And then:</p>
+<div class="highlight"><pre><span></span><code>xclip<span class="w"> </span>-out<span class="w"> </span>-selection<span class="w"> </span>clipboard<span class="w"> </span>-target<span class="w"> </span>text/html
+</code></pre></div>
+
+<p>This will print the content of a specific target, <code>text/html</code> in this case, to the standard output.</p>
+<p>As a Linux user, <code>xclip</code> works for me, but there should be similar tools for Windows and macOS.</p>
+<h1 id="back-to-the-browser">Back to the browser</h1>
+<p>Now that we understand the basics, let's fix our chatbot's 'Copy' button! I prompted an LLM to generate a simple HTML element for testing, with an SVG in it.</p>
+<blockquote>
+<p>Generate a test div (with id='clipboardTest') with lorem ipsum text and a simple svg below it. Just the div please, not a full html page</p>
+</blockquote>
+<details>
+    <summary>Code</summary>
+
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;clipboardTest&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Clipboard Test Content<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;100&quot;</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">&quot;0 0 100 100&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">circle</span> <span class="na">cx</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">cy</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">r</span><span class="o">=</span><span class="s">&quot;40&quot;</span> <span class="na">stroke</span><span class="o">=</span><span class="s">&quot;#4CAF50&quot;</span> <span class="na">stroke-width</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&quot;#8BC34A&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">text</span> <span class="na">x</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">y</span><span class="o">=</span><span class="s">&quot;55&quot;</span> <span class="na">font-family</span><span class="o">=</span><span class="s">&quot;Arial&quot;</span> <span class="na">font-size</span><span class="o">=</span><span class="s">&quot;20&quot;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&quot;white&quot;</span> <span class="na">text-anchor</span><span class="o">=</span><span class="s">&quot;middle&quot;</span> <span class="na">alignment-baseline</span><span class="o">=</span><span class="s">&quot;middle&quot;</span><span class="p">&gt;</span>SVG<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+</details>
+
+<div id="clipboardTest" style="padding: 20px; border: 1px solid #ccc; background-color: #f9f9f9; max-width: 600px; margin: 20px auto;">
+  <h1>Clipboard Test Content</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+
+  <svg width="100" height="100" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" stroke="#4CAF50" stroke-width="3" fill="#8BC34A" />
+    <text x="50" y="55" font-family="Arial" font-size="20" fill="white" text-anchor="middle" alignment-baseline="middle">SVG</text>
+  </svg>
+</div>
+
+<p>This simulates the chatbot answer we want to copy. Now for the 'Copy' button.</p>
+<blockquote>
+<p>Create an html copy button. When clicked it copies the content of the element with id='clipboardTest' to the clipboard. Just the button and the JS script within &lt;script&gt; tags please, not a full html page</p>
+</blockquote>
+<details>
+    <summary>Code</summary>
+
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- The button that triggers the copy action --&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;copyButtonPlainText&quot;</span><span class="p">&gt;</span>Copy Content<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="c1">// Ensure the DOM is fully loaded before trying to access elements</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">copyButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;copyButtonPlainText&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;clipboardTest&#39;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">copyButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Get the plain text content of the div</span>
+<span class="w">            </span><span class="c1">// Use .innerHTML if you want to copy the raw HTML including tags</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">textToCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
+
+<span class="w">            </span><span class="c1">// Use the modern Clipboard API to write text</span>
+<span class="w">            </span><span class="c1">// This generally requires a secure context (HTTPS)</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">writeText</span><span class="p">(</span><span class="nx">textToCopy</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+</details>
+
+<!-- The button that triggers the copy action -->
+<p><button id="copyButtonPlainText">Copy Content</button></p>
+<script>
+    // Ensure the DOM is fully loaded before trying to access elements
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButtonPlainText');
+        const clipboardDiv = document.getElementById('clipboardTest');
+
+        copyButton.addEventListener('click', async () => {
+            // Get the plain text content of the div
+            // Use .innerHTML if you want to copy the raw HTML including tags
+            const textToCopy = clipboardDiv.textContent;
+
+            // Use the modern Clipboard API to write text
+            // This generally requires a secure context (HTTPS)
+            await navigator.clipboard.writeText(textToCopy);
+        });
+    });
+</script>
+
+<p>This copies our text, but <em>only</em> as plaintext. No formatting, and definitely not the SVG. When I run <code>xclip -out -selection clipboard -target TARGETS</code>, there's no <code>text/html</code> target. The <code>text/plain</code> target shows:</p>
+<div class="highlight"><pre><span></span><code>  Clipboard Test Content
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+
+
+
+    SVG
+</code></pre></div>
+
+<p>We need to store the HTML in the <code>text/html</code> target! That's a small manual tweak to the previous script.</p>
+<details>
+    <summary>Code</summary>
+
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;copyButtonTextAndHtml&quot;</span><span class="p">&gt;</span>Copy Content - plaintext and HTML<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="c1">// Ensure the DOM is fully loaded before trying to access elements</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">copyButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;copyButtonTextAndHtml&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;clipboardTest&#39;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">copyButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Get the plain text content of the div</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">textToCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// Get the HTML content, including tags</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">htmlToCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
+
+<span class="w">            </span><span class="c1">// Create a ClipboardItem to hold multiple data types simultaneously</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">clipboardItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ClipboardItem</span><span class="p">({</span>
+<span class="w">                </span><span class="s1">&#39;text/plain&#39;</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">textToCopy</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text/plain&#39;</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">                </span><span class="s1">&#39;text/html&#39;</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">htmlToCopy</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text/html&#39;</span><span class="w"> </span><span class="p">})</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="c1">// Write the ClipboardItem to the clipboard</span>
+<span class="w">            </span><span class="c1">// This generally requires a secure context (HTTPS)</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">write</span><span class="p">([</span><span class="nx">clipboardItem</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+</details>
+
+<p><button id="copyButtonTextAndHtml">Copy Content - plaintext and HTML</button></p>
+<script>
+    // Ensure the DOM is fully loaded before trying to access elements
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButtonTextAndHtml');
+        const clipboardDiv = document.getElementById('clipboardTest');
+
+        copyButton.addEventListener('click', async () => {
+            // Get the plain text content of the div
+            const textToCopy = clipboardDiv.textContent;
+            // Get the HTML content, including tags
+            const htmlToCopy = clipboardDiv.innerHTML;
+
+            // Create a ClipboardItem to hold multiple data types simultaneously
+            const clipboardItem = new ClipboardItem({
+                'text/plain': new Blob([textToCopy], { type: 'text/plain' }),
+                'text/html': new Blob([htmlToCopy], { type: 'text/html' })
+            });
+
+            // Write the ClipboardItem to the clipboard
+            // This generally requires a secure context (HTTPS)
+            await navigator.clipboard.write([clipboardItem]);
+        });
+    });
+</script>
+
+<p>Checking <code>xclip -out -selection clipboard -target text/html</code> shows an improvement:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span><span class="p">&gt;&lt;</span><span class="nt">html</span><span class="p">&gt;&lt;</span><span class="nt">head</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Clipboard Test Content<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;100&quot;</span> <span class="na">viewBox</span><span class="o">=</span><span class="s">&quot;0 0 100 100&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">circle</span> <span class="na">cx</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">cy</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">r</span><span class="o">=</span><span class="s">&quot;40&quot;</span> <span class="na">stroke</span><span class="o">=</span><span class="s">&quot;#4CAF50&quot;</span> <span class="na">stroke-width</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&quot;#8BC34A&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">circle</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">text</span> <span class="na">x</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">y</span><span class="o">=</span><span class="s">&quot;55&quot;</span> <span class="na">font-family</span><span class="o">=</span><span class="s">&quot;Arial&quot;</span> <span class="na">font-size</span><span class="o">=</span><span class="s">&quot;20&quot;</span> <span class="na">fill</span><span class="o">=</span><span class="s">&quot;white&quot;</span> <span class="na">text-anchor</span><span class="o">=</span><span class="s">&quot;middle&quot;</span> <span class="na">alignment-baseline</span><span class="o">=</span><span class="s">&quot;middle&quot;</span><span class="p">&gt;</span>SVG<span class="p">&lt;/</span><span class="nt">text</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>When I paste this into a Google Doc, the title is formatted, but the SVG still doesn't show up 😥</p>
+<p><img alt="Screenshot from the Google Doc showing formatting but not the SVG" src="/images/blog/clipboard_paste_html_no_svg.webp"></p>
+<p>That's because most applications don't know how to render SVGs directly from the clipboard. They can, however, handle standard image formats like PNG. Can we convert our SVG into an image in the browser? We definitely can! The browser has some APIs that can help us with this. As usual, let's ask an LLM for help:</p>
+<blockquote>
+<p>The clipboardTest div contains SVGs. When storing the content into the text/html target we need to first convert these to PNGs, encoded as URLs, and replace the SVGs with these in a cloned element, before returning the cloned element inner HTML. Only the script please, not full html page nor explanations</p>
+</blockquote>
+<details>
+    <summary>Code</summary>
+
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG --&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;copyButtonTextAndHtmlWithImages&quot;</span><span class="p">&gt;</span>Copy Content - plaintext and HTML w/ images<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="c1">// Converts a given SVG element to a PNG data URL.</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">svgToPngDataURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">svgElement</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span>
+<span class="w">        </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">serializer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">XMLSerializer</span><span class="p">();</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">svgString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">serializer</span><span class="p">.</span><span class="nx">serializeToString</span><span class="p">(</span><span class="nx">svgElement</span><span class="p">);</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">svgDataUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`data:image/svg+xml;base64,</span><span class="si">${</span><span class="nx">btoa</span><span class="p">(</span>
+<span class="w">                </span><span class="ow">new</span><span class="w"> </span><span class="nx">TextEncoder</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">.</span><span class="nx">encode</span><span class="p">(</span><span class="nx">svgString</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="kr">byte</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="kr">byte</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Image</span><span class="p">();</span>
+<span class="w">            </span><span class="nx">img</span><span class="p">.</span><span class="nx">onload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">canvas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;canvas&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">(</span><span class="s2">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">));</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="w">            </span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">svgDataUrl</span><span class="p">;</span>
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">copyButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;copyButtonTextAndHtmlWithImages&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;clipboardTest&#39;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nx">copyButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Get the plain text content</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">textToCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
+
+<span class="w">            </span><span class="c1">// Create a clone of the div to modify it without affecting the original</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">clonedDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clipboardDiv</span><span class="p">.</span><span class="nx">cloneNode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Find all SVGs within the cloned element</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">svgs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clonedDiv</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Create an array of promises for each SVG conversion</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">conversionPromises</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Array</span><span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="nx">svgs</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">svg</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">pngDataUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">svgToPngDataURL</span><span class="p">(</span><span class="nx">svg</span><span class="p">);</span>
+
+<span class="w">                </span><span class="c1">// Create a new &lt;img&gt; element with the PNG data</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">img</span><span class="p">.</span><span class="nx">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pngDataUrl</span><span class="p">;</span>
+
+<span class="w">                </span><span class="c1">// Preserve original dimensions</span>
+<span class="w">                </span><span class="nx">img</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">svg</span><span class="p">.</span><span class="nx">attributes</span><span class="p">.</span><span class="nx">width</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">img</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">svg</span><span class="p">.</span><span class="nx">attributes</span><span class="p">.</span><span class="nx">height</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+
+<span class="w">                </span><span class="c1">// Replace the SVG with the new IMG in the cloned DOM</span>
+<span class="w">                </span><span class="nx">svg</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">svg</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="c1">// Wait for all SVG-to-PNG conversions to complete</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">conversionPromises</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Get the final HTML from the modified clone</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">htmlToCopy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clonedDiv</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
+
+<span class="w">            </span><span class="c1">// Create a ClipboardItem with both text and HTML formats</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">clipboardItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ClipboardItem</span><span class="p">({</span>
+<span class="w">                </span><span class="s1">&#39;text/plain&#39;</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">textToCopy</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text/plain&#39;</span><span class="w"> </span><span class="p">}),</span>
+<span class="w">                </span><span class="s1">&#39;text/html&#39;</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">htmlToCopy</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text/html&#39;</span><span class="w"> </span><span class="p">})</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="c1">// Write the ClipboardItem to the clipboard</span>
+<span class="w">            </span><span class="c1">// This generally requires a secure context (HTTPS)</span>
+<span class="w">            </span><span class="k">await</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">clipboard</span><span class="p">.</span><span class="nx">write</span><span class="p">([</span><span class="nx">clipboardItem</span><span class="p">]);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+
+</details>
+
+<!-- The new button that triggers the copy action for both text/plain and text/html with SVG as PNG -->
+<p><button id="copyButtonTextAndHtmlWithImages">Copy Content - plaintext and HTML w/ images</button></p>
+<script>
+    // Converts a given SVG element to a PNG data URL.
+    const svgToPngDataURL = async (svgElement) =>
+        new Promise((resolve, reject) => {
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svgElement);
+            const svgDataUrl = `data:image/svg+xml;base64,${btoa(
+                new TextEncoder()
+                    .encode(svgString)
+                    .reduce((data, byte) => data + String.fromCharCode(byte), ""),
+            )}`;
+
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+                resolve(canvas.toDataURL("image/png", 1));
+            };
+            img.src = svgDataUrl;
+        });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copyButtonTextAndHtmlWithImages');
+        const clipboardDiv = document.getElementById('clipboardTest');
+
+        copyButton.addEventListener('click', async () => {
+            // Get the plain text content
+            const textToCopy = clipboardDiv.textContent;
+
+            // Create a clone of the div to modify it without affecting the original
+            const clonedDiv = clipboardDiv.cloneNode(true);
+
+            // Find all SVGs within the cloned element
+            const svgs = clonedDiv.querySelectorAll('svg');
+
+            // Create an array of promises for each SVG conversion
+            const conversionPromises = Array.from(svgs).map(async (svg) => {
+                const pngDataUrl = await svgToPngDataURL(svg);
+
+                // Create a new <img> element with the PNG data
+                const img = document.createElement('img');
+                img.src = pngDataUrl;
+
+                // Preserve original dimensions
+                img.width = svg.attributes.width.value;
+                img.height = svg.attributes.height.value;
+
+                // Replace the SVG with the new IMG in the cloned DOM
+                svg.parentNode.replaceChild(img, svg);
+            });
+
+            // Wait for all SVG-to-PNG conversions to complete
+            await Promise.all(conversionPromises);
+
+            // Get the final HTML from the modified clone
+            const htmlToCopy = clonedDiv.innerHTML;
+
+            // Create a ClipboardItem with both text and HTML formats
+            const clipboardItem = new ClipboardItem({
+                'text/plain': new Blob([textToCopy], { type: 'text/plain' }),
+                'text/html': new Blob([htmlToCopy], { type: 'text/html' })
+            });
+
+            // Write the ClipboardItem to the clipboard
+            // This generally requires a secure context (HTTPS)
+            await navigator.clipboard.write([clipboardItem]);
+        });
+    });
+</script>
+
+<p>Now, try the 'Copy' button and paste into a Google Doc. Hopefully, you'll see a nicely rendered image of our SVG! Let's double-check with <code>xclip -out -selection clipboard -target text/html</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;content-type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span><span class="p">&gt;&lt;</span><span class="nt">html</span><span class="p">&gt;&lt;</span><span class="nt">head</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Clipboard Test Content<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAY...&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;100&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Looks good! 🙌</p>
+<p>We've discussed the clipboard, but a lot of heavy lifting is done by the <code>svgToPngDataURL</code> function. It's basically a mini in-browser image converter, orchestrating multiple browser APIs. Here's how it works:</p>
+<ol>
+<li><strong>Serialize SVG</strong>: First, it takes the live SVG element from the page and turns it into a text string, like <code>&lt;svg&gt;...&lt;/svg&gt;</code>.</li>
+<li><strong>Create an SVG Data URL</strong>: It then base64-encodes this string and embeds it in a <code>data:</code> URL. This is a special URL format that contains the resource's data directly. Now we have our SVG represented as a URL the browser can load.</li>
+<li><strong>Load into an Image</strong>: Next, it creates a new, temporary <code>&lt;img&gt;</code> element in memory and sets its <code>src</code> to our new SVG data URL. The browser loads the SVG into this image element, off-screen.</li>
+<li><strong>Draw on a Canvas</strong>: Once the image has loaded, we draw it onto an invisible <code>&lt;canvas&gt;</code> element. The canvas is like a pixel-based drawing board in the browser.</li>
+<li><strong>Export as PNG</strong>: Finally, we ask the canvas to export its contents as a PNG, again using a <code>data:</code> URL. This final data URL, containing the PNG image data, is what the function returns.</li>
+</ol>
+<p>The function's pipeline looks like this: <code>&lt;svg&gt;</code> → <code>SVG string</code> → <code>SVG data URL</code> → <code>&lt;img&gt;</code> → <code>&lt;canvas&gt;</code> → <code>PNG data URL</code>. And just like that, we have a universally-compatible image ready for the clipboard. Nice!</p>
+<p><em>A side note about the code: while it looks like I'm vibe-coding my way through this problem, I'm definitely not! I'm sparing you the details of a lot of manual code editing and a few minor iterations with the AI to get things right.</em></p>
+<h1 id="stretch-goal-presentation-slides">Stretch goal: presentation slides</h1>
+<p>The revamped 'Copy' button was a success. Stakeholders and clients couldn't stop copy-pasting chatbot answers with charts into their documents and, especially, into their presentations. This sparked a new idea: what if we could copy an entire conversation into a ready-to-use presentation deck? For example, we wanted to make each user query a new section header, each paragraph in the AI response a separate slide, and give charts their own slides. That's a lot to ask of the clipboard, but it would be a beautiful user interface if we could pull it off.</p>
+<p>Sadly, we couldn't. 😔</p>
+<p>We failed fast after discovering that presentation apps use custom, proprietary clipboard targets. If I create a presentation in LibreOffice Impress (Linux user here, sorry) and copy a slide, I get multiple targets from <code>xclip</code> that start with <code>application/x-libreoffice-...</code>. The browser isn't allowed to write to these targets; trying to do so raises an error.</p>
+<p>So, my takeaway is that if your use case requires writing to a custom, application-specific target, you probably can't do it from a web browser. I might be wrong, but this is as far as I got in my exploration.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>I hope I've convinced you that the clipboard is more interesting than it initially seems. I think knowing the basics of how it works can enable surprisingly simple and elegant solutions in frontend development. In this case, for example, the team had considered developing a download endpoint just so users could get the charts and paste them into their documents. Using the clipboard is much nicer 🙂</p>
+<hr>
+<p>Written with the help of Gemini 2.5 Pro.</p>
+        </div>
+    </article>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>    </body>
+</html>
