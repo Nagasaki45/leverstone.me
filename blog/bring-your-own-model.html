@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Bring-your-own-model | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Bring-your-own-model | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/bring-your-own-model.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Bring-your-own-model</h1>
+<div class="meta">
+        <time datetime="2025-06-27T11:00:00+00:00">
+            27 June 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>3 minutes read</span>
+</div>        <div class="content">
+            <p>AI is showing up in every app, and so are the subscription pop-ups. It feels like every new feature wants its own monthly fee. This makes sense from one perspective: running large language models is expensive. The old web model, where tiny per-user costs could be covered by advertising, doesn't work when a single request costs a noticeable amount of money. But this path leads to an expensive and exhausting future of juggling dozens of AI subscriptions.</p>
+<p>Instead of paying every service for their AI, what if you could <strong>just bring your own?</strong></p>
+<p>The Model Context Protocol (MCP) includes a feature called <a href="https://modelcontextprotocol.io/docs/concepts/sampling"><em>sampling</em></a>, which allows a server to <em>request</em> inference from the user's client. This shifts the compute and control from the server to the user's side.</p>
+<p>Two days ago, Anthropic announced a related feature on its Claude platform. Developers can now <a href="https://www.anthropic.com/news/claude-powered-artifacts">build and share AI apps</a> that call Claude for inference. The crucial part is the economics: when someone uses your app, the computation runs on <em>their</em> Claude account. Their subscription covers the cost, not yours. As the developer, you pay nothing for their usage.</p>
+<p>This is the sampling idea packaged differently. Both concepts flip the standard SaaS model on its head. The service brings the expertise, workflow, and data, but the user provides the expensive resource—the model inference, the brain of the system.</p>
+<p>Imagine if this wasn't just a feature of a developer protocol like MCP or a single platform like Claude. What if it were a core capability of your browser or operating system? You'd have a primary subscription to a model provider of your choice—be it OpenAI, Anthropic, Google, or even a powerful open-source model running locally. When you visit a website or use an app that needs AI, it would request access to <em>your</em> model through a standard API.</p>
+<p>The app provides the interface, the unique workflow, the clever prompts. You provide the engine.</p>
+<p>This model solves the subscription fatigue problem for users and lowers the barrier to entry for developers, who no longer have to foot the bill for inference.</p>
+<p>Of course, this model isn't a silver bullet. New questions arise immediately. How does an app guarantee a quality experience if it doesn't know which model the user will bring? A frontier model will give better results than a smaller one, but perhaps fast and cheap is better for a specific application. The app could specify a minimum required capability, and your system would provide the best-matching model it has.</p>
+<p>And what about security? An AI with access to your local context is incredibly powerful for personalization but also a potential privacy risk. That said, I would rather trust my browser, with its mature security and sandboxing models, to manage that permission than dozens of web apps.</p>
+<p>I don't know if this "bring-your-own-model" future will happen, but it's a compelling alternative to the subscription-for-everything world we seem to be building. It reframes the question from "How does this service pay for its AI?" to "How can this service best use the AI I already have?" That's a shift that promises a more sustainable and powerful future for developers and users alike.</p>
+<hr>
+<p>This blog post was made with the help of Gemini 2.5 Pro.</p>
+        </div>
+    </article>
+</div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>    </body>
+</html>
