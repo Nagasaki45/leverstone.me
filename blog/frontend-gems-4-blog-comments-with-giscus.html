@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+    <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Tom Leverstone">
+<meta name="description" content="A father, software engineer, and hobbies collector.">
+<title>Frontend Gems 4: Blog comments with giscus | Tom Leverstone</title>
+<!-- Favicon -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="/theme/css/bootstrap.min.css" type="text/css">
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="/theme/font-awesome/css/all.css" type="text/css">
+<!-- Plugin CSS -->
+<link rel="stylesheet" href="/theme/css/youtube.css" type="text/css">
+<!-- Pygments for code highlighting -->
+<link rel="stylesheet" href="/theme/css/pygments.css" type="text/css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/theme/css/creative.css" type="text/css">
+<link rel="stylesheet" href="/theme/css/header-links.css">
+
+<!-- Open graph protocol -->
+<meta property="og:title" content="Frontend Gems 4: Blog comments with giscus | Tom Leverstone" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/blog/frontend-gems-4-blog-comments-with-giscus.html" />
+<meta property="og:image:secure_url" itemprop="image" content="/images/me.jpg" />
+<meta property="og:description" content="A father, software engineer, and hobbies collector." />
+
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="/images/me.jpg" />    </head>
+    <body>
+<div class="container article-container">
+<nav>
+  <a class="btn" href="/" aria-label="Home">
+    <span class="fas fa-home"></span>
+  </a>
+  <ul class="float">
+    <li>
+      <a class="btn" href="/search" aria-label="Search">
+        <span class="fas fa-search"></span>
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/blog/">
+        Blog
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/projects/">
+        Projects
+      </a>
+    </li>
+    <li>
+      <a class="btn " href="/hobbies">
+        Hobbies
+      </a>
+    </li>
+  </ul>
+</nav>    <article data-pagefind-body>
+        <h1 class="title">Frontend Gems 4: Blog comments with giscus</h1>
+<div class="meta">
+        <time datetime="2025-07-31T23:57:23.671325+01:00">
+            31 July 2025
+        </time>
+            <span class="meta-separator"></span>
+        <span>1 minute read</span>
+</div>        <div class="content">
+            <p>I've been wanting to spark more discussion around my blog posts. While sharing them on LinkedIn is great for visibility (especially while <a href="/blog/i-found-a-new-job">job hunting</a>), I'm genuinely curious to hear what you think and get your feedback. Somehow, for me, that kind of conversation doesn't always happen on social media.</p>
+<p>So, I decided to add a comment section right here on the blog. It's a feature I've wanted for a while, and one I often miss when it's not available on other sites I read.</p>
+<p>When I started looking for a comment system, I had a few key requirements:</p>
+<ul>
+<li>I didn't want to host it myself.</li>
+<li>The comments needed to be portable, so I could move them if I switched services.</li>
+<li>It had to be free.</li>
+<li>Ideally, it would use a service I already have, so I wouldn't need another account.</li>
+</ul>
+<p>That's a tough list, but <a href="https://giscus.app/">giscus</a> ticks all the boxes. It's an open-source project that uses GitHub discussions as a backend for a comment section on your site. It was very easy to integrate into this blog, so why not write a Frontend Gems post about it?!? 🤩</p>
+<p>The main downside is that you need a GitHub account to comment. There are no anonymous posts or other login options. Given this blog's technical focus and audience, I think that's a trade-off I can live with.</p>
+<p>So, please give it a try! I'd love to hear your thoughts in the comments below. 😊</p>
+<hr>
+<p>This blog post was made with the help of Gemini 2.5 Pro.</p>
+        </div>
+    </article>
+<script src="https://giscus.app/client.js"
+    data-repo="nagasaki45/leverstone.me"
+    data-repo-id="MDEwOlJlcG9zaXRvcnk0ODg1NzgxMA=="
+    data-category="Announcements"
+    data-category-id="DIC_kwDOAumC0s4Ctmqo"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="0"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script></div>
+<footer>
+    <div class="container article-container">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Stay Updated</h4>
+                <p>Follow my blog via
+                    <a href="/blog/atom.xml">
+                        <i class="fas fa-rss"></i> RSS Feed
+                    </a>
+                </p>
+                <p>Or get new posts directly to your inbox.</p>
+<form action="https://app.audienceful.com/api/subscribe/5Upvrxge29AWPEBCqQ6Pj8/" method="post">
+    <div class="form-group">
+        <div class="input-group">
+            <input name="email" type="email" class="form-control" id="emailField" required
+                   placeholder="name@example.com" />
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <!-- Anti spam protection -->
+    <div style="position: absolute; left: -5000px" aria-hidden="true">
+        <input type="text" name="b28-ft" tabindex="-1" value="" />
+    </div>
+</form>            </div>
+            <div class="col-md-1" style="min-height: 1em;"></div>
+            <div class="col-md-4">
+                <h4>Find me on the web</h4>
+                <div class="links">
+<a class="icon" href="https://github.com/Nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-github"></i>&nbsp;GitHub
+</a>
+<a class="icon" href="https://www.linkedin.com/in/tleverstone/" rel="me" target="_blank">
+    <i class="fab fa-linkedin"></i>&nbsp;LinkedIn
+</a>
+<a class="icon" href="https://www.goodreads.com/nagasaki45" rel="me" target="_blank">
+    <i class="fab fa-goodreads"></i>&nbsp;Goodreads
+</a>
+<a class="icon" href="mailto:tleverstone@gmail.com">
+    <i class="fa fa-envelope"></i>&nbsp;Email
+</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer><script src="/theme/js/header-links.js"></script>
+<script src="https://unpkg.com/htmx.org@2.0.4"></script>    </body>
+</html>
