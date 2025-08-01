@@ -1,5 +1,6 @@
 ---
 title: I found a new job
+date: 2025-07-21T00:00:00.000Z
 ---
 
 I’m thrilled to announce that I’ve found a new job! Starting next Monday, I'll be joining the engineering team at Vanta.

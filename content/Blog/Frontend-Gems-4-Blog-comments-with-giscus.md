@@ -1,5 +1,6 @@
 ---
 title: "Frontend Gems 4: Blog comments with giscus"
+date: 2025-08-01T01:00:00.000Z
 ---
 
 I've been wanting to spark more discussion around my blog posts. While sharing them on LinkedIn is great for visibility (especially while [job hunting]({filename}/Blog/I-found-a-new-job.md)), I'm genuinely curious to hear what you think and get your feedback. Somehow, for me, that kind of conversation doesn't always happen on social media.
